@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanskrit Stem Table Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Serif:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #fdfbf7;
+            /* Warm paper-like background */
+        }
+
+        .sanskrit-text {
+            font-family: 'Noto Serif', serif;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // --- DATA PREPARATION ---
+
+        const STRONG = "strong";
+        const MIDDLE = "middle";
+        const WEAK = "weak";
+
+        // Helper for constructing split forms
+        // t: full text, s: strength/style, d: isDifferent (for pronoun comparison)
+        const cell = (text, strength = null, isDiff = false) => {
+            if (typeof text === 'string') return { t: text, s: strength, d: isDiff };
+            return { ...text, d: isDiff }; // preserve existing obj
+        };
+
+        const DATA = {
+            // --- Original Tables ---
+            "a_masc": {
+                id: "a_masc",
+                stem: "a-stem Masculine",
+                shortStem: "-a",
+                gender: "陽",
+                example: "deva (god)",
+                base: "dev",
+                data: [
+                    ["devas", "devau", "devās"],
+                    ["devam", "devau", "devān"],
+                    ["devena", "devābhyām", "devais"],
+                    ["devāya", "devābhyām", "devebhyas"],
+                    ["devāt", "devābhyām", "devebhyas"],
+                    ["devasya", "devayos", "devānām"],
+                    ["deve", "devayos", "deveṣu"],
+                    ["deva", "devau", "devās"]
+                ]
+            },
+            "a_neut": {
+                id: "a_neut",
+                stem: "a-stem Neuter",
+                shortStem: "-a",
+                gender: "中",
+                example: "phala (fruit)",
+                base: "phal",
+                data: [
+                    ["phalam", "phale", "phalāni"],
+                    ["phalam", "phale", "phalāni"],
+                    ["phalena", "phalābhyām", "phalais"],
+                    ["phalāya", "phalābhyām", "phalebhyas"],
+                    ["phalāt", "phalābhyām", "phalebhyas"],
+                    ["phalasya", "phalayos", "phalānām"],
+                    ["phale", "phalayos", "phaleṣu"],
+                    ["phala", "phale", "phalāni"]
+                ]
+            },
+            "aa_fem": {
+                id: "aa_fem",
+                stem: "ā-stem Feminine",
+                shortStem: "-ā",
+                gender: "陰",
+                example: "senā (army)",
+                base: "sen",
+                data: [
+                    ["senā", "sene", "senās"],
+                    ["senām", "sene", "senās"],
+                    ["senayā", "senābhyām", "senābhis"],
+                    ["senāyai", "senābhyām", "senābhyas"],
+                    ["senāyās", "senābhyām", "senābhyas"],
+                    ["senāyās", "senayos", "senānām"],
+                    ["senāyām", "senayos", "senāsu"],
+                    ["sene", "sene", "senās"]
+                ]
+            },
+            "i_masc": {
+                id: "i_masc",
+                stem: "i-stem Masculine",
+                shortStem: "-i",
+                gender: "陽",
+                example: "agni (fire)",
+                base: "agn",
+                data: [
+                    ["agnis", "agnī", "agnayas"],
+                    ["agnim", "agnī", "agnīn"],
+                    ["agninā", "agnibhyām", "agnibhis"],
+                    ["agnaye", "agnibhyām", "agnibhyas"],
+                    ["agnes", "agnibhyām", "agnibhyas"],
+                    ["agnes", "agnyos", "agnīnām"],
+                    ["agnau", "agnyos", "agniṣu"],
+                    ["agne", "agnī", "agnayas"]
+                ]
+            },
+            "i_neut": {
+                id: "i_neut",
+                stem: "i-stem Neuter",
+                shortStem: "-i",
+                gender: "中",
+                example: "vāri (water)",
+                base: "vār",
+                data: [
+                    ["vāri", "vāriṇī", "vārīṇi"],
+                    ["vāri", "vāriṇī", "vārīṇi"],
+                    ["vāriṇā", "vāribhyām", "vāribhis"],
+                    ["vāriṇe", "vāribhyām", "vāribhyas"],
+                    ["vāriṇas", "vāribhyām", "vāribhyas"],
+                    ["vāriṇas", "vāriṇos", "vārīṇām"],
+                    ["vāriṇi", "vāriṇos", "vāriṣu"],
+                    ["vāri / vāre", "vāriṇī", "vārīṇi"]
+                ]
+            },
+            "i_fem": {
+                id: "i_fem",
+                stem: "i-stem Feminine",
+                shortStem: "-i",
+                gender: "陰",
+                example: "mati (mind)",
+                base: "mat",
+                data: [
+                    ["matis", "matī", "matayas"],
+                    ["matim", "matī", "matīs"],
+                    ["matyā", "matibhyām", "matibhis"],
+                    ["matye / matyai", "matibhyām", "matibhyas"],
+                    ["mates / matyās", "matibhyām", "matibhyas"],
+                    ["mates / matyās", "matyos", "matīnām"],
+                    ["matau / matyām", "matyos", "matiṣu"],
+                    ["mate", "matī", "matayas"]
+                ]
+            },
+            "nadi_fem": {
+                id: "nadi_fem",
+                stem: "Polysyllabic ī-stem Feminine",
+                shortStem: "-ī",
+                gender: "陰",
+                example: "nadī (river)",
+                base: "nad",
+                data: [
+                    ["nadī", "nadyau", "nadyas"],
+                    ["nadīm", "nadyau", "nadīs"],
+                    ["nadyā", "nadībhyām", "nadībhis"],
+                    ["nadyai", "nadībhyām", "nadībhyas"],
+                    ["nadyās", "nadībhyām", "nadībhyas"],
+                    ["nadyās", "nadyos", "nadīnām"],
+                    ["nadyām", "nadyos", "nadīṣu"],
+                    ["nadi", "nadyau", "nadyas"]
+                ]
+            },
+            "dhi_fem": {
+                id: "dhi_fem",
+                stem: "Monosyllabic ī-stem Feminine",
+                shortStem: "-ī",
+                gender: "陰",
+                example: "dhī (thought)",
+                base: "dh",
+                data: [
+                    ["dhīs", "dhiyau", "dhiyas"],
+                    ["dhiyam", "dhiyau", "dhiyas"],
+                    ["dhiyā", "dhībhyām", "dhībhis"],
+                    ["dhiye / dhiyai", "dhībhyām", "dhībhyas"],
+                    ["dhiyas / dhiyās", "dhībhyām", "dhībhyas"],
+                    ["dhiyas / dhiyās", "dhiyos", "dhiyām / dhīnām"],
+                    ["dhiyi / dhiyām", "dhiyos", "dhīṣu"],
+                    ["dhīs", "dhiyau", "dhiyas"]
+                ]
+            },
+            "suci_neut": {
+                id: "suci_neut",
+                stem: "i-stem Adjective Neuter",
+                shortStem: "-i",
+                gender: "中",
+                example: "śuci (pure)",
+                base: "śuc",
+                data: [
+                    ["śuci", "śucinī", "śucīni"],
+                    ["śuci", "śucinī", "śucīni"],
+                    ["śucinā", "śucibhyām", "śucibhis"],
+                    ["śucine / śucaye", "śucibhyām", "śucibhyas"],
+                    ["śucinas / śuces", "śucibhyām", "śucibhyas"],
+                    ["śucinas / śuces", "śucinos / śucyos", "śucīnām"],
+                    ["śucini / śucau", "śucinos / śucyos", "śuciṣu"],
+                    ["śuci / śuce", "śucinī", "śucīni"]
+                ]
+            },
+            "u_masc": {
+                id: "u_masc",
+                stem: "u-stem Masculine",
+                shortStem: "-u",
+                gender: "陽",
+                example: "bhānu (sun)",
+                base: "bhān",
+                data: [
+                    ["bhānus", "bhānū", "bhānavas"],
+                    ["bhānum", "bhānū", "bhānūn"],
+                    ["bhānunā", "bhānubhyām", "bhānubhis"],
+                    ["bhānave", "bhānubhyām", "bhānubhyas"],
+                    ["bhānos", "bhānubhyām", "bhānubhyas"],
+                    ["bhānos", "bhānvos", "bhānūnām"],
+                    ["bhānau", "bhānvos", "bhānuṣu"],
+                    ["bhāno", "bhānū", "bhānavas"]
+                ]
+            },
+            "u_neut": {
+                id: "u_neut",
+                stem: "u-stem Neuter",
+                shortStem: "-u",
+                gender: "中",
+                example: "madhu (honey)",
+                base: "madh",
+                data: [
+                    ["madhu", "madhunī", "madhūni"],
+                    ["madhu", "madhunī", "madhūni"],
+                    ["madhunā", "madhubhyām", "madhubhis"],
+                    ["madhune", "madhubhyām", "madhubhyas"],
+                    ["madhunas", "madhubhyām", "madhubhyas"],
+                    ["madhunas", "madhunos", "madhūnām"],
+                    ["madhuni", "madhunos", "madhuṣu"],
+                    ["madhu / madho", "madhunī", "madhūni"]
+                ]
+            },
+            "vadhu_fem": {
+                id: "vadhu_fem",
+                stem: "Polysyllabic ū-stem Feminine",
+                shortStem: "-ū",
+                gender: "陰",
+                example: "vadhū (woman)",
+                base: "vadh",
+                data: [
+                    ["vadhūs", "vadhvau", "vadhvas"],
+                    ["vadhūm", "vadhvau", "vadhūs"],
+                    ["vadhvā", "vadhūbhyām", "vadhūbhis"],
+                    ["vadhvai", "vadhūbhyām", "vadhūbhyas"],
+                    ["vadhvās", "vadhūbhyām", "vadhūbhyas"],
+                    ["vadhvās", "vadhvos", "vadhūnām"],
+                    ["vadhvām", "vadhvos", "vadhūṣu"],
+                    ["vadhu", "vadhvau", "vadhvas"]
+                ]
+            },
+            "bhu_fem": {
+                id: "bhu_fem",
+                stem: "Monosyllabic ū-stem Feminine",
+                shortStem: "-ū",
+                gender: "陰",
+                example: "bhū (earth)",
+                base: "bh",
+                data: [
+                    ["bhūs", "bhuvau", "bhuvas"],
+                    ["bhuvam", "bhuvau", "bhuvas"],
+                    ["bhuvā", "bhūbhyām", "bhūbhis"],
+                    ["bhuve", "bhūbhyām", "bhūbhyas"],
+                    ["bhuvas", "bhūbhyām", "bhūbhyas"],
+                    ["bhuvas", "bhuvos", "bhuvām"],
+                    ["bhuvi", "bhuvos", "bhūṣu"],
+                    ["bhūs", "bhuvau", "bhuvas"]
+                ]
+            },
+            "pitr": {
+                id: "pitr",
+                stem: "ṛ-stem Kinship Masc",
+                shortStem: "-ṛ",
+                gender: "陽",
+                example: "pitṛ (father)",
+                base: "pit",
+                data: [
+                    ["pitā", "pitarau", "pitaras"],
+                    ["pitaram", "pitarau", "pitṝn"],
+                    ["pitrā", "pitṛbhyām", "pitṛbhis"],
+                    ["pitre", "pitṛbhyām", "pitṛbhyas"],
+                    ["pitur", "pitṛbhyām", "pitṛbhyas"],
+                    ["pitur", "pitros", "pitṝṇām"],
+                    ["pitari", "pitros", "pitṛṣu"],
+                    ["pitar", "pitarau", "pitaras"]
+                ]
+            },
+            "matr": {
+                id: "matr",
+                stem: "ṛ-stem Kinship Fem",
+                shortStem: "-ṛ",
+                gender: "陰",
+                example: "mātṛ (mother)",
+                base: "māt",
+                data: [
+                    ["mātā", "mātarau", "mātaras"],
+                    ["mātaram", "mātarau", "mātṝs"],
+                    ["mātrā", "mātṛbhyām", "mātṛbhis"],
+                    ["mātre", "mātṛbhyām", "mātṛbhyas"],
+                    ["mātur", "mātṛbhyām", "mātṛbhyas"],
+                    ["mātur", "mātros", "mātṝṇām"],
+                    ["mātari", "mātros", "mātṛṣu"],
+                    ["mātar", "mātarau", "mātaras"]
+                ]
+            },
+            "r_masc": {
+                id: "r_masc",
+                stem: "ṛ-stem Agent Masc",
+                shortStem: "-ṛ",
+                gender: "陽",
+                example: "kartṛ (doer)",
+                base: "kart",
+                hasStrength: true,
+                data: [
+                    [{ t: "kartā", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
+                    [{ t: "kartāram", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartṝn", s: WEAK }],
+                    [{ t: "kartrā", s: WEAK }, { t: "kartṛbhyām", s: MIDDLE }, { t: "kartṛbhis", s: MIDDLE }],
+                    [{ t: "kartre", s: WEAK }, { t: "kartṛbhyām", s: MIDDLE }, { t: "kartṛbhyas", s: MIDDLE }],
+                    [{ t: "kartur", s: WEAK }, { t: "kartṛbhyām", s: MIDDLE }, { t: "kartṛbhyas", s: MIDDLE }],
+                    [{ t: "kartur", s: WEAK }, { t: "kartros", s: WEAK }, { t: "kartṝṇām", s: WEAK }],
+                    [{ t: "kartari", s: WEAK }, { t: "kartros", s: WEAK }, { t: "kartṛṣu", s: MIDDLE }],
+                    [{ t: "kartar", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }]
+                ]
+            },
+            "r_neut": {
+                id: "r_neut",
+                stem: "ṛ-stem Agent Neut",
+                shortStem: "-ṛ",
+                gender: "中",
+                example: "kartṛ (doer - neuter)",
+                base: "kart",
+                data: [
+                    ["kartṛ", "kartṛṇī", "kartṝṇi"],
+                    ["kartṛ", "kartṛṇī", "kartṝṇi"],
+                    ["kartrā / kartṛṇā", "kartṛbhyām", "kartṛbhis"],
+                    ["kartre / kartṛṇe", "kartṛbhyām", "kartṛbhyas"],
+                    ["kartur / kartṛṇas", "kartṛbhyām", "kartṛbhyas"],
+                    ["kartur / kartṛṇas", "kartros / kartṛṇos", "kartṝṇām"],
+                    ["kartari / kartṛṇi", "kartros / kartṛṇos", "kartṛṣu"],
+                    ["kartar / kartṛ", "kartṛṇī", "kartṝṇi"]
+                ]
+            },
+            "r_fem": {
+                id: "r_fem",
+                stem: "ṛ-stem Agent Fem",
+                shortStem: "-ṛ",
+                gender: "陰",
+                example: "kartrī (doer - fem)",
+                base: "kartr",
+                data: [
+                    ["kartrī", "kartryau", "kartryas"],
+                    ["kartrīm", "kartryau", "kartrīs"],
+                    ["kartryā", "kartrībhyām", "kartrībhis"],
+                    ["kartryai", "kartrībhyām", "kartrībhyas"],
+                    ["kartryās", "kartrībhyām", "kartrībhyas"],
+                    ["kartryās", "kartryos", "kartrīnām"],
+                    ["kartryām", "kartryos", "kartrīṣu"],
+                    ["kartri", "kartryau", "kartryas"]
+                ]
+            },
+            "bhavat_masc": {
+                id: "bhavat_masc",
+                stem: "Honorific Pronoun Masc",
+                shortStem: "-at",
+                gender: "陽",
+                example: "bhavat (Your Honor)",
+                base: "bhav",
+                note: "强语干 bhavant，弱语干 bhavat。呼格可为 bhos (通常重复)。",
+                data: [
+                    [{ t: "bhavān", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }],
+                    [{ t: "bhavantam", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavatas", s: WEAK }],
+                    [{ t: "bhavatā", s: WEAK }, { t: "bhavadbhyām", s: MIDDLE }, { t: "bhavadbhis", s: MIDDLE }],
+                    [{ t: "bhavate", s: WEAK }, { t: "bhavadbhyām", s: MIDDLE }, { t: "bhavadbhyas", s: MIDDLE }],
+                    [{ t: "bhavatas", s: WEAK }, { t: "bhavadbhyām", s: MIDDLE }, { t: "bhavadbhyas", s: MIDDLE }],
+                    [{ t: "bhavatas", s: WEAK }, { t: "bhavatos", s: WEAK }, { t: "bhavatām", s: WEAK }],
+                    [{ t: "bhavati", s: WEAK }, { t: "bhavatos", s: WEAK }, { t: "bhavatsu", s: MIDDLE }],
+                    [{ t: "bhavan / bhos", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }]
+                ]
+            },
+            "yusmad": {
+                id: "yusmad",
+                stem: "2nd Person Pronoun",
+                shortStem: "yuṣmad",
+                gender: "通",
+                example: "yuṣmad (you)",
+                base: "",
+                note: "斜线后的形式不可出现在句首，不可用在 ca、eva、vā 等不变词前，也不能出现在韵脚。",
+                data: [
+                    ["tvam", "yuvām", "yūyam"],
+                    ["tvām / tvā", "yuvām / vām", "yuṣmān / vas"],
+                    ["tvayā", "yuvābhyām", "yuṣmābhis"],
+                    ["tubhyam / te", "yuvābhyām / vām", "yuṣmabhyam / vas"],
+                    ["tvat", "yuvābhyām", "yuṣmat"],
+                    ["tava / te", "yuvayos / vām", "yuṣmākam / vas"],
+                    ["tvayi", "yuvayos", "yuṣmāsu"],
+                    ["-", "-", "-"]
+                ]
+            },
+            "asmad": {
+                id: "asmad",
+                stem: "1st Person Pronoun",
+                shortStem: "asmad",
+                gender: "通",
+                example: "asmad (I/we)",
+                base: "",
+                note: "斜线后的形式不可出现在句首，也不可用在 ca、eva、vā 等小词前。单数第五格也可是 mattas。",
+                data: [
+                    ["aham", "āvām", "vayam"],
+                    ["mām / mā", "āvām / nau", "asmān / nas"],
+                    ["mayā", "āvābhyām", "asmābhis"],
+                    ["mahyam / me", "āvābhyām / nau", "asmabhyam / nas"],
+                    ["mat (mattas)", "āvābhyām", "asmat"],
+                    ["mama / me", "āvayos / nau", "asmākam / nas"],
+                    ["mayi", "āvayos", "asmāsu"],
+                    ["-", "-", "-"]
+                ]
+            },
+            // --- TAD GROUP (Pronouns) ---
+            "tad_group": {
+                id: "tad_group",
+                isGroup: true,
+                stem: "Demonstrative/Pronouns",
+                variants: ["tad", "etad", "yad", "kim", "sarva", "eka"],
+                defaultVariant: "tad",
+                data: {
+                    "tad": {
+                        stem: "tad", example: "that", gender: "三性", base: "t",
+                        note: "第三人称代词。阳性 sas，阴性 sā，中性 tad。用于泛指或远指。",
+                        rows: [
+                            [{ M: "sas", N: "tat / tad", F: "sā" }, { M: "tau", N: "te", F: "te" }, { M: "te", N: "tāni", F: "tās" }],
+                            [{ M: "tam", N: "tat / tad", F: "tām" }, { M: "tau", N: "te", F: "te" }, { M: "tān", N: "tāni", F: "tās" }],
+                            [{ M: "tena", N: "tena", F: "tayā" }, { M: "tābhyām", N: "tābhyām", F: "tābhyām" }, { M: "tais", N: "tais", F: "tābhis" }],
+                            [{ M: "tasmai", N: "tasmai", F: "tasyai" }, { M: "tābhyām", N: "tābhyām", F: "tābhyām" }, { M: "tebhyas", N: "tebhyas", F: "tābhyas" }],
+                            [{ M: "tasmāt", N: "tasmāt", F: "tasyās" }, { M: "tābhyām", N: "tābhyām", F: "tābhyām" }, { M: "tebhyas", N: "tebhyas", F: "tābhyas" }],
+                            [{ M: "tasya", N: "tasya", F: "tasyās" }, { M: "tayos", N: "tayos", F: "tayos" }, { M: "teṣām", N: "teṣām", F: "tāsām" }],
+                            [{ M: "tasmin", N: "tasmin", F: "tasyām" }, { M: "tayos", N: "tayos", F: "tayos" }, { M: "teṣu", N: "teṣu", F: "tāsu" }],
+                            [{ M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }]
+                        ]
+                    },
+                    "etad": {
+                        stem: "etad", example: "this", gender: "三性", base: "et",
+                        note: "同 tad，在 tad 变格前加前缀 e 即可。sas 和 eṣas 句内连声时，遇 a 变 so' 和 eṣo'，遇其他元音和辅音丢失 s。",
+                        rows: [
+                            [{ M: "eṣas", N: "etat / etad", F: "eṣā" }, { M: "etau", N: "ete", F: "ete" }, { M: "ete", N: "etāni", F: "etās" }],
+                            [{ M: "etam", N: "etat / etad", F: "etām" }, { M: "etau", N: "ete", F: "ete" }, { M: "etān", N: "etāni", F: "etās" }],
+                            [{ M: "etena", N: "etena", F: "etayā" }, { M: "etābhyām", N: "etābhyām", F: "etābhyām" }, { M: "etais", N: "etais", F: "etābhis" }],
+                            [{ M: "etasmai", N: "etasmai", F: "etasyai" }, { M: "etābhyām", N: "etābhyām", F: "etābhyām" }, { M: "etebhyas", N: "etebhyas", F: "etābhyas" }],
+                            [{ M: "etasmāt", N: "etasmāt", F: "etasyās" }, { M: "etābhyām", N: "etābhyām", F: "etābhyām" }, { M: "etebhyas", N: "etebhyas", F: "etābhyas" }],
+                            [{ M: "etasya", N: "etasya", F: "etasyās" }, { M: "etayos", N: "etayos", F: "etayos" }, { M: "eteṣām", N: "eteṣām", F: "etāsām" }],
+                            [{ M: "etasmin", N: "etasmin", F: "etasyām" }, { M: "etayos", N: "etayos", F: "etayos" }, { M: "eteṣu", N: "eteṣu", F: "etāsu" }],
+                            [{ M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }]
+                        ]
+                    },
+                    "yad": {
+                        stem: "yad", example: "who/which", gender: "三性", base: "y",
+                        note: "关系代词。变格同 tad，将 t 替换为 y 即可。",
+                        rows: [
+                            [{ M: "yas", N: "yat / yad", F: "yā" }, { M: "yau", N: "ye", F: "ye" }, { M: "ye", N: "yāni", F: "yās" }],
+                            [{ M: "yam", N: "yat / yad", F: "yām" }, { M: "yau", N: "ye", F: "ye" }, { M: "yān", N: "yāni", F: "yās" }],
+                            [{ M: "yena", N: "yena", F: "yayā" }, { M: "yābhyām", N: "yābhyām", F: "yābhyām" }, { M: "yais", N: "yais", F: "yābhis" }],
+                            [{ M: "yasmai", N: "yasmai", F: "yasyai" }, { M: "yābhyām", N: "yābhyām", F: "yābhyām" }, { M: "yebhyas", N: "yebhyas", F: "yābhyas" }],
+                            [{ M: "yasmāt", N: "yasmāt", F: "yasyās" }, { M: "yābhyām", N: "yābhyām", F: "yābhyām" }, { M: "yebhyas", N: "yebhyas", F: "yābhyas" }],
+                            [{ M: "yasya", N: "yasya", F: "yasyās" }, { M: "yayos", N: "yayos", F: "yayos" }, { M: "yeṣām", N: "yeṣām", F: "yāsām" }],
+                            [{ M: "yasmin", N: "yasmin", F: "yasyām" }, { M: "yayos", N: "yayos", F: "yayos" }, { M: "yeṣu", N: "yeṣu", F: "yāsu" }],
+                            [{ M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }]
+                        ]
+                    },
+                    "sarva": {
+                        stem: "sarva", example: "all", gender: "三性", base: "sarv",
+                        note: "中单一、二用 -am 代替 -ad，其余与 tad 相同。viśva 变格同此。",
+                        rows: [
+                            [{ M: "sarvas", N: cell("sarvam", null, true), F: "sarvā" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarve", N: "sarvāṇi", F: "sarvās" }],
+                            [{ M: "sarvam", N: cell("sarvam", null, true), F: "sarvām" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarvān", N: "sarvāṇi", F: "sarvās" }],
+                            [{ M: "sarveṇa", N: "sarveṇa", F: "sarvayā" }, { M: "sarvābhyām", N: "sarvābhyām", F: "sarvābhyām" }, { M: "sarvais", N: "sarvais", F: "sarvābhis" }],
+                            [{ M: "sarvasmai", N: "sarvasmai", F: "sarvasyai" }, { M: "sarvābhyām", N: "sarvābhyām", F: "sarvābhyām" }, { M: "sarvebhyas", N: "sarvebhyas", F: "sarvābhyas" }],
+                            [{ M: "sarvasmāt", N: "sarvasmāt", F: "sarvasyās" }, { M: "sarvābhyām", N: "sarvābhyām", F: "sarvābhyām" }, { M: "sarvebhyas", N: "sarvebhyas", F: "sarvābhyas" }],
+                            [{ M: "sarvasya", N: "sarvasya", F: "sarvasyās" }, { M: "sarvayos", N: "sarvayos", F: "sarvayos" }, { M: "sarveṣām", N: "sarveṣām", F: "sarvāsām" }],
+                            [{ M: "sarvasmin", N: "sarvasmin", F: "sarvasyām" }, { M: "sarvayos", N: "sarvayos", F: "sarvayos" }, { M: "sarveṣu", N: "sarveṣu", F: "sarvāsu" }],
+                            [{ M: "sarva", N: "sarve", F: "sarve" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarve", N: "sarvāṇi", F: "sarvās" }]
+                        ]
+                    },
+                    "kim": {
+                        stem: "kim", example: "what/who", gender: "三性", base: "k",
+                        note: "疑问代词。阳 kas，阴 kā，中 kim。中单一、二为 kim，其余同 tad。",
+                        rows: [
+                            [{ M: "kas", N: cell("kim", null, true), F: "kā" }, { M: "kau", N: "ke", F: "ke" }, { M: "ke", N: "kāni", F: "kās" }],
+                            [{ M: "kam", N: cell("kim", null, true), F: "kām" }, { M: "kau", N: "ke", F: "ke" }, { M: "kān", N: "kāni", F: "kās" }],
+                            [{ M: "kena", N: "kena", F: "kayā" }, { M: "kābhyām", N: "kābhyām", F: "kābhyām" }, { M: "kais", N: "kais", F: "kābhis" }],
+                            [{ M: "kasmai", N: "kasmai", F: "kasyai" }, { M: "kābhyām", N: "kābhyām", F: "kābhyām" }, { M: "kebhyas", N: "kebhyas", F: "kābhyas" }],
+                            [{ M: "kasmāt", N: "kasmāt", F: "kasyās" }, { M: "kābhyām", N: "kābhyām", F: "kābhyām" }, { M: "kebhyas", N: "kebhyas", F: "kābhyas" }],
+                            [{ M: "kasya", N: "kasya", F: "kasyās" }, { M: "kayos", N: "kayos", F: "kayos" }, { M: "keṣām", N: "keṣām", F: "kāsām" }],
+                            [{ M: "kasmin", N: "kasmin", F: "kasyām" }, { M: "kayos", N: "kayos", F: "kayos" }, { M: "keṣu", N: "keṣu", F: "kāsu" }],
+                            [{ M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }, { M: "-", N: "-", F: "-" }]
+                        ]
+                    },
+                    "eka": {
+                        stem: "eka", example: "one", gender: "三性", base: "ek",
+                        note: "复数表示“一些”。变格规则同 sarva。",
+                        rows: [
+                            [{ M: "ekas", N: cell("ekam", null, true), F: "ekā" }, { M: "ekau", N: "eke", F: "eke" }, { M: "eke", N: "ekāni", F: "ekās" }],
+                            [{ M: "ekam", N: cell("ekam", null, true), F: "ekām" }, { M: "ekau", N: "eke", F: "eke" }, { M: "ekān", N: "ekāni", F: "ekās" }],
+                            [{ M: "ekena", N: "ekena", F: "ekayā" }, { M: "ekābhyām", N: "ekābhyām", F: "ekābhyām" }, { M: "ekais", N: "ekais", F: "ekābhis" }],
+                            [{ M: "ekasmai", N: "ekasmai", F: "ekasyai" }, { M: "ekābhyām", N: "ekābhyām", F: "ekābhyām" }, { M: "ekebhyas", N: "ekebhyas", F: "ekābhyas" }],
+                            [{ M: "ekasmāt", N: "ekasmāt", F: "ekasyās" }, { M: "ekābhyām", N: "ekābhyām", F: "ekābhyām" }, { M: "ekebhyas", N: "ekebhyas", F: "ekābhyas" }],
+                            [{ M: "ekasya", N: "ekasya", F: "ekasyās" }, { M: "ekayos", N: "ekayos", F: "ekayos" }, { M: "ekeṣām", N: "ekeṣām", F: "ekāsām" }],
+                            [{ M: "ekasmin", N: "ekasmin", F: "ekasyām" }, { M: "ekayos", N: "ekayos", F: "ekayos" }, { M: "ekeṣu", N: "ekeṣu", F: "ekāsu" }],
+                            [{ M: "eka", N: "eke", F: "eke" }, { M: "ekau", N: "eke", F: "eke" }, { M: "eke", N: "ekāni", F: "ekās" }]
+                        ]
+                    }
+                }
+            },
+            "o_masc": {
+                id: "o_masc",
+                stem: "o-stem Masc/Fem",
+                shortStem: "-o",
+                gender: "陽",
+                example: "go (cow)",
+                base: "g",
+                data: [
+                    ["gaus", "gavau", "gāvas"],
+                    ["gām", "gavau", "gās"],
+                    ["gavā", "gobhyām", "gobhis"],
+                    ["gave", "gobhyām", "gobhyas"],
+                    ["gos", "gobhyām", "gobhyas"],
+                    ["gos", "gavos", "gavām"],
+                    ["gavi", "gavos", "goṣu"],
+                    ["gaus", "gavau", "gavas"]
+                ]
+            },
+            "au_fem": {
+                id: "au_fem",
+                stem: "au-stem Feminine",
+                shortStem: "-au",
+                gender: "陰",
+                example: "nau (ship)",
+                base: "n",
+                data: [
+                    ["naus", "nāvau", "nāvas"],
+                    ["nāvam", "nāvau", "nāvas"],
+                    ["nāvā", "naubhyām", "naubhis"],
+                    ["nāve", "naubhyām", "naubhyas"],
+                    ["nāvas", "naubhyām", "naubhyas"],
+                    ["nāvas", "nāvos", "nāvām"],
+                    ["nāvi", "nāvos", "nauṣu"],
+                    ["naus", "nāvau", "nāvas"]
+                ]
+            }
+        };
+
+        const CASE_NAMES = ["一", "二", "三", "四", "五", "六", "七", "呼"];
+        const COL_NAMES = ["單", "雙", "複"];
+
+        // --- UTILS ---
+
+        function parseCellData(cellData, tableBase) {
+            let text = "";
+            let strength = null;
+
+            if (typeof cellData === 'object' && cellData !== null) {
+                text = cellData.t;
+                strength = cellData.s;
+            } else {
+                text = cellData;
+            }
+
+            const forms = text.split("/").map(w => w.trim());
+
+            const parsedForms = forms.map(f => {
+                if (f.startsWith(tableBase)) {
+                    return {
+                        full: f,
+                        base: tableBase,
+                        suffix: f.substring(tableBase.length),
+                        strength: strength
+                    };
+                }
+                return {
+                    full: f,
+                    base: "",
+                    suffix: f,
+                    strength: strength
+                };
+            });
+
+            return { parsedForms, strength, rawWord: text };
+        }
+
+        // Helper to extract specific gender data from a 3-gender cell
+        function extractGenderData(cellData, genderKey) {
+            if (!cellData) return "";
+            if (typeof cellData !== 'object' || cellData.t || Array.isArray(cellData)) return cellData;
+            if (cellData[genderKey]) return cellData[genderKey];
+            return "";
+        }
+
+        // 1. Find matches for same Red Suffix
+        function findMatchingForms(targetSuffix, currentTableId) {
+            if (!targetSuffix) return [];
+
+            const rawMatches = [];
+
+            Object.values(DATA).forEach(entry => {
+                const processTable = (table, tableId, variantName = null, genderKey = null) => {
+                    const rows = table.data || table.rows;
+                    if (!rows) return;
+
+                    rows.forEach((row, rowIndex) => {
+                        row.forEach((cell, colIndex) => {
+                            let actualCell = cell;
+                            if (genderKey) {
+                                actualCell = extractGenderData(cell, genderKey);
+                            }
+
+                            const { parsedForms } = parseCellData(actualCell, table.base);
+
+                            if (parsedForms.some(p => p.suffix === targetSuffix)) {
+                                rawMatches.push({
+                                    tableId: tableId,
+                                    table: table,
+                                    variantName: variantName,
+                                    genderKey: genderKey,
+                                    rowIdx: rowIndex,
+                                    colIdx: colIndex,
+                                    word: typeof actualCell === 'object' ? actualCell.t : actualCell,
+                                    suffix: targetSuffix
+                                });
+                            }
+                        });
+                    });
+                };
+
+                if (entry.isGroup) {
+                    Object.entries(entry.data).forEach(([vKey, vData]) => {
+                        ["M", "N", "F"].forEach(gKey => {
+                            processTable(vData, entry.id, vKey, gKey);
+                        });
+                    });
+                } else {
+                    processTable(entry, entry.id);
+                }
+            });
+
+            const grouped = {};
+
+            rawMatches.forEach(m => {
+                const key = `${m.tableId}_${m.variantName || ''}_${m.genderKey || ''}_${m.word}`;
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        tableId: m.tableId,
+                        table: m.table,
+                        variantName: m.variantName,
+                        genderKey: m.genderKey,
+                        word: m.word,
+                        suffix: m.suffix,
+                        occurrences: []
+                    };
+                }
+                grouped[key].occurrences.push({ r: m.rowIdx, c: m.colIdx });
+            });
+
+            return Object.values(grouped).map(group => {
+                const infoStr = formatOccurrences(group.occurrences);
+                let tableName = group.table.stem;
+                if (group.variantName) {
+                    tableName = `${group.variantName} (${group.genderKey})`;
+                }
+
+                return {
+                    tableId: group.tableId,
+                    tableName: tableName,
+                    shortStem: group.table.shortStem || group.table.stem,
+                    gender: group.genderKey ? group.genderKey : group.table.gender,
+                    word: group.word,
+                    suffix: group.suffix,
+                    infoStr: infoStr,
+                    isCurrent: group.tableId === currentTableId,
+                    variantName: group.variantName,
+                    genderKey: group.genderKey
+                };
+            });
+        }
+
+        // 2. New Function: Find matches for Same Case & Number
+        function findSameCaseNumberForms(rowIdx, colIdx, currentTableId) {
+            const matches = [];
+
+            Object.values(DATA).forEach(entry => {
+                // We don't skip current table here because we might want to see other variants/genders of the same group
+
+                const processTable = (table, tableId, variantName = null, genderKey = null) => {
+                    const rows = table.data || table.rows;
+                    if (!rows) return;
+
+                    const cellData = rows[rowIdx][colIdx];
+                    let actualCell = cellData;
+                    if (genderKey) {
+                        actualCell = extractGenderData(cellData, genderKey);
+                    }
+
+                    const word = typeof actualCell === 'object' ? actualCell.t : actualCell;
+
+                    matches.push({
+                        tableId: tableId,
+                        shortStem: table.shortStem || table.stem,
+                        gender: genderKey || table.gender,
+                        word: word,
+                        variantName: variantName,
+                        genderKey: genderKey
+                    });
+                };
+
+                if (entry.isGroup) {
+                    Object.entries(entry.data).forEach(([vKey, vData]) => {
+                        ["M", "N", "F"].forEach(gKey => {
+                            processTable(vData, entry.id, vKey, gKey);
+                        });
+                    });
+                } else {
+                    if (entry.id !== currentTableId) { // Only skip simple tables if they are the current one
+                        processTable(entry, entry.id);
+                    }
+                }
+            });
+
+            return matches;
+        }
+
+        // Helper to format occurrences into "雙三四五"
+        function formatOccurrences(occurrences) {
+            occurrences.sort((a, b) => {
+                if (a.c !== b.c) return a.c - b.c;
+                return a.r - b.r;
+            });
+
+            const byCol = {};
+            occurrences.forEach(o => {
+                if (!byCol[o.c]) byCol[o.c] = [];
+                byCol[o.c].push(o.r);
+            });
+
+            let parts = [];
+            Object.keys(byCol).sort().forEach(cIdx => {
+                const colName = COL_NAMES[cIdx];
+                const rows = byCol[cIdx].sort((a, b) => a - b);
+                const rowNames = rows.map(r => CASE_NAMES[r]).join("");
+                parts.push(`${colName}${rowNames}`);
+            });
+
+            return parts.join(" ");
+        }
+
+        // --- COMPONENTS ---
+
+        const WordCell = ({ cellData, base, onClick }) => {
+            const { parsedForms, strength } = parseCellData(cellData, base);
+
+            let bgClass = "hover:bg-red-50 active:bg-red-100";
+            let textBaseClass = "text-stone-800";
+            let textSuffixClass = "text-red-600";
+            let slashClass = "text-stone-300";
+
+            if (strength === STRONG) {
+                bgClass = "bg-stone-800 hover:bg-stone-700 active:bg-stone-900 shadow-sm";
+                textBaseClass = "text-stone-200";
+                textSuffixClass = "text-red-400 font-bold";
+                slashClass = "text-stone-600";
+            } else if (strength === MIDDLE) {
+                bgClass = "bg-stone-200 hover:bg-stone-300 active:bg-stone-400";
+                textBaseClass = "text-stone-700";
+                textSuffixClass = "text-red-700 font-bold";
+                slashClass = "text-stone-400";
+            }
+
+            return (
+                <button
+                    onClick={onClick}
+                    className={`w-full h-full py-3 px-1 rounded transition-colors focus:outline-none flex flex-wrap items-center justify-center gap-x-1 ${bgClass}`}
+                >
+                    {parsedForms.map((part, idx) => (
+                        <span key={idx} className="sanskrit-text text-base sm:text-lg leading-tight whitespace-nowrap">
+                            <span className={textBaseClass}>{part.base}</span>
+                            <span className={`${textSuffixClass} font-medium`}>{part.suffix}</span>
+                            {idx < parsedForms.length - 1 && <span className={`mx-1 ${slashClass}`}>/</span>}
+                        </span>
+                    ))}
+                </button>
+            );
+        };
+
+        const Modal = ({ isOpen, onClose, title, children }) => {
+            if (!isOpen) return null;
+            return (
+                <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+                    <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300">
+                        <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-red-50">
+                            <h3 className="text-lg font-bold text-red-900">{title}</h3>
+                            <button onClick={onClose} className="p-1 rounded-full hover:bg-red-100 text-red-700 transition-colors">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+                        <div className="overflow-y-auto p-4 custom-scrollbar">
+                            {children}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Legend = () => (
+            <div className="bg-white border border-stone-200 rounded-lg p-3 mb-4 text-xs sm:text-sm shadow-sm">
+                <h4 className="font-bold text-stone-700 mb-2 border-b border-stone-100 pb-1">Stem Strength (ṛ-stems)</h4>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                    <div className="bg-stone-800 text-white p-1 rounded">
+                        <span className="font-bold">Strong</span> (強)
+                        <div className="text-[10px] text-stone-400 opacity-80">Nom/Acc Sg-Pl</div>
+                    </div>
+                    <div className="bg-stone-200 text-stone-800 p-1 rounded border border-stone-300">
+                        <span className="font-bold">Middle</span> (中)
+                        <div className="text-[10px] text-stone-500">Before consonants</div>
+                    </div>
+                    <div className="bg-white text-stone-800 p-1 rounded border border-stone-200">
+                        <span className="font-bold">Weak</span> (弱)
+                        <div className="text-[10px] text-stone-500">Before vowels</div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const [currentTableId, setCurrentTableId] = React.useState("a_masc");
+            const [currentVariant, setCurrentVariant] = React.useState(null);
+            const [currentGender, setCurrentGender] = React.useState("M");
+
+            const [selectedCell, setSelectedCell] = React.useState(null);
+            const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+            // Effect to set default variant when table changes
+            React.useEffect(() => {
+                const table = DATA[currentTableId];
+                if (table.isGroup) {
+                    setCurrentVariant(table.defaultVariant);
+                    setCurrentGender("M");
+                } else {
+                    setCurrentVariant(null);
+                }
+            }, [currentTableId]);
+
+            const handleCellClick = (cellData, rowIdx, colIdx) => {
+                const table = DATA[currentTableId];
+                // We need the base from the ACTUAL current table (variant)
+                const effectiveTable = currentTable;
+
+                const { parsedForms } = parseCellData(cellData, effectiveTable.base);
+
+                let allMatches = [];
+                let displaySuffixes = [];
+
+                parsedForms.forEach(part => {
+                    const matches = findMatchingForms(part.suffix, currentTableId);
+                    if (matches.length > 0) {
+                        allMatches = [...allMatches, ...matches];
+                        displaySuffixes.push(part.suffix);
+                    }
+                });
+
+                const uniqueMatches = allMatches.filter((v, i, a) => a.findIndex(t => (t.tableId === v.tableId && t.word === v.word && t.variantName === v.variantName && t.genderKey === v.genderKey)) === i);
+
+                // Prepare info for current cell
+                const currentTableMatches = uniqueMatches.filter(m =>
+                    m.isCurrent &&
+                    m.word === (typeof cellData === 'object' ? cellData.t : cellData) &&
+                    (!m.variantName || m.variantName === currentVariant) &&
+                    (!m.genderKey || m.genderKey === currentGender)
+                );
+                const otherMatches = uniqueMatches.filter(m =>
+                    !m.isCurrent ||
+                    (m.variantName && m.variantName !== currentVariant) ||
+                    (m.genderKey && m.genderKey !== currentGender)
+                );
+                const currentInfoStr = currentTableMatches.length > 0 ? currentTableMatches[0].infoStr : formatOccurrences([{ r: rowIdx, c: colIdx }]);
+
+                const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, currentTableId);
+
+                setSelectedCell({
+                    rawWord: typeof cellData === 'object' ? cellData.t : cellData,
+                    suffixes: displaySuffixes,
+                    currentInfoStr: currentInfoStr,
+                    tableGender: effectiveTable.gender,
+                    matches: otherMatches,
+                    sameCaseNumberMatches: sameCaseNumberMatches,
+                    caseLabel: `${COL_NAMES[colIdx]}${CASE_NAMES[rowIdx]}`
+                });
+                setIsModalOpen(true);
+            };
+
+            const switchTable = (tableId, variant = null, gender = null) => {
+                setCurrentTableId(tableId);
+                if (variant) setCurrentVariant(variant);
+                if (gender) setCurrentGender(gender);
+                setIsModalOpen(false);
+            };
+
+            // Derive current table data
+            const rawTable = DATA[currentTableId];
+            let currentTable = rawTable;
+
+            if (rawTable.isGroup && currentVariant) {
+                const variantData = rawTable.data[currentVariant];
+                // Construct a flat table for rendering
+                const mappedRows = variantData.rows.map(row =>
+                    row.map(cell => extractGenderData(cell, currentGender))
+                );
+
+                currentTable = {
+                    ...variantData,
+                    id: rawTable.id,
+                    variant: currentVariant,
+                    gender: currentGender === "M" ? "陽" : (currentGender === "N" ? "中" : "陰"), // Map key to label
+                    data: mappedRows
+                };
+            }
+
+            return (
+                <div className="min-h-screen pb-20 sm:pb-10">
+
+                    {/* Header */}
+                    <header className="bg-red-900 text-white p-4 shadow-lg sticky top-0 z-10">
+                        <div className="max-w-3xl mx-auto flex flex-col gap-2">
+                            <h1 className="text-xl font-bold tracking-tight">梵语速查手册 (Stem Viewer)</h1>
+
+                            {/* Table Selector */}
+                            <div className="relative">
+                                <select
+                                    value={currentTableId}
+                                    onChange={(e) => setCurrentTableId(e.target.value)}
+                                    className="w-full appearance-none bg-red-800 border border-red-700 text-white py-3 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 font-medium"
+                                >
+                                    {Object.values(DATA).map(t => (
+                                        <option key={t.id} value={t.id}>
+                                            {t.stem} — {t.example}
+                                        </option>
+                                    ))}
+                                </select>
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-red-200">
+                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="max-w-3xl mx-auto p-2 sm:p-4 mt-2">
+
+                        {/* Variant Selectors for Groups */}
+                        {rawTable.isGroup && (
+                            <div className="mb-4 space-y-2">
+                                {/* Variant Tabs */}
+                                <div className="flex flex-wrap gap-2">
+                                    {rawTable.variants.map(v => (
+                                        <button
+                                            key={v}
+                                            onClick={() => setCurrentVariant(v)}
+                                            className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${currentVariant === v
+                                                ? 'bg-red-800 text-white shadow-sm'
+                                                : 'bg-white text-stone-600 border border-stone-200 hover:bg-red-50'
+                                                }`}
+                                        >
+                                            {v}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Gender Tabs for Pronouns */}
+                                <div className="flex gap-2 bg-stone-100 p-1 rounded-lg w-fit">
+                                    {["M", "N", "F"].map(g => (
+                                        <button
+                                            key={g}
+                                            onClick={() => setCurrentGender(g)}
+                                            className={`px-4 py-1 rounded-md text-sm font-bold transition-all ${currentGender === g
+                                                ? 'bg-white text-red-800 shadow-sm'
+                                                : 'text-stone-500 hover:text-stone-700'
+                                                }`}
+                                        >
+                                            {g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine")}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Variant Selectors for Groups */}
+                        {rawTable.isGroup && (
+                            <div className="mb-4 space-y-2">
+                                {/* Variant Tabs */}
+                                <div className="flex flex-wrap gap-2">
+                                    {rawTable.variants.map(v => (
+                                        <button
+                                            key={v}
+                                            onClick={() => setCurrentVariant(v)}
+                                            className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${currentVariant === v
+                                                    ? 'bg-red-800 text-white shadow-sm'
+                                                    : 'bg-white text-stone-600 border border-stone-200 hover:bg-red-50'
+                                                }`}
+                                        >
+                                            {v}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Gender Tabs for Pronouns */}
+                                <div className="flex gap-2 bg-stone-100 p-1 rounded-lg w-fit">
+                                    {["M", "N", "F"].map(g => (
+                                        <button
+                                            key={g}
+                                            onClick={() => setCurrentGender(g)}
+                                            className={`px-4 py-1 rounded-md text-sm font-bold transition-all ${currentGender === g
+                                                    ? 'bg-white text-red-800 shadow-sm'
+                                                    : 'text-stone-500 hover:text-stone-700'
+                                                }`}
+                                        >
+                                            {g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine")}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Legend for r-stem if needed */}
+                        {currentTable.hasStrength && <Legend />}
+
+                        {/* Table Card */}
+                        <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                            <div className="bg-stone-50 p-3 border-b border-stone-200 flex justify-between items-center">
+                                <span className="text-xs font-bold text-stone-500 uppercase tracking-wider">Paradigm</span>
+                                <div className="text-sm font-serif text-stone-700">
+                                    Base: <span className="font-bold">{currentTable.base}</span> + <span className="text-red-600 font-bold">Suffix</span>
+                                </div>
+                            </div>
+
+                            <div className="overflow-x-auto no-scrollbar">
+                                <table className="w-full min-w-[350px]">
+                                    <thead>
+                                        <tr className="bg-stone-100 text-stone-500 text-xs font-semibold border-b border-stone-200">
+                                            <th className="py-3 px-2 text-left w-12 sticky left-0 bg-stone-100 z-10 border-r border-stone-200">格</th>
+                                            <th className="py-3 px-2 text-center w-1/3">單 (1)</th>
+                                            <th className="py-3 px-2 text-center w-1/3">雙 (2)</th>
+                                            <th className="py-3 px-2 text-center w-1/3">複 (3+)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-stone-100">
+                                        {currentTable.data.map((row, rowIdx) => (
+                                            <tr key={rowIdx} className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-stone-50/30'}>
+                                                {/* Case Label */}
+                                                <td className="py-3 px-2 font-bold text-stone-400 text-sm sticky left-0 bg-inherit border-r border-stone-200 z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
+                                                    {CASE_NAMES[rowIdx]}
+                                                </td>
+
+                                                {/* Cells */}
+                                                {row.map((cellData, colIdx) => (
+                                                    <td key={colIdx} className="p-1 align-middle">
+                                                        <WordCell
+                                                            cellData={cellData}
+                                                            base={currentTable.base}
+                                                            onClick={() => handleCellClick(cellData, rowIdx, colIdx)}
+                                                        />
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div className="mt-4 text-xs text-center text-stone-400">
+                            Tap any word to link to other stems with the same <span className="text-red-500 font-bold">red ending</span>.
+                        </div>
+                    </main>
+
+                    {/* Analysis Modal */}
+                    <Modal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        title="Suffix Analysis"
+                    >
+                        {selectedCell && (
+                            <div className="space-y-8">
+                                {/* Header Info */}
+                                <div className="text-center">
+                                    <div className="flex justify-center items-center gap-2 mb-2 flex-wrap">
+                                        {selectedCell.rawWord.split("/").map((w, i) => {
+                                            const parts = parseCellData(w, DATA[currentTableId].base).parsedForms[0];
+                                            return (
+                                                <span key={i} className="text-2xl sm:text-3xl sanskrit-text font-serif">
+                                                    <span className="text-stone-800">{parts.base}</span>
+                                                    <span className="text-red-600">{parts.suffix}</span>
+                                                    {i < selectedCell.rawWord.split("/").length - 1 && <span className="text-stone-300 mx-2">/</span>}
+                                                </span>
+                                            )
+                                        })}
+                                    </div>
+
+                                    {/* Consolidated Current Cell Info */}
+                                    <div className="text-lg font-bold text-stone-700 mt-2">
+                                        {selectedCell.rawWord}
+                                        <span className="ml-2 text-indigo-700 bg-indigo-50 px-2 py-1 rounded-md text-base">
+                                            {selectedCell.tableGender}{selectedCell.currentInfoStr}
+                                        </span>
+                                    </div>
+
+                                    <div className="mt-3 flex flex-wrap gap-2 justify-center">
+                                        {selectedCell.suffixes.map(s => (
+                                            <span key={s} className="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full border border-red-200">
+                                                Ending: -{s}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Cross References - Same Suffix */}
+                                <div>
+                                    <div className="flex justify-between items-end mb-3 border-b border-stone-100 pb-2">
+                                        <h4 className="text-xs font-bold text-stone-400 uppercase tracking-wider">
+                                            Other stems with same red part
+                                        </h4>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-2">
+                                        {selectedCell.matches.map((match, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => switchTable(match.tableId, match.variantName, match.genderKey)}
+                                                className="flex items-center justify-between p-3 rounded-lg border border-stone-200 hover:border-red-300 hover:bg-red-50 transition-all group text-left shadow-sm"
+                                            >
+                                                <div className="flex items-center gap-2 font-semibold text-stone-800 group-hover:text-red-900 w-full">
+                                                    <span className="bg-stone-100 text-stone-600 px-1.5 rounded text-sm font-bold min-w-[30px] text-center">{match.shortStem}</span>
+                                                    <span className="text-indigo-800 text-sm">
+                                                        {match.gender}{match.infoStr}
+                                                    </span>
+                                                    <span className="flex-grow text-right text-lg font-serif sanskrit-text">
+                                                        {match.word}
+                                                    </span>
+                                                </div>
+                                            </button>
+                                        ))}
+
+                                        {selectedCell.matches.length === 0 && (
+                                            <div className="text-center py-4 bg-stone-50 rounded-lg border border-dashed border-stone-200">
+                                                <p className="text-stone-400 italic text-sm">No other stems share exactly this ending.</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* NEW SECTION: Same Case & Number */}
+                                <div>
+                                    <div className="flex justify-between items-end mb-3 border-b border-stone-100 pb-2">
+                                        <h4 className="text-xs font-bold text-stone-400 uppercase tracking-wider">
+                                            其他同數同格詞形 ({selectedCell.caseLabel})
+                                        </h4>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-2">
+                                        {selectedCell.sameCaseNumberMatches.map((match, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => switchTable(match.tableId, match.variantName, match.genderKey)}
+                                                className="flex items-center justify-between p-3 rounded-lg border border-stone-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all group text-left shadow-sm"
+                                            >
+                                                <div className="flex items-center gap-2 font-semibold text-stone-800 group-hover:text-indigo-900 w-full">
+                                                    <span className="bg-stone-100 text-stone-600 px-1.5 rounded text-sm font-bold min-w-[30px] text-center">{match.shortStem}</span>
+                                                    <span className="text-stone-500 text-sm">
+                                                        {match.gender}
+                                                    </span>
+                                                    <span className="flex-grow text-right text-lg font-serif sanskrit-text text-indigo-900">
+                                                        {match.word}
+                                                    </span>
+                                                </div>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </Modal>
+
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
