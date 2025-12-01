@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanskrit Stem Table Viewer</title>
+    <title>LEGACY Sanskrit Stem Table Viewer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -1017,8 +1017,8 @@
                                             key={v}
                                             onClick={() => setCurrentVariant(v)}
                                             className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${currentVariant === v
-                                                    ? 'bg-red-800 text-white shadow-sm'
-                                                    : 'bg-white text-stone-600 border border-stone-200 hover:bg-red-50'
+                                                ? 'bg-red-800 text-white shadow-sm'
+                                                : 'bg-white text-stone-600 border border-stone-200 hover:bg-red-50'
                                                 }`}
                                         >
                                             {v}
@@ -1033,8 +1033,8 @@
                                             key={g}
                                             onClick={() => setCurrentGender(g)}
                                             className={`px-4 py-1 rounded-md text-sm font-bold transition-all ${currentGender === g
-                                                    ? 'bg-white text-red-800 shadow-sm'
-                                                    : 'text-stone-500 hover:text-stone-700'
+                                                ? 'bg-white text-red-800 shadow-sm'
+                                                : 'text-stone-500 hover:text-stone-700'
                                                 }`}
                                         >
                                             {g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine")}
