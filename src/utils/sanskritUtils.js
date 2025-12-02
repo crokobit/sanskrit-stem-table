@@ -78,6 +78,78 @@ export function formatOccurrences(occurrences) {
     return parts.join(" ");
 }
 
+// Circular dependency if we import DATA here, but we just need constants or we can pass them.
+// Actually CASE_NAMES and COL_NAMES are in sanskritData.js.
+// Let's avoid circular dependency. We can just pass headers or use fixed ones if they are standard.
+// But wait, sanskritData imports cell/STRONG etc from here.
+// So we cannot import CASE_NAMES/COL_NAMES from sanskritData.js into sanskritUtils.js.
+// We should move constants to a separate file or just duplicate/hardcode if they are simple, or pass them as args.
+// For now, let's assume we don't need them inside mergeTableData if we construct headers dynamically or passed in.
+
+// Re-export constants if needed or just define them here if they were moved?
+// The original file imported cell, STRONG... from here.
+// Let's check where CASE_NAMES are defined. They are in sanskritData.js.
+// We should probably move CASE_NAMES/COL_NAMES to utils or a constants file to avoid circular dep if we need them here.
+// However, mergeTableData might not need them if we just merge the data arrays.
+// The headers generation might happen in App or Table.
+// Let's look at the plan: "It will generate a new table object with... headers".
+// If we want to generate headers like "Singular (Table1)", we might need COL_NAMES.
+// Let's see if we can move constants to utils or a new file.
+// For now, let's just implement mergeTableData without importing constants, and pass necessary info or handle headers in App/Table.
+
+export const mergeTableData = (table1, table2) => {
+    // table1 and table2 are the "currentTable" objects (already processed for variant/gender)
+    // They have .data which is 8 rows x 3 cols (usually).
+    // If "All Genders" complex view, .data might be different?
+    // The currentTable.data for "All Genders" is 8 rows x 3 cols, but each cell is {M, N, F}.
+    // If we merge two "All Genders" tables, we probably want to flatten them?
+    // The plan said: "If 'All Genders' is selected for both, it will result in 6 columns per number".
+    // Actually, standard table is 3 columns (Sing, Dual, Plural).
+    // If we merge, we want: Sing(T1), Sing(T2), Dual(T1), Dual(T2), Plural(T1), Plural(T2).
+    // So 6 columns total.
+
+    // If one is "All Genders" (complex cell) and other is "M" (simple string), it's tricky.
+    // Let's assume for Merged View, we treat "All Genders" as just another value?
+    // Or maybe we force the user to select specific gender for merge?
+    // The plan said: "The 'Merged View' will interleave columns based on the active gender selection".
+    // If "All Genders" is active, we might have 3 sub-columns per number.
+    // That would be 3 * 3 = 9 columns per table. 18 columns total. Too wide.
+    // Let's restrict Merged View to specific genders OR simplified "All" (maybe just show one representative?).
+    // But the user wants to compare.
+    // Let's stick to the plan: Interleave columns.
+
+    const rows1 = table1.data;
+    const rows2 = table2.data;
+
+    const mergedRows = rows1.map((row1, rowIdx) => {
+        const row2 = rows2[rowIdx] || [];
+        // Interleave: [Col1_T1, Col1_T2, Col2_T1, Col2_T2, Col3_T1, Col3_T2]
+        const newRow = [];
+        for (let i = 0; i < 3; i++) {
+            newRow.push({ ...wrapCell(row1[i]), origin: 'left', base: table1.base });
+            newRow.push({ ...wrapCell(row2[i]), origin: 'right', base: table2.base });
+        }
+        return newRow;
+    });
+
+    return {
+        id: `merged_${table1.id}_${table2.id}`,
+        isMerged: true,
+        base: `${table1.base} / ${table2.base}`,
+        gender: `${table1.gender} | ${table2.gender}`,
+        data: mergedRows,
+        table1Label: table1.gender, // or some other label
+        table2Label: table2.gender
+    };
+};
+
+const wrapCell = (cellData) => {
+    // Ensure cellData is an object so we can add origin
+    if (typeof cellData === 'string') return { t: cellData };
+    if (typeof cellData === 'object' && cellData !== null) return cellData; // Already object (maybe {t, s} or {M,N,F})
+    return { t: "-" };
+};
+
 // 1. Find matches for same Red Suffix
 export function findMatchingForms(targetSuffix, currentTableId) {
     if (!targetSuffix) return [];

@@ -3,7 +3,9 @@ import WordCell from './WordCell';
 import { CASE_NAMES, COL_NAMES } from '../data/sanskritData';
 
 const Table = ({ currentTable, handleCellClick }) => {
-    const isAllGenders = currentTable.gender === "ALL" || (currentTable.data.length > 0 && currentTable.data[0].some(cell => typeof cell === 'object' && !cell.t && (cell.M || cell.N || cell.F)));
+    const isMerged = currentTable.isMerged;
+    const isAllGenders = !isMerged && (currentTable.gender === "ALL" || (currentTable.data.length > 0 && currentTable.data[0].some(cell => typeof cell === 'object' && !cell.t && (cell.M || cell.N || cell.F))));
+
 
     // Helper to compare cell data for equality
     const areCellsEqual = (c1, c2) => {
@@ -25,7 +27,24 @@ const Table = ({ currentTable, handleCellClick }) => {
             <div className="table-scroll-container">
                 <table className={`data-table ${isAllGenders ? 'complex-table' : ''}`}>
                     <thead>
-                        {isAllGenders ? (
+                        {isMerged ? (
+                            <>
+                                <tr className="table-head-row">
+                                    <th className="th-case" rowSpan={2}>格</th>
+                                    <th className="th-number" colSpan={2}>單 (1)</th>
+                                    <th className="th-number" colSpan={2}>雙 (2)</th>
+                                    <th className="th-number" colSpan={2}>複 (3+)</th>
+                                </tr>
+                                <tr className="table-head-row-sub">
+                                    {/* Singular */}
+                                    <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
+                                    {/* Dual */}
+                                    <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
+                                    {/* Plural */}
+                                    <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
+                                </tr>
+                            </>
+                        ) : isAllGenders ? (
                             <>
                                 <tr className="table-head-row">
                                     <th className="th-case" rowSpan={2}>格</th>
@@ -158,6 +177,22 @@ const Table = ({ currentTable, handleCellClick }) => {
                                             );
                                         }
 
+                                    } else if (isMerged) {
+                                        // Merged View Render
+                                        // cellData has .origin ('left' or 'right')
+                                        // We can style them slightly differently if needed
+                                        const isRight = cellData.origin === 'right';
+                                        return (
+                                            <td key={colIdx} className={`td-cell ${isRight ? 'bg-stone-50' : ''}`}>
+                                                <WordCell
+                                                    cellData={cellData}
+                                                    base={cellData.base || currentTable.base} // Use specific base for merged cells
+                                                    // WordCell passes cellData to onClick.
+                                                    // App.jsx handles parsing using effectiveTable.base.
+                                                    onClick={(clickedWord, clickedGender) => handleCellClick(clickedWord, rowIdx, colIdx, clickedGender)}
+                                                />
+                                            </td>
+                                        );
                                     } else {
                                         // Standard render
                                         return (
