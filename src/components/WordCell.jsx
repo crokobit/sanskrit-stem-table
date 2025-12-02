@@ -2,6 +2,7 @@ import React from 'react';
 import { parseCellData, STRONG, MIDDLE } from '../utils/sanskritUtils';
 
 const WordCell = ({ cellData, base, onClick }) => {
+    // Standard Single Cell Rendering
     const { parsedForms, strength } = parseCellData(cellData, base);
 
     let bgClass = "word-cell-default";
@@ -23,7 +24,7 @@ const WordCell = ({ cellData, base, onClick }) => {
 
     return (
         <button
-            onClick={onClick}
+            onClick={() => onClick(cellData)}
             className={`word-cell-btn ${bgClass}`}
         >
             {parsedForms.map((part, idx) => (

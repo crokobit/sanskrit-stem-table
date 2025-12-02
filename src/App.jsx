@@ -18,7 +18,7 @@ const App = () => {
         const table = DATA[currentTableId];
         if (table.isGroup) {
             setCurrentVariant(table.defaultVariant);
-            setCurrentGender("M");
+            setCurrentGender("ALL");
         } else {
             setCurrentVariant(null);
         }
@@ -28,23 +28,36 @@ const App = () => {
     const rawTable = DATA[currentTableId];
     let currentTable = rawTable;
 
-    if (rawTable.isGroup && currentVariant) {
-        const variantData = rawTable.data[currentVariant];
+    // Determine effective variant and gender to avoid race conditions during render
+    let effectiveVariant = currentVariant;
+    let effectiveGender = currentGender;
+
+    if (rawTable.isGroup) {
+        if (!effectiveVariant) {
+            effectiveVariant = rawTable.defaultVariant;
+        }
+        if (!effectiveGender) {
+            effectiveGender = "ALL";
+        }
+    }
+
+    if (rawTable.isGroup && effectiveVariant) {
+        const variantData = rawTable.data[effectiveVariant];
         // Construct a flat table for rendering
         const mappedRows = variantData.rows.map(row =>
-            row.map(cell => extractGenderData(cell, currentGender))
+            row.map(cell => extractGenderData(cell, effectiveGender))
         );
 
         currentTable = {
             ...variantData,
             id: rawTable.id,
-            variant: currentVariant,
-            gender: currentGender === "M" ? "陽" : (currentGender === "N" ? "中" : "陰"), // Map key to label
+            variant: effectiveVariant,
+            gender: effectiveGender === "M" ? "陽" : (effectiveGender === "N" ? "中" : "陰"), // Map key to label
             data: mappedRows
         };
     }
 
-    const handleCellClick = (cellData, rowIdx, colIdx) => {
+    const handleCellClick = (cellData, rowIdx, colIdx, clickedGender = null) => {
         // We need the base from the ACTUAL current table (variant)
         const effectiveTable = currentTable;
 
@@ -64,16 +77,23 @@ const App = () => {
         const uniqueMatches = allMatches.filter((v, i, a) => a.findIndex(t => (t.tableId === v.tableId && t.word === v.word && t.variantName === v.variantName && t.genderKey === v.genderKey)) === i);
 
         // Prepare info for current cell
+        // If clickedGender is provided (from multi-gender cell), use it.
+        // Otherwise use currentGender (unless it is ALL, then we might need to be careful, but usually single cell click implies specific gender if not passed)
+        // Actually, if currentGender is ALL, and we clicked a specific sub-cell, clickedGender will be set.
+        // If currentGender is ALL and we clicked a simple cell (unlikely in group view), clickedGender might be null.
+
+        const targetGender = clickedGender || (currentGender === "ALL" ? null : currentGender);
+
         const currentTableMatches = uniqueMatches.filter(m =>
             m.isCurrent &&
             m.word === (typeof cellData === 'object' ? cellData.t : cellData) &&
             (!m.variantName || m.variantName === currentVariant) &&
-            (!m.genderKey || m.genderKey === currentGender)
+            (!targetGender || m.genderKey === targetGender)
         );
         const otherMatches = uniqueMatches.filter(m =>
             !m.isCurrent ||
             (m.variantName && m.variantName !== currentVariant) ||
-            (m.genderKey && m.genderKey !== currentGender)
+            (targetGender && m.genderKey && m.genderKey !== targetGender)
         );
         const currentInfoStr = currentTableMatches.length > 0 ? currentTableMatches[0].infoStr : formatOccurrences([{ r: rowIdx, c: colIdx }]);
 
@@ -83,7 +103,7 @@ const App = () => {
             rawWord: typeof cellData === 'object' ? cellData.t : cellData,
             suffixes: displaySuffixes,
             currentInfoStr: currentInfoStr,
-            tableGender: effectiveTable.gender,
+            tableGender: targetGender ? (targetGender === "M" ? "陽" : (targetGender === "N" ? "中" : "陰")) : effectiveTable.gender,
             matches: otherMatches,
             sameCaseNumberMatches: sameCaseNumberMatches,
             caseLabel: `${COL_NAMES[colIdx]}${CASE_NAMES[rowIdx]}`
@@ -150,7 +170,7 @@ const App = () => {
 
                         {/* Gender Tabs for Pronouns */}
                         <div className="gender-tabs">
-                            {["M", "N", "F"].map(g => (
+                            {["ALL", "M", "N", "F"].map(g => (
                                 <button
                                     key={g}
                                     onClick={() => setCurrentGender(g)}
@@ -159,7 +179,7 @@ const App = () => {
                                         : 'gender-tab-inactive'
                                         }`}
                                 >
-                                    {g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine")}
+                                    {g === "ALL" ? "All Genders" : (g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine"))}
                                 </button>
                             ))}
                         </div>

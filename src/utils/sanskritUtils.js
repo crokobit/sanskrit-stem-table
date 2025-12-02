@@ -45,9 +45,11 @@ export function parseCellData(cellData, tableBase) {
 }
 
 // Helper to extract specific gender data from a 3-gender cell
+// Helper to extract specific gender data from a 3-gender cell
 export function extractGenderData(cellData, genderKey) {
     if (!cellData) return "";
     if (typeof cellData !== 'object' || cellData.t || Array.isArray(cellData)) return cellData;
+    if (genderKey === "ALL") return cellData; // Return full object for combined view
     if (cellData[genderKey]) return cellData[genderKey];
     return "";
 }
