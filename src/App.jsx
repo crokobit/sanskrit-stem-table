@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DATA, COL_NAMES, CASE_NAMES } from './data/sanskritData';
-import { parseCellData, findMatchingForms, findSameCaseNumberForms, formatOccurrences, extractGenderData, mergeTableData, formatStemLabel } from './utils/sanskritUtils';
+import { parseCellData, findMatchingForms, findSameCaseNumberForms, formatOccurrences, extractGenderData, mergeTableData, formatStemLabel, getGenderLabel } from './utils/sanskritUtils';
 import Table from './components/Table';
 import Legend from './components/Legend';
 import Modal from './components/Modal';
@@ -324,7 +324,7 @@ const App = () => {
                                         <div className="match-content">
                                             <span className="match-stem-badge">{formatStemLabel(match.table)}</span>
                                             <span className="text-indigo-800 text-sm">
-                                                {match.gender}{match.infoStr}
+                                                {getGenderLabel(match.gender)}{match.infoStr}
                                             </span>
                                             <span className="flex-grow text-right text-lg font-serif sanskrit-text">
                                                 {match.word}
@@ -359,7 +359,7 @@ const App = () => {
                                         <div className="match-content-indigo">
                                             <span className="match-stem-badge">{match.shortStem}</span>
                                             <span className="text-stone-500 text-sm">
-                                                {match.gender}
+                                                {getGenderLabel(match.gender)}{match.infoStr}
                                             </span>
                                             <span className="flex-grow text-right text-lg font-serif sanskrit-text text-indigo-900">
                                                 {match.word}

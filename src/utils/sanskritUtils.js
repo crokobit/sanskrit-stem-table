@@ -54,6 +54,12 @@ export function extractGenderData(cellData, genderKey) {
     return "";
 }
 
+// Helper to get localized gender label
+export function getGenderLabel(genderCode) {
+    const genderMap = { "M": "陽", "N": "中", "F": "陰", "m": "陽", "n": "中", "f": "陰", "ALL": "三性" };
+    return genderMap[genderCode] || genderCode;
+}
+
 // Helper to format occurrences into "雙三四五"
 export function formatOccurrences(occurrences) {
     occurrences.sort((a, b) => {
@@ -242,6 +248,43 @@ export function findMatchingForms(targetSuffix, currentTableId) {
 export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId) {
     const matches = [];
 
+    // We need to find ALL occurrences of the word in the matched table to build the infoStr
+    // But wait, findSameCaseNumberForms is supposed to find *other* words that match the *current* cell's case/number?
+    // "其他同數同格同詞形" -> "Other same-number same-case same-word-form"
+    // Actually, the user request says: "The 其他同數同格同詞形 sections, need to show like 中雙三四五"
+    // This implies that for the matches found (which are presumably same word form in same/other tables),
+    // we want to show *all* the places that word appears in *that* table.
+
+    // The current logic of findSameCaseNumberForms:
+    // It iterates all tables.
+    // It looks at [rowIdx][colIdx] (same case/number).
+    // It checks if the word there matches... wait, the current implementation DOES NOT check if the word matches!
+    // It just pushes the cell at that position?
+    // Let's re-read the function.
+    // It pushes { ... word: word ... }.
+    // It seems it just lists *what is at that position* in other tables?
+    // "其他同數同格詞形" -> "Other forms with same number and case".
+    // If I am at "Devasya" (Gen Sg), I want to see what other tables have at Gen Sg.
+    // e.g. "Phalasya".
+    // But the user said "The 其他同數同格同詞形 sections... 也就是要把那個表同樣詞形的有那個數那幾格的資訊野標出來"
+    // "That table's same word form's occupied number/cases info mark out".
+    // This implies we are looking for *matches* of the word form?
+    // Wait, "同數同格" means "Same Number Same Case".
+    // "同詞形" means "Same Word Form".
+    // The section title in App.jsx is "其他同數同格詞形" (Other Same Number Case Forms).
+    // But the user request says "其他同數同格同詞形 sections".
+    // Maybe the user means "Other stems that have the SAME FORM in the SAME CASE/NUMBER"?
+    // OR "For the matches found in 'Same Case Number', show their full distribution"?
+
+    // Let's look at App.jsx again.
+    // `const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id);`
+    // And in the UI: `{match.word}`.
+    // If I click "Devasya" (Gen Sg), and I see "Phalasya" (Gen Sg) in the list.
+    // Does "Phalasya" appear elsewhere? No.
+    // But if I click "Devas" (Nom Sg), I might see "Phalam" (Nom Sg)? No, Phalam is Nom/Acc.
+    // So for "Phalam", it should say "中單一二".
+    // So yes, for every match found in "Same Case Number" section, we want to know where ELSE that word appears in THAT table.
+
     Object.values(DATA).forEach(entry => {
         // We don't skip current table here because we might want to see other variants/genders of the same group
 
@@ -257,13 +300,36 @@ export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId) {
 
             const word = typeof actualCell === 'object' ? actualCell.t : actualCell;
 
+            // Now we need to find all occurrences of 'word' in 'table' (filtered by genderKey if needed)
+            // to generate infoStr like "中單一二"
+
+            const occurrences = [];
+            rows.forEach((r, rIdx) => {
+                r.forEach((c, cIdx) => {
+                    let cVal = c;
+                    if (genderKey) cVal = extractGenderData(c, genderKey);
+                    const cWord = typeof cVal === 'object' ? cVal.t : cVal;
+
+                    // We need to handle multiple forms in a cell like "devas / devās"
+                    // parseCellData handles splitting.
+                    const { parsedForms } = parseCellData(cVal, table.base);
+                    if (parsedForms.some(p => p.full === word)) { // Exact match of full word
+                        occurrences.push({ r: rIdx, c: cIdx });
+                    }
+                });
+            });
+
+            const infoStr = formatOccurrences(occurrences);
+
             matches.push({
                 tableId: tableId,
                 shortStem: table.shortStem || table.stem,
-                gender: genderKey || table.gender,
+                gender: genderKey || table.gender, // This might be "M", "N", "F" or "陽"...
                 word: word,
                 variantName: variantName,
-                genderKey: genderKey
+                genderKey: genderKey,
+                infoStr: infoStr,
+                table: table // Pass table for formatting label if needed
             });
         };
 
