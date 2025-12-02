@@ -175,14 +175,14 @@ export const DATA = {
         example: "bhānu (sun)",
         base: "bhān",
         data: [
-            ["bhānus", "bhānū", "bhānavas"],
-            ["bhānum", "bhānū", "bhānūn"],
-            ["bhānunā", "bhānubhyām", "bhānubhis"],
+            ["bhānus", { t: "bhānū", userMarked: true }, { t: "bhānavas", userMarked: true }],
+            ["bhānum", { t: "bhānū", userMarked: true }, { t: "bhānūn", userMarked: true }],
+            [{ t: "bhānunā", userMarked: true }, "bhānubhyām", "bhānubhis"],
             ["bhānave", "bhānubhyām", "bhānubhyas"],
             ["bhānos", "bhānubhyām", "bhānubhyas"],
             ["bhānos", "bhānvos", "bhānūnām"],
-            ["bhānau", "bhānvos", "bhānuṣu"],
-            ["bhāno", "bhānū", "bhānavas"]
+            [{ t: "bhānau", userMarked: true }, "bhānvos", "bhānuṣu"],
+            ["bhāno", "bhānū", { t: "bhānavas", userMarked: true }]
         ]
     },
     "u_neut": {
@@ -192,6 +192,7 @@ export const DATA = {
         gender: "中",
         example: "madhu (honey)",
         base: "madh",
+        note: "單一二呼不變，複一二呼母音拉長後加 ni。全部為標準語尾。但語尾開頭前為母音的話，加n。例外為複六為 madhūnām",
         data: [
             ["madhu", "madhunī", "madhūni"],
             ["madhu", "madhunī", "madhūni"],

@@ -22,6 +22,10 @@ const WordCell = ({ cellData, base, onClick }) => {
         slashClass = "text-stone-400";
     }
 
+    if (typeof cellData === 'object' && cellData.userMarked) {
+        bgClass = `${bgClass} word-cell-marked`;
+    }
+
     return (
         <button
             onClick={() => onClick(cellData)}
