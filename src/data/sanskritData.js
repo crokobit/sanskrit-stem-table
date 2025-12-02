@@ -178,7 +178,7 @@ export const DATA = {
             ["bhānus", { t: "bhānū", userMarked: true }, { t: "bhānavas", userMarked: true }],
             ["bhānum", { t: "bhānū", userMarked: true }, { t: "bhānūn", userMarked: true }],
             [{ t: "bhānunā", userMarked: true }, "bhānubhyām", "bhānubhis"],
-            ["bhānave", "bhānubhyām", "bhānubhyas"],
+            [{ t: "bhānave", userMarked: true }, "bhānubhyām", "bhānubhyas"],
             ["bhānos", "bhānubhyām", "bhānubhyas"],
             ["bhānos", "bhānvos", "bhānūnām"],
             [{ t: "bhānau", userMarked: true }, "bhānvos", "bhānuṣu"],
