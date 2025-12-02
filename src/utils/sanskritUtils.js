@@ -232,7 +232,8 @@ export function findMatchingForms(targetSuffix, currentTableId) {
             infoStr: infoStr,
             isCurrent: group.tableId === currentTableId,
             variantName: group.variantName,
-            genderKey: group.genderKey
+            genderKey: group.genderKey,
+            table: group.table
         };
     });
 }
@@ -280,4 +281,29 @@ export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId) {
     });
 
     return matches;
+}
+
+// Helper to format stem label for UI (e.g. "陰 -ī (多音節)")
+export function formatStemLabel(table) {
+    if (!table) return "";
+
+    const genderMap = { "M": "陽", "N": "中", "F": "陰", "m": "陽", "n": "中", "f": "陰" };
+    // Handle "三性" or other custom gender strings if present in data, otherwise map standard codes
+    // The data uses "陽", "中", "陰" directly in .gender prop usually, but let's be safe.
+    // Actually DATA entries have .gender as "陽", "中", "陰" already.
+    // But for variants in groups, we might construct it.
+
+    let gender = table.gender;
+    if (genderMap[gender]) gender = genderMap[gender];
+
+    const stemSuffix = table.shortStem || table.stem;
+
+    let extra = "";
+    if (table.stem && table.stem.toLowerCase().includes("monosyllabic")) {
+        extra = " (單音節)";
+    } else if (table.stem && table.stem.toLowerCase().includes("polysyllabic")) {
+        extra = " (多音節)";
+    }
+
+    return `${stemSuffix} ${gender}${extra}`;
 }

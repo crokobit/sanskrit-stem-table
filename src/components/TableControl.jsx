@@ -1,5 +1,6 @@
 import React from 'react';
 import { DATA } from '../data/sanskritData';
+import { formatStemLabel } from '../utils/sanskritUtils';
 
 const TableControl = ({
     tableId,
@@ -22,7 +23,7 @@ const TableControl = ({
                 >
                     {Object.values(DATA).map(t => (
                         <option key={t.id} value={t.id}>
-                            {t.stem} — {t.example}
+                            {formatStemLabel(t)} — {t.example}
                         </option>
                     ))}
                 </select>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DATA, COL_NAMES, CASE_NAMES } from './data/sanskritData';
-import { parseCellData, findMatchingForms, findSameCaseNumberForms, formatOccurrences, extractGenderData, mergeTableData } from './utils/sanskritUtils';
+import { parseCellData, findMatchingForms, findSameCaseNumberForms, formatOccurrences, extractGenderData, mergeTableData, formatStemLabel } from './utils/sanskritUtils';
 import Table from './components/Table';
 import Legend from './components/Legend';
 import Modal from './components/Modal';
@@ -322,7 +322,7 @@ const App = () => {
                                         className="match-item"
                                     >
                                         <div className="match-content">
-                                            <span className="match-stem-badge">{match.shortStem}</span>
+                                            <span className="match-stem-badge">{formatStemLabel(match.table)}</span>
                                             <span className="text-indigo-800 text-sm">
                                                 {match.gender}{match.infoStr}
                                             </span>
