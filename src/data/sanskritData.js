@@ -156,6 +156,7 @@ export const DATA = {
         gender: "中",
         example: "śuci (pure)",
         base: "śuc",
+        note: "以 i 收尾的形容词，中单四五六七格，双六七，可用陽性變格",
         data: [
             ["śuci", "śucinī", "śucīni"],
             ["śuci", "śucinī", "śucīni"],

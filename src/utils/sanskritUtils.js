@@ -362,6 +362,11 @@ export function formatStemLabel(table) {
     let gender = table.gender;
     if (genderMap[gender]) gender = genderMap[gender];
 
+    // Check for Adjective
+    if (table.stem && table.stem.toLowerCase().includes("adjective")) {
+        gender = "形" + gender;
+    }
+
     const stemSuffix = table.shortStem || table.stem;
 
     let extra = "";
