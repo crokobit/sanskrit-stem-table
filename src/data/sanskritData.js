@@ -285,6 +285,7 @@ export const DATA = {
         example: "kartṛ (doer)",
         base: "kart",
         hasStrength: true,
+        stemStrength: { strong: "kartār", middle: "kartṛ", weak: "kartr" },
         data: [
             [{ t: "kartā", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
             [{ t: "kartāram", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartṝn", s: WEAK }],
@@ -339,15 +340,16 @@ export const DATA = {
         gender: "陽",
         example: "bhavat (Your Honor)",
         base: "bhav",
-        note: "强语干 bhavant，弱语干 bhavat。呼格可为 bhos (通常重复)。",
+        hasStrength: true,
+        stemStrength: { strong: "bhavant", weak: "bhavat" },
         data: [
             [{ t: "bhavān", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }],
             [{ t: "bhavantam", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavatas", s: WEAK }],
-            [{ t: "bhavatā", s: WEAK }, { t: "bhavadbhyām", s: MIDDLE }, { t: "bhavadbhis", s: MIDDLE }],
-            [{ t: "bhavate", s: WEAK }, { t: "bhavadbhyām", s: MIDDLE }, { t: "bhavadbhyas", s: MIDDLE }],
-            [{ t: "bhavatas", s: WEAK }, { t: "bhavadbhyām", s: MIDDLE }, { t: "bhavadbhyas", s: MIDDLE }],
+            [{ t: "bhavatā", s: WEAK }, { t: "bhavadbhyām", s: WEAK }, { t: "bhavadbhis", s: WEAK }],
+            [{ t: "bhavate", s: WEAK }, { t: "bhavadbhyām", s: WEAK }, { t: "bhavadbhyas", s: WEAK }],
+            [{ t: "bhavatas", s: WEAK }, { t: "bhavadbhyām", s: WEAK }, { t: "bhavadbhyas", s: WEAK }],
             [{ t: "bhavatas", s: WEAK }, { t: "bhavatos", s: WEAK }, { t: "bhavatām", s: WEAK }],
-            [{ t: "bhavati", s: WEAK }, { t: "bhavatos", s: WEAK }, { t: "bhavatsu", s: MIDDLE }],
+            [{ t: "bhavati", s: WEAK }, { t: "bhavatos", s: WEAK }, { t: "bhavatsu", s: WEAK }],
             [{ t: "bhavan / bhos", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }]
         ]
     },

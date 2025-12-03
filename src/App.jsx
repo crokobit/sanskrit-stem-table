@@ -63,7 +63,9 @@ const App = () => {
                 gender: effectiveGender === "M" ? "陽" : (effectiveGender === "N" ? "中" : "陰"),
                 data: mappedRows,
                 base: variantData.base || rawTable.base,
-                hasStrength: rawTable.hasStrength // Preserve flags
+                base: variantData.base || rawTable.base,
+                hasStrength: rawTable.hasStrength, // Preserve flags
+                stemStrength: rawTable.stemStrength // Preserve stem strength data
             };
         }
         return rawTable;
@@ -184,7 +186,7 @@ const App = () => {
                             onVariantChange={setTable1Variant}
                             onGenderChange={setTable1Gender}
                         />
-                        {table1Data.hasStrength && <Legend />}
+                        {table1Data.hasStrength && <Legend stemStrength={table1Data.stemStrength} />}
                         <Table currentTable={table1Data} handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)} />
                     </>
                 )}
@@ -200,7 +202,7 @@ const App = () => {
                                 onVariantChange={setTable1Variant}
                                 onGenderChange={setTable1Gender}
                             />
-                            {table1Data.hasStrength && <Legend />}
+                            {table1Data.hasStrength && <Legend stemStrength={table1Data.stemStrength} />}
                             <Table currentTable={table1Data} handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)} />
                         </div>
                         <div className="compare-col">
@@ -212,7 +214,7 @@ const App = () => {
                                 onVariantChange={setTable2Variant}
                                 onGenderChange={setTable2Gender}
                             />
-                            {table2Data.hasStrength && <Legend />}
+                            {table2Data.hasStrength && <Legend stemStrength={table2Data.stemStrength} />}
                             <Table currentTable={table2Data} handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table2Data)} />
                         </div>
                     </div>
