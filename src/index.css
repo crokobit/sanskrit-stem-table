@@ -244,12 +244,12 @@ body {
     border-collapse: collapse;
 }
 
-/* Complex Table Grid Lines */
-.complex-table .td-cell,
-.complex-table .th-number,
-.complex-table .th-gender,
-.complex-table .th-case,
-.complex-table .td-case-label {
+/* Table Grid Lines */
+.td-cell,
+.th-number,
+.th-gender,
+.th-case,
+.td-case-label {
     border: 1px solid #e7e5e4;
     /* border-stone-200 */
 }
@@ -336,7 +336,7 @@ body {
 }
 
 .td-cell {
-    padding: 0.25rem;
+    padding: 0;
     vertical-align: middle;
 }
 
