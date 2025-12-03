@@ -353,6 +353,68 @@ export const DATA = {
             [{ t: "bhavan / bhos", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }]
         ]
     },
+    "jivat_masc": {
+        id: "jivat_masc",
+        stem: "Present Participle Active Masc",
+        shortStem: "-at",
+        gender: "陽",
+        example: "jīvat (living)",
+        base: "jīv",
+        hasStrength: true,
+        stemStrength: { strong: "jīvant", weak: "jīvat" },
+        data: [
+            [{ t: "jīvan", s: STRONG }, { t: "jīvantau", s: STRONG }, { t: "jīvantas", s: STRONG }],
+            [{ t: "jīvantam", s: STRONG }, { t: "jīvantau", s: STRONG }, { t: "jīvatas", s: WEAK }],
+            [{ t: "jīvatā", s: WEAK }, { t: "jīvadbhyām", s: WEAK }, { t: "jīvadbhis", s: WEAK }],
+            [{ t: "jīvate", s: WEAK }, { t: "jīvadbhyām", s: WEAK }, { t: "jīvadbhyas", s: WEAK }],
+            [{ t: "jīvatas", s: WEAK }, { t: "jīvadbhyām", s: WEAK }, { t: "jīvadbhyas", s: WEAK }],
+            [{ t: "jīvatas", s: WEAK }, { t: "jīvatos", s: WEAK }, { t: "jīvatām", s: WEAK }],
+            [{ t: "jīvati", s: WEAK }, { t: "jīvatos", s: WEAK }, { t: "jīvatsu", s: WEAK }],
+            [{ t: "jīvan", s: STRONG }, { t: "jīvantau", s: STRONG }, { t: "jīvantas", s: STRONG }]
+        ]
+    },
+    "jivat_neut": {
+        id: "jivat_neut",
+        stem: "Present Participle Active Neut (Class 1, 4, 10)",
+        shortStem: "-at",
+        gender: "中",
+        example: "jīvat (living - neuter)",
+        base: "jīva",
+        hasStrength: true,
+        stemStrength: { strong: "jīvant", weak: "jīvat" },
+        note: "第 1、4、10 類動詞，雙數一、二、呼格為 jīvantī。其餘同陽性。",
+        data: [
+            [{ t: "jīvat", s: WEAK }, { t: "jīvantī", s: STRONG, userMarked: true }, { t: "jīvanti", s: STRONG }],
+            [{ t: "jīvat", s: WEAK }, { t: "jīvantī", s: STRONG, userMarked: true }, { t: "jīvanti", s: STRONG }],
+            [{ t: "jīvatā", s: WEAK }, { t: "jīvadbhyām", s: WEAK }, { t: "jīvadbhis", s: WEAK }],
+            [{ t: "jīvate", s: WEAK }, { t: "jīvadbhyām", s: WEAK }, { t: "jīvadbhyas", s: WEAK }],
+            [{ t: "jīvatas", s: WEAK }, { t: "jīvadbhyām", s: WEAK }, { t: "jīvadbhyas", s: WEAK }],
+            [{ t: "jīvatas", s: WEAK }, { t: "jīvatos", s: WEAK }, { t: "jīvatām", s: WEAK }],
+            [{ t: "jīvati", s: WEAK }, { t: "jīvatos", s: WEAK }, { t: "jīvatsu", s: WEAK }],
+            [{ t: "jīvat", s: WEAK }, { t: "jīvantī", s: STRONG, userMarked: true }, { t: "jīvanti", s: STRONG }]
+        ]
+    },
+    "ksipat_neut": {
+        id: "ksipat_neut",
+        stem: "Present Participle Active Neut (Class 6)",
+        shortStem: "-at",
+        gender: "中",
+        example: "kṣipat (throwing)",
+        base: "kṣipa",
+        hasStrength: true,
+        stemStrength: { strong: "kṣipant", weak: "kṣipat" },
+        note: "第 6 類動詞，雙數一、二、呼格既可以是 kṣipantī 也可以是 kṣipatī。其餘同陽性。",
+        data: [
+            [{ t: "kṣipat", s: WEAK }, { t: "kṣipantī / kṣipatī", userMarked: true }, { t: "kṣipanti", s: STRONG }],
+            [{ t: "kṣipat", s: WEAK }, { t: "kṣipantī / kṣipatī", userMarked: true }, { t: "kṣipanti", s: STRONG }],
+            [{ t: "kṣipatā", s: WEAK }, { t: "kṣipadbhyām", s: WEAK }, { t: "kṣipadbhis", s: WEAK }],
+            [{ t: "kṣipate", s: WEAK }, { t: "kṣipadbhyām", s: WEAK }, { t: "kṣipadbhyas", s: WEAK }],
+            [{ t: "kṣipatas", s: WEAK }, { t: "kṣipadbhyām", s: WEAK }, { t: "kṣipadbhyas", s: WEAK }],
+            [{ t: "kṣipatas", s: WEAK }, { t: "kṣipatos", s: WEAK }, { t: "kṣipatām", s: WEAK }],
+            [{ t: "kṣipati", s: WEAK }, { t: "kṣipatos", s: WEAK }, { t: "kṣipatsu", s: WEAK }],
+            [{ t: "kṣipat", s: WEAK }, { t: "kṣipantī / kṣipatī", userMarked: true }, { t: "kṣipanti", s: STRONG }]
+        ]
+    },
     "yusmad": {
         id: "yusmad",
         stem: "2nd Person Pronoun",
