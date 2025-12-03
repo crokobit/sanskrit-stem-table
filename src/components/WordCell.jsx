@@ -24,11 +24,6 @@ const WordCell = ({ cellData, base, onClick }) => {
 
     if (typeof cellData === 'object' && cellData.userMarked) {
         bgClass = `${bgClass} word-cell-marked`;
-        // If marked, the background becomes light (sky-100), so we must ensure text is dark
-        // regardless of strength.
-        textBaseClass = "text-stone-800";
-        textSuffixClass = "text-red-600 font-bold";
-        slashClass = "text-stone-400";
     }
 
     return (

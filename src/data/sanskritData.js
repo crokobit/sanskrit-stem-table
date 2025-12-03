@@ -287,14 +287,14 @@ export const DATA = {
         hasStrength: true,
         stemStrength: { strong: "kartār", middle: "kartṛ", weak: "kartr" },
         data: [
-            [{ t: "kartā", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
-            [{ t: "kartāram", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartṝn", s: WEAK }],
+            [{ t: "kartā", s: STRONG, userMarked: true }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
+            [{ t: "kartāram", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartṝn", s: WEAK, userMarked: true }],
             [{ t: "kartrā", s: WEAK }, { t: "kartṛbhyām", s: MIDDLE }, { t: "kartṛbhis", s: MIDDLE }],
             [{ t: "kartre", s: WEAK }, { t: "kartṛbhyām", s: MIDDLE }, { t: "kartṛbhyas", s: MIDDLE }],
-            [{ t: "kartur", s: WEAK }, { t: "kartṛbhyām", s: MIDDLE }, { t: "kartṛbhyas", s: MIDDLE }],
-            [{ t: "kartur", s: WEAK }, { t: "kartros", s: WEAK }, { t: "kartṝṇām", s: WEAK }],
-            [{ t: "kartari", s: WEAK }, { t: "kartros", s: WEAK }, { t: "kartṛṣu", s: MIDDLE }],
-            [{ t: "kartar", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }]
+            [{ t: "kartur", s: WEAK, userMarked: true }, { t: "kartṛbhyām", s: MIDDLE }, { t: "kartṛbhyas", s: MIDDLE }],
+            [{ t: "kartur", s: WEAK, userMarked: true }, { t: "kartros", s: WEAK }, { t: "kartṝṇām", s: WEAK, userMarked: true }],
+            [{ t: "kartari", s: WEAK, userMarked: true }, { t: "kartros", s: WEAK }, { t: "kartṛṣu", s: MIDDLE }],
+            [{ t: "kartar", s: STRONG, userMarked: true }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }]
         ]
     },
     "r_neut": {
