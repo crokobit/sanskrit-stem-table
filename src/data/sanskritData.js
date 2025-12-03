@@ -401,10 +401,9 @@ export const DATA = {
         data: {
             "tad": {
                 stem: "tad", example: "that", gender: "三性", base: "t",
-                note: "第三人称代词。阳性 sas，阴性 sā，中性 tad。用于泛指或远指。",
                 rows: [
-                    [{ M: "sas", N: "tat / tad", F: "sā" }, { M: "tau", N: "te", F: "te" }, { M: "te", N: "tāni", F: "tās" }],
-                    [{ M: "tam", N: "tat / tad", F: "tām" }, { M: "tau", N: "te", F: "te" }, { M: "tān", N: "tāni", F: "tās" }],
+                    [{ M: { t: "sas", userMarked: true }, N: { t: "tad", userMarked: true }, F: { t: "sā", userMarked: true } }, { M: "tau", N: "te", F: "te" }, { M: "te", N: "tāni", F: "tās" }],
+                    [{ M: "tam", N: { t: "tad", userMarked: true }, F: "tām" }, { M: "tau", N: "te", F: "te" }, { M: "tān", N: "tāni", F: "tās" }],
                     [{ M: "tena", N: "tena", F: "tayā" }, { M: "tābhyām", N: "tābhyām", F: "tābhyām" }, { M: "tais", N: "tais", F: "tābhis" }],
                     [{ M: "tasmai", N: "tasmai", F: "tasyai" }, { M: "tābhyām", N: "tābhyām", F: "tābhyām" }, { M: "tebhyas", N: "tebhyas", F: "tābhyas" }],
                     [{ M: "tasmāt", N: "tasmāt", F: "tasyās" }, { M: "tābhyām", N: "tābhyām", F: "tābhyām" }, { M: "tebhyas", N: "tebhyas", F: "tābhyas" }],
