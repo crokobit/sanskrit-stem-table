@@ -18,13 +18,6 @@ const Table = ({ currentTable, handleCellClick }) => {
     return (
         <div className="table-wrapper">
             <div className="paradigm-table">
-                <div className="table-header-bar">
-                    <span className="table-header-title">Paradigm</span>
-                    <div className="table-base-info">
-                        Base: <span className="font-bold">{currentTable.base}</span> + <span className="text-red-600 font-bold">Suffix</span>
-                    </div>
-                </div>
-
                 <div className="table-scroll-container">
                     <table className={`data-table ${isAllGenders ? 'complex-table' : ''}`}>
                         <thead>

@@ -160,8 +160,6 @@ const App = () => {
             {/* Header */}
             <header className="app-header">
                 <div className="header-content flex flex-col md:flex-row justify-between items-center gap-4">
-                    <h1 className="header-title">梵语速查手册 (Stem Viewer)</h1>
-
                     {/* View Mode Switcher */}
                     <div className="view-mode-switcher flex bg-stone-100 rounded-lg p-1">
                         <button

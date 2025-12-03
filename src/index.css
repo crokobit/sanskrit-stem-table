@@ -26,13 +26,12 @@ body {
     max-width: 48rem;
     margin-left: auto;
     margin-right: auto;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
+    padding: 0 0.5rem 0.5rem 0.5rem;
 }
 
 @media (min-width: 640px) {
     .main-content {
-        padding: 1rem;
+      padding: 0 0.5rem 0.5rem 0.5rem;
     }
 }
 
