@@ -116,10 +116,23 @@ const App = () => {
             !m.isCurrent ||
             (m.variantName && m.variantName !== effectiveTable.variant) ||
             (targetGender && m.genderKey && m.genderKey !== targetGender)
-        );
+        ).filter(m => {
+            // Hide all stem tables in Demonstrative/Pronouns (tad_group) except yad
+            if (m.tableId === "tad_group") {
+                return m.variantName === "yad";
+            }
+            return true;
+        });
         const currentInfoStr = currentTableMatches.length > 0 ? currentTableMatches[0].infoStr : formatOccurrences([{ r: rowIdx, c: colIdx }]);
 
-        const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id);
+        const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id)
+            .filter(m => {
+                // Hide all stem tables in Demonstrative/Pronouns (tad_group) except yad
+                if (m.tableId === "tad_group") {
+                    return m.variantName === "yad";
+                }
+                return true;
+            });
 
         setSelectedCell({
             rawWord: typeof cellData === 'object' ? cellData.t : cellData,
