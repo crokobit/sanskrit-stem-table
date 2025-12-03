@@ -445,8 +445,8 @@ export const DATA = {
                 stem: "sarva", example: "all", gender: "三性", base: "sarv",
                 note: "所有，全部。中单一、二用 -am 代替 -ad，其余与 tad 相同。viśva 变格同此。",
                 rows: [
-                    [{ M: "sarvas", N: cell("sarvam", null, true), F: "sarvā" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarve", N: "sarvāṇi", F: "sarvās" }],
-                    [{ M: "sarvam", N: cell("sarvam", null, true), F: "sarvām" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarvān", N: "sarvāṇi", F: "sarvās" }],
+                    [{ M: "sarvas", N: { t: "sarvam", d: true, userMarked: true }, F: "sarvā" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarve", N: "sarvāṇi", F: "sarvās" }],
+                    [{ M: { t: "sarvam", userMarked: true }, N: { t: "sarvam", d: true, userMarked: true }, F: "sarvām" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarvān", N: "sarvāṇi", F: "sarvās" }],
                     [{ M: "sarveṇa", N: "sarveṇa", F: "sarvayā" }, { M: "sarvābhyām", N: "sarvābhyām", F: "sarvābhyām" }, { M: "sarvais", N: "sarvais", F: "sarvābhis" }],
                     [{ M: "sarvasmai", N: "sarvasmai", F: "sarvasyai" }, { M: "sarvābhyām", N: "sarvābhyām", F: "sarvābhyām" }, { M: "sarvebhyas", N: "sarvebhyas", F: "sarvābhyas" }],
                     [{ M: "sarvasmāt", N: "sarvasmāt", F: "sarvasyās" }, { M: "sarvābhyām", N: "sarvābhyām", F: "sarvābhyām" }, { M: "sarvebhyas", N: "sarvebhyas", F: "sarvābhyas" }],
