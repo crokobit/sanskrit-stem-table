@@ -396,7 +396,7 @@ export const DATA = {
         id: "tad_group",
         isGroup: true,
         stem: "Demonstrative/Pronouns",
-        variants: ["tad", "etad", "yad", "kim", "sarva", "eka"],
+        variants: ["tad", "etad", "yad", "kim", "sarva", "purva", "sva", "antara", "prathama", "nema", "eka"],
         defaultVariant: "tad",
         data: {
             "tad": {
@@ -453,6 +453,81 @@ export const DATA = {
                     [{ M: "sarvasya", N: "sarvasya", F: "sarvasyās" }, { M: "sarvayos", N: "sarvayos", F: "sarvayos" }, { M: "sarveṣām", N: "sarveṣām", F: "sarvāsām" }],
                     [{ M: "sarvasmin", N: "sarvasmin", F: "sarvasyām" }, { M: "sarvayos", N: "sarvayos", F: "sarvayos" }, { M: "sarveṣu", N: "sarveṣu", F: "sarvāsu" }],
                     [{ M: "sarva", N: "sarve", F: "sarve" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarve", N: "sarvāṇi", F: "sarvās" }]
+                ]
+            },
+            "purva": {
+                stem: "pūrva", example: "eastern/prior", gender: "三性", base: "pūrv",
+                excludeFromAnalysis: true,
+                note: "pūrva, para, avara, dakṣiṇa, uttara, apara, adhara 这七个词，在表达方位以及时间的概念，并且不是专有名词时，按代词 sarva 变格。其他情况下，则按 以 a 收尾的名词和形容词变格。例如:dakṣiṇa 当“右，南方”讲时按代词变，当“灵活， 熟练”讲时按形容词变。uttara 表示“北方”时通常按代词变，但与 kuru 连用构成专有名 词 uttarāḥ kuravaḥ 北俱卢洲时，则按名词变。上述九词按代词变时，阳/中单五、七也可以按名词变。",
+                rows: [
+                    [{ M: "pūrvas", N: { t: "pūrvam", d: true, userMarked: true }, F: "pūrvā" }, { M: "pūrvau", N: "pūrve", F: "pūrve" }, { M: "pūrve", N: "pūrvāṇi", F: "pūrvās" }],
+                    [{ M: { t: "pūrvam", userMarked: true }, N: { t: "pūrvam", d: true, userMarked: true }, F: "pūrvām" }, { M: "pūrvau", N: "pūrve", F: "pūrve" }, { M: "pūrvān", N: "pūrvāṇi", F: "pūrvās" }],
+                    [{ M: "pūrveṇa", N: "pūrveṇa", F: "pūrvayā" }, { M: "pūrvābhyām", N: "pūrvābhyām", F: "pūrvābhyām" }, { M: "pūrvais", N: "pūrvais", F: "pūrvābhis" }],
+                    [{ M: "pūrvasmai", N: "pūrvasmai", F: "pūrvasyai" }, { M: "pūrvābhyām", N: "pūrvābhyām", F: "pūrvābhyām" }, { M: "pūrvebhyas", N: "pūrvebhyas", F: "pūrvābhyas" }],
+                    [{ M: { t: "pūrvasmāt / pūrvāt", userMarked: true }, N: { t: "pūrvasmāt / pūrvāt", userMarked: true }, F: "pūrvasyās" }, { M: "pūrvābhyām", N: "pūrvābhyām", F: "pūrvābhyām" }, { M: "pūrvebhyas", N: "pūrvebhyas", F: "pūrvābhyas" }],
+                    [{ M: "pūrvasya", N: "pūrvasya", F: "pūrvasyās" }, { M: "pūrvayos", N: "pūrvayos", F: "pūrvayos" }, { M: "pūrveṣām", N: "pūrveṣām", F: "pūrvāsām" }],
+                    [{ M: { t: "pūrvasmin / pūrve", userMarked: true }, N: { t: "pūrvasmin / pūrve", userMarked: true }, F: "pūrvasyām" }, { M: "pūrvayos", N: "pūrvayos", F: "pūrvayos" }, { M: "pūrveṣu", N: "pūrveṣu", F: "pūrvāsu" }],
+                    [{ M: "pūrva", N: "pūrve", F: "pūrve" }, { M: "pūrvau", N: "pūrve", F: "pūrve" }, { M: "pūrve", N: "pūrvāṇi", F: "pūrvās" }]
+                ]
+            },
+            "sva": {
+                stem: "sva", example: "own/self", gender: "三性", base: "sv",
+                excludeFromAnalysis: true,
+                note: "sva 一词有四个意思: (1)【阳】自我(ātman) (2)【形】属于自己的(ātmīya) (3) 【阳】亲属(jñāti) (4)【阳、中】财富(dhana)。表达前两个意义时，按形容词性代词 sarva 变格;阳复一可以有两种变化:sve 或 svās。表达后两个意义时，按名词变格。上述九词按代词变时，阳/中单五、七也可以按名词变。",
+                rows: [
+                    [{ M: { t: "sve / svās", userMarked: true }, N: { t: "svam", d: true, userMarked: true }, F: "svā" }, { M: "svau", N: "sve", F: "sve" }, { M: "sve", N: "svāṇi", F: "svās" }],
+                    [{ M: { t: "svam", userMarked: true }, N: { t: "svam", d: true, userMarked: true }, F: "svām" }, { M: "svau", N: "sve", F: "sve" }, { M: "svān", N: "svāṇi", F: "svās" }],
+                    [{ M: "sveṇa", N: "sveṇa", F: "svayā" }, { M: "svābhyām", N: "svābhyām", F: "svābhyām" }, { M: "svais", N: "svais", F: "svābhis" }],
+                    [{ M: "svasmai", N: "svasmai", F: "svasyai" }, { M: "svābhyām", N: "svābhyām", F: "svābhyām" }, { M: "svebhyas", N: "svebhyas", F: "svābhyas" }],
+                    [{ M: { t: "svasmāt / svāt", userMarked: true }, N: { t: "svasmāt / svāt", userMarked: true }, F: "svasyās" }, { M: "svābhyām", N: "svābhyām", F: "svābhyām" }, { M: "svebhyas", N: "svebhyas", F: "svābhyas" }],
+                    [{ M: "svasya", N: "svasya", F: "svasyās" }, { M: "svayos", N: "svayos", F: "svayos" }, { M: "sveṣām", N: "sveṣām", F: "svāsām" }],
+                    [{ M: { t: "svasmin / sve", userMarked: true }, N: { t: "svasmin / sve", userMarked: true }, F: "svasyām" }, { M: "svayos", N: "svayos", F: "svayos" }, { M: "sveṣu", N: "sveṣu", F: "svāsu" }],
+                    [{ M: "sva", N: "sve", F: "sve" }, { M: "svau", N: "sve", F: "sve" }, { M: "sve", N: "svāṇi", F: "svās" }]
+                ]
+            },
+            "antara": {
+                stem: "antara", example: "outer/inner", gender: "三性", base: "antar",
+                excludeFromAnalysis: true,
+                note: "antara 一词有三种意义: (1)外部 (2)内(衣) (3)中间。用前两个意义时，需按 形容词性代词 sarva 变格;阳复一可以有两种变化:antare 或 antarās，前者是按代词变的， 后者是按名词变的。上述九词按代词变时，阳/中单五、七也可以按名词变。",
+                rows: [
+                    [{ M: { t: "antare / antarās", userMarked: true }, N: { t: "antaram", d: true, userMarked: true }, F: "antarā" }, { M: "antarau", N: "antare", F: "antare" }, { M: "antare", N: "antarāṇi", F: "antarās" }],
+                    [{ M: { t: "antaram", userMarked: true }, N: { t: "antaram", d: true, userMarked: true }, F: "antarām" }, { M: "antarau", N: "antare", F: "antare" }, { M: "antarān", N: "antarāṇi", F: "antarās" }],
+                    [{ M: "antareṇa", N: "antareṇa", F: "antarayā" }, { M: "antarābhyām", N: "antarābhyām", F: "antarābhyām" }, { M: "antarais", N: "antarais", F: "antarābhis" }],
+                    [{ M: "antarasmai", N: "antarasmai", F: "antarasyai" }, { M: "antarābhyām", N: "antarābhyām", F: "antarābhyām" }, { M: "antarebhyas", N: "antarebhyas", F: "antarābhyas" }],
+                    [{ M: { t: "antarasmāt / antarāt", userMarked: true }, N: { t: "antarasmāt / antarāt", userMarked: true }, F: "antarasyās" }, { M: "antarābhyām", N: "antarābhyām", F: "antarābhyām" }, { M: "antarebhyas", N: "antarebhyas", F: "antarābhyas" }],
+                    [{ M: "antarasya", N: "antarasya", F: "antarasyās" }, { M: "antarayos", N: "antarayos", F: "antarayos" }, { M: "antareṣām", N: "antareṣām", F: "antarāsām" }],
+                    [{ M: { t: "antarasmin / antare", userMarked: true }, N: { t: "antarasmin / antare", userMarked: true }, F: "antarasyām" }, { M: "antarayos", N: "antarayos", F: "antarayos" }, { M: "antareṣu", N: "antareṣu", F: "antarāsu" }],
+                    [{ M: "antara", N: "antare", F: "antare" }, { M: "antarau", N: "antare", F: "antare" }, { M: "antare", N: "antarāṇi", F: "antarās" }]
+                ]
+            },
+            "prathama": {
+                stem: "prathama", example: "first", gender: "三性", base: "pratham",
+                excludeFromAnalysis: true,
+                note: "prathama【形】第一、carama【形】最末的、以 taya 为后缀的词、alpa【形】少许、 ardha【形、阳、中】一半、katipaya【形】一些，这六个词，复一可按代词 sarva 变。例如 prathama 的阳复一为 prathame 或 prathamās。",
+                rows: [
+                    [{ M: "prathamas", N: { t: "prathamam", d: true, userMarked: true }, F: "prathamā" }, { M: "prathamau", N: "prathame", F: "prathame" }, { M: { t: "prathame / prathamās", userMarked: true }, N: "prathamāni", F: "prathamās" }],
+                    [{ M: { t: "prathamam", userMarked: true }, N: { t: "prathamam", d: true, userMarked: true }, F: "prathamām" }, { M: "prathamau", N: "prathame", F: "prathame" }, { M: "prathamān", N: "prathamāni", F: "prathamās" }],
+                    [{ M: "prathamena", N: "prathamena", F: "prathamayā" }, { M: "prathamābhyām", N: "prathamābhyām", F: "prathamābhyām" }, { M: "prathamais", N: "prathamais", F: "prathamābhis" }],
+                    [{ M: "prathamāya", N: "prathamāya", F: "prathamāyai" }, { M: "prathamābhyām", N: "prathamābhyām", F: "prathamābhyām" }, { M: "prathamebhyas", N: "prathamebhyas", F: "prathamābhyas" }],
+                    [{ M: "prathamāt", N: "prathamāt", F: "prathamāyās" }, { M: "prathamābhyām", N: "prathamābhyām", F: "prathamābhyām" }, { M: "prathamebhyas", N: "prathamebhyas", F: "prathamābhyas" }],
+                    [{ M: "prathamasya", N: "prathamasya", F: "prathamāyās" }, { M: "prathamayos", N: "prathamayos", F: "prathamayos" }, { M: "prathamānām", N: "prathamānām", F: "prathamānām" }],
+                    [{ M: "prathame", N: "prathame", F: "prathamāyām" }, { M: "prathamayos", N: "prathamayos", F: "prathamayos" }, { M: "prathameṣu", N: "prathameṣu", F: "prathamāsu" }],
+                    [{ M: "prathama", N: "prathame", F: "prathame" }, { M: "prathamau", N: "prathame", F: "prathame" }, { M: "prathamās", N: "prathamāni", F: "prathamās" }]
+                ]
+            },
+            "nema": {
+                stem: "nema", example: "several", gender: "三性", base: "nem",
+                excludeFromAnalysis: true,
+                note: "nema【形】几个，复数第一格两可 neme 或 nemās，其余按代词 sarva 变。",
+                rows: [
+                    [{ M: "nemas", N: { t: "nemam", d: true, userMarked: true }, F: "nemā" }, { M: "nemau", N: "neme", F: "neme" }, { M: { t: "neme / nemās", userMarked: true }, N: "nemāni", F: "nemās" }],
+                    [{ M: { t: "nemam", userMarked: true }, N: { t: "nemam", d: true, userMarked: true }, F: "nemām" }, { M: "nemau", N: "neme", F: "neme" }, { M: "nemān", N: "nemāni", F: "nemās" }],
+                    [{ M: "nemeṇa", N: "nemeṇa", F: "nemayā" }, { M: "nemābhyām", N: "nemābhyām", F: "nemābhyām" }, { M: "nemais", N: "nemais", F: "nemābhis" }],
+                    [{ M: "nemasmai", N: "nemasmai", F: "nemasyai" }, { M: "nemābhyām", N: "nemābhyām", F: "nemābhyām" }, { M: "nemebhyas", N: "nemebhyas", F: "nemābhyas" }],
+                    [{ M: "nemasmāt", N: "nemasmāt", F: "nemasyās" }, { M: "nemābhyām", N: "nemābhyām", F: "nemābhyām" }, { M: "nemebhyas", N: "nemebhyas", F: "nemābhyas" }],
+                    [{ M: "nemasya", N: "nemasya", F: "nemasyās" }, { M: "nemayos", N: "nemayos", F: "nemayos" }, { M: "nemeṣām", N: "nemeṣām", F: "nemāsām" }],
+                    [{ M: "nemasmin", N: "nemasmin", F: "nemasyām" }, { M: "nemayos", N: "nemayos", F: "nemayos" }, { M: "nemeṣu", N: "nemeṣu", F: "nemāsu" }],
+                    [{ M: "nema", N: "neme", F: "neme" }, { M: "nemau", N: "neme", F: "neme" }, { M: "neme", N: "nemāni", F: "nemās" }]
                 ]
             },
             "kim": {

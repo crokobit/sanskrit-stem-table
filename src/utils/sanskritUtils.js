@@ -166,6 +166,7 @@ export function findMatchingForms(targetSuffix, currentTableId) {
         const processTable = (table, tableId, variantName = null, genderKey = null) => {
             const rows = table.data || table.rows;
             if (!rows) return;
+            if (table.excludeFromAnalysis) return;
 
             rows.forEach((row, rowIndex) => {
                 row.forEach((cell, colIndex) => {
@@ -291,6 +292,7 @@ export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId) {
         const processTable = (table, tableId, variantName = null, genderKey = null) => {
             const rows = table.data || table.rows;
             if (!rows) return;
+            if (table.excludeFromAnalysis) return;
 
             const cellData = rows[rowIdx][colIdx];
             let actualCell = cellData;
