@@ -23,7 +23,7 @@ const TableControl = ({
                 >
                     {Object.values(DATA).map(t => (
                         <option key={t.id} value={t.id}>
-                            {formatStemLabel(t)} — {t.example}
+                            {formatStemLabel(t)} — {t.example ? (t.shortStem === '-ṛ' ? t.example : t.example.replace(/\s*\(.*?\)\s*/g, '')) : ''}
                         </option>
                     ))}
                 </select>
