@@ -401,6 +401,7 @@ export const DATA = {
         data: {
             "tad": {
                 stem: "tad", example: "that", gender: "三性", base: "t",
+                note: "泛指或遠指",
                 rows: [
                     [{ M: { t: "sas", userMarked: true }, N: { t: "tad", userMarked: true }, F: { t: "sā", userMarked: true } }, { M: "tau", N: "te", F: "te" }, { M: "te", N: "tāni", F: "tās" }],
                     [{ M: "tam", N: { t: "tad", userMarked: true }, F: "tām" }, { M: "tau", N: "te", F: "te" }, { M: "tān", N: "tāni", F: "tās" }],
@@ -414,10 +415,10 @@ export const DATA = {
             },
             "etad": {
                 stem: "etad", example: "this", gender: "三性", base: "et",
-                note: "同 tad，在 tad 变格前加前缀 e 即可。sas 和 eṣas 句内连声时，遇 a 变 so' 和 eṣo'，遇其他元音和辅音丢失 s。",
+                note: "近指。同 tad，在 tad 变格前加前缀 e 即可。sas 和 eṣas 句内连声时，遇 a 变 so' 和 eṣo'，遇其他元音和辅音丢失 s。",
                 rows: [
-                    [{ M: "eṣas", N: "etat / etad", F: "eṣā" }, { M: "etau", N: "ete", F: "ete" }, { M: "ete", N: "etāni", F: "etās" }],
-                    [{ M: "etam", N: "etat / etad", F: "etām" }, { M: "etau", N: "ete", F: "ete" }, { M: "etān", N: "etāni", F: "etās" }],
+                    [{ M: { t: "eṣas", userMarked: true }, N: { t: "etad", userMarked: true }, F: { t: "eṣā", userMarked: true } }, { M: "etau", N: "ete", F: "ete" }, { M: "ete", N: "etāni", F: "etās" }],
+                    [{ M: "etam", N: { t: "etad", userMarked: true }, F: "etām" }, { M: "etau", N: "ete", F: "ete" }, { M: "etān", N: "etāni", F: "etās" }],
                     [{ M: "etena", N: "etena", F: "etayā" }, { M: "etābhyām", N: "etābhyām", F: "etābhyām" }, { M: "etais", N: "etais", F: "etābhis" }],
                     [{ M: "etasmai", N: "etasmai", F: "etasyai" }, { M: "etābhyām", N: "etābhyām", F: "etābhyām" }, { M: "etebhyas", N: "etebhyas", F: "etābhyas" }],
                     [{ M: "etasmāt", N: "etasmāt", F: "etasyās" }, { M: "etābhyām", N: "etābhyām", F: "etābhyām" }, { M: "etebhyas", N: "etebhyas", F: "etābhyas" }],
@@ -428,10 +429,10 @@ export const DATA = {
             },
             "yad": {
                 stem: "yad", example: "who/which", gender: "三性", base: "y",
-                note: "关系代词。变格同 tad，将 t 替换为 y 即可。",
+                note: "那個。关系代词。变格同 tad，将 t 替换为 y 即可。",
                 rows: [
-                    [{ M: "yas", N: "yat / yad", F: "yā" }, { M: "yau", N: "ye", F: "ye" }, { M: "ye", N: "yāni", F: "yās" }],
-                    [{ M: "yam", N: "yat / yad", F: "yām" }, { M: "yau", N: "ye", F: "ye" }, { M: "yān", N: "yāni", F: "yās" }],
+                    [{ M: { t: "yas", userMarked: true }, N: { t: "yad", userMarked: true }, F: { t: "yā", userMarked: true } }, { M: "yau", N: "ye", F: "ye" }, { M: "ye", N: "yāni", F: "yās" }],
+                    [{ M: "yam", N: { t: "yad", userMarked: true }, F: "yām" }, { M: "yau", N: "ye", F: "ye" }, { M: "yān", N: "yāni", F: "yās" }],
                     [{ M: "yena", N: "yena", F: "yayā" }, { M: "yābhyām", N: "yābhyām", F: "yābhyām" }, { M: "yais", N: "yais", F: "yābhis" }],
                     [{ M: "yasmai", N: "yasmai", F: "yasyai" }, { M: "yābhyām", N: "yābhyām", F: "yābhyām" }, { M: "yebhyas", N: "yebhyas", F: "yābhyas" }],
                     [{ M: "yasmāt", N: "yasmāt", F: "yasyās" }, { M: "yābhyām", N: "yābhyām", F: "yābhyām" }, { M: "yebhyas", N: "yebhyas", F: "yābhyas" }],
@@ -442,7 +443,7 @@ export const DATA = {
             },
             "sarva": {
                 stem: "sarva", example: "all", gender: "三性", base: "sarv",
-                note: "中单一、二用 -am 代替 -ad，其余与 tad 相同。viśva 变格同此。",
+                note: "所有，全部。中单一、二用 -am 代替 -ad，其余与 tad 相同。viśva 变格同此。",
                 rows: [
                     [{ M: "sarvas", N: cell("sarvam", null, true), F: "sarvā" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarve", N: "sarvāṇi", F: "sarvās" }],
                     [{ M: "sarvam", N: cell("sarvam", null, true), F: "sarvām" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarvān", N: "sarvāṇi", F: "sarvās" }],
@@ -456,10 +457,10 @@ export const DATA = {
             },
             "kim": {
                 stem: "kim", example: "what/who", gender: "三性", base: "k",
-                note: "疑问代词。阳 kas，阴 kā，中 kim。中单一、二为 kim，其余同 tad。",
+                note: "什麼。疑问代词。阳 kas，阴 kā，中 kim。中单一、二为 kim，其余同 tad。",
                 rows: [
-                    [{ M: "kas", N: cell("kim", null, true), F: "kā" }, { M: "kau", N: "ke", F: "ke" }, { M: "ke", N: "kāni", F: "kās" }],
-                    [{ M: "kam", N: cell("kim", null, true), F: "kām" }, { M: "kau", N: "ke", F: "ke" }, { M: "kān", N: "kāni", F: "kās" }],
+                    [{ M: { t: "kas", userMarked: true }, N: { t: "kim", userMarked: true }, F: { t: "kā", userMarked: true } }, { M: "kau", N: "ke", F: "ke" }, { M: "ke", N: "kāni", F: "kās" }],
+                    [{ M: "kam", N: { t: "kim", userMarked: true }, F: "kām" }, { M: "kau", N: "ke", F: "ke" }, { M: "kān", N: "kāni", F: "kās" }],
                     [{ M: "kena", N: "kena", F: "kayā" }, { M: "kābhyām", N: "kābhyām", F: "kābhyām" }, { M: "kais", N: "kais", F: "kābhis" }],
                     [{ M: "kasmai", N: "kasmai", F: "kasyai" }, { M: "kābhyām", N: "kābhyām", F: "kābhyām" }, { M: "kebhyas", N: "kebhyas", F: "kābhyas" }],
                     [{ M: "kasmāt", N: "kasmāt", F: "kasyās" }, { M: "kābhyām", N: "kābhyām", F: "kābhyām" }, { M: "kebhyas", N: "kebhyas", F: "kābhyas" }],
