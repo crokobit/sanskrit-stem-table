@@ -202,13 +202,13 @@ const App = () => {
                     <div className="mode-switcher mode-switcher-container">
                         <button
                             onClick={() => setAppMode('noun')}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${appMode === 'noun' ? 'bg-white text-emerald-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
+                            className={`app-btn ${appMode === 'noun' ? 'app-btn-mode-active' : 'app-btn-inactive'}`}
                         >
                             Noun
                         </button>
                         <button
                             onClick={() => setAppMode('verb')}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${appMode === 'verb' ? 'bg-white text-emerald-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
+                            className={`app-btn ${appMode === 'verb' ? 'app-btn-mode-active' : 'app-btn-inactive'}`}
                         >
                             Verb
                         </button>
@@ -218,19 +218,19 @@ const App = () => {
                     <div className="view-mode-switcher view-mode-switcher-container">
                         <button
                             onClick={() => setViewMode('single')}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'single' ? 'bg-white text-indigo-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
+                            className={`app-btn ${viewMode === 'single' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
                         >
                             Single
                         </button>
                         <button
                             onClick={() => setViewMode('compare')}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'compare' ? 'bg-white text-indigo-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
+                            className={`app-btn ${viewMode === 'compare' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
                         >
                             Compare
                         </button>
                         <button
                             onClick={() => setViewMode('merge')}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'merge' ? 'bg-white text-indigo-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
+                            className={`app-btn ${viewMode === 'merge' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
                         >
                             Merge
                         </button>
