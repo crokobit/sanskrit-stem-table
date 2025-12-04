@@ -213,6 +213,11 @@ const Table = ({ currentTable, handleCellClick }) => {
                     {currentTable.note}
                 </div>
             )}
+            {currentTable.memorizeNote && (
+                <div className="table-note-memorize">
+                    Memorize: {currentTable.memorizeNote}
+                </div>
+            )}
         </div>
     );
 };

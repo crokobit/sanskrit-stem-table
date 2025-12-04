@@ -221,7 +221,8 @@ export const DATA = {
             ["vadhvās", "vadhvos", "vadhūnām"],
             ["vadhvām", "vadhvos", "vadhūṣu"],
             ["vadhu", "vadhvau", "vadhvas"]
-        ]
+        ],
+        memorizeNote: "規則詞尾，母音開頭 + v , 前變變短u， 子音直接加"
     },
     "bhu_fem": {
         id: "bhu_fem",

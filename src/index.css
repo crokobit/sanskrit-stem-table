@@ -242,6 +242,7 @@ body {
     width: 100%;
     min-width: 350px;
     border-collapse: collapse;
+    margin-top: 0.2rem;
 }
 
 /* Table Grid Lines */
@@ -817,6 +818,25 @@ body {
     margin-bottom: 0.25rem;
     color: #0e7490;
     /* cyan-700 */
+}
+
+.table-note-memorize {
+    margin-top: 0.2rem;
+    padding: 0.75rem;
+    background-color: #f0fdf4;
+    /* green-50 */
+    color: #166534;
+    /* green-800 */
+    border: 1px solid #bbf7d0;
+    /* green-200 */
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.table-note-memorize .table-note-label {
+    color: #14532d;
+    /* green-900 */
 }
 
 .word-cell-marked {
