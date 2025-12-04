@@ -196,10 +196,10 @@ const App = () => {
 
             {/* Header */}
             <header className="app-header">
-                <div className="header-content flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="header-content app-header-content">
 
                     {/* Mode Switcher (Noun/Verb) */}
-                    <div className="mode-switcher flex bg-stone-100 rounded-lg p-1">
+                    <div className="mode-switcher mode-switcher-container">
                         <button
                             onClick={() => setAppMode('noun')}
                             className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${appMode === 'noun' ? 'bg-white text-emerald-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
@@ -215,7 +215,7 @@ const App = () => {
                     </div>
 
                     {/* View Mode Switcher */}
-                    <div className="view-mode-switcher flex bg-stone-100 rounded-lg p-1">
+                    <div className="view-mode-switcher view-mode-switcher-container">
                         <button
                             onClick={() => setViewMode('single')}
                             className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'single' ? 'bg-white text-indigo-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
@@ -264,7 +264,7 @@ const App = () => {
                 )}
 
                 {viewMode === 'compare' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="app-grid-2-col">
                         <div className="compare-col">
                             <TableControl
                                 tableId={table1Id}
@@ -306,7 +306,7 @@ const App = () => {
 
                 {viewMode === 'merge' && (
                     <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div className="app-grid-merge">
                             <TableControl
                                 tableId={table1Id}
                                 variant={table1Variant}
@@ -336,8 +336,8 @@ const App = () => {
                     </>
                 )}
 
-                <div className="mt-4 text-xs text-center text-stone-400">
-                    Tap any word to link to other stems with the same <span className="text-red-500 font-bold">red ending</span>.
+                <div className="app-footer-note">
+                    Tap any word to link to other stems with the same <span className="app-footer-note-highlight">red ending</span>.
                 </div>
             </main>
 
@@ -348,9 +348,9 @@ const App = () => {
                 title="Suffix Analysis"
             >
                 {selectedCell && (
-                    <div className="space-y-8">
+                    <div className="modal-content-container">
                         {/* Header Info */}
-                        <div className="text-center">
+                        <div className="modal-header-container">
                             <div className="modal-word-display">
                                 {selectedCell.rawWord.split("/").map((w, i) => {
                                     return (
@@ -369,7 +369,7 @@ const App = () => {
                                 </span>
                             </div>
 
-                            <div className="mt-3 flex flex-wrap gap-2 justify-center">
+                            <div className="modal-tags-container">
                                 {selectedCell.suffixes.map(s => (
                                     <span key={s} className="modal-suffix-tag">
                                         Ending: -{s}
@@ -395,10 +395,10 @@ const App = () => {
                                     >
                                         <div className="match-content">
                                             <span className="match-stem-badge">{formatStemLabel(match.table)}</span>
-                                            <span className="text-indigo-800 text-sm">
+                                            <span className="match-item-text-info">
                                                 {getGenderLabel(match.gender)}{match.infoStr}
                                             </span>
-                                            <span className="flex-grow text-right text-lg font-serif sanskrit-text">
+                                            <span className="match-item-text-word">
                                                 {match.word}
                                             </span>
                                         </div>
@@ -406,8 +406,8 @@ const App = () => {
                                 ))}
 
                                 {selectedCell.matches.length === 0 && (
-                                    <div className="text-center py-4 bg-stone-50 rounded-lg border border-dashed border-stone-200">
-                                        <p className="text-stone-400 italic text-sm">No other stems share exactly this ending.</p>
+                                    <div className="no-matches-container">
+                                        <p className="no-matches-text">No other stems share exactly this ending.</p>
                                     </div>
                                 )}
                             </div>
@@ -430,10 +430,10 @@ const App = () => {
                                     >
                                         <div className="match-content-indigo">
                                             <span className="match-stem-badge">{formatStemLabel(match.table)}</span>
-                                            <span className="text-stone-500 text-sm">
+                                            <span className="match-item-text-info-indigo">
                                                 {getGenderLabel(match.gender)}{match.infoStr}
                                             </span>
-                                            <span className="flex-grow text-right text-lg font-serif sanskrit-text text-indigo-900">
+                                            <span className="match-item-text-word-indigo">
                                                 {match.word}
                                             </span>
                                         </div>

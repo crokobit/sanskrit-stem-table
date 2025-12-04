@@ -952,3 +952,393 @@ body {
 .td-highlight {
     background-color: #fafaf9;
 }
+
+/* --- Table Control Styles --- */
+.table-control-container {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #f5f5f4;
+    /* stone-100 */
+    margin-bottom: 1rem;
+}
+
+.table-select-wrapper {
+    margin-bottom: 1rem;
+}
+
+.table-selector-btn {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.table-selector-btn-active {
+    background-color: #4f46e5;
+    /* indigo-600 */
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.table-selector-btn-inactive {
+    background-color: #f5f5f4;
+    /* stone-100 */
+    color: #57534e;
+    /* stone-600 */
+}
+
+.table-selector-btn-inactive:hover {
+    background-color: #e7e5e4;
+    /* stone-200 */
+}
+
+.variant-tab-btn {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.variant-tab-btn-active {
+    background-color: #e0e7ff;
+    /* indigo-100 */
+    color: #4338ca;
+    /* indigo-700 */
+    border: 1px solid #c7d2fe;
+    /* indigo-200 */
+}
+
+.variant-tab-btn-inactive {
+    background-color: #fafaf9;
+    /* stone-50 */
+    color: #57534e;
+    /* stone-600 */
+    border: 1px solid #e7e5e4;
+    /* stone-200 */
+}
+
+.variant-tab-btn-inactive:hover {
+    background-color: #f5f5f4;
+    /* stone-100 */
+}
+
+.gender-tab-btn {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.gender-tab-btn-active {
+    background-color: #d1fae5;
+    /* emerald-100 */
+    color: #047857;
+    /* emerald-700 */
+    border: 1px solid #a7f3d0;
+    /* emerald-200 */
+}
+
+.gender-tab-btn-inactive {
+    background-color: #fafaf9;
+    /* stone-50 */
+    color: #57534e;
+    /* stone-600 */
+    border: 1px solid #e7e5e4;
+    /* stone-200 */
+}
+
+.gender-tab-btn-inactive:hover {
+    background-color: #f5f5f4;
+    /* stone-100 */
+}
+
+/* --- WordCell Styles --- */
+/* Base Text Colors */
+.word-cell-text-base {
+    color: #292524;
+    /* stone-800 */
+}
+
+.word-cell-text-base-strong {
+    color: #e7e5e4;
+    /* stone-200 */
+}
+
+.word-cell-text-base-middle {
+    color: #44403c;
+    /* stone-700 */
+}
+
+/* Suffix Text Colors */
+.word-cell-text-suffix {
+    color: #dc2626;
+    /* red-600 */
+}
+
+.word-cell-text-suffix-strong {
+    color: #f87171;
+    /* red-400 */
+    font-weight: 700;
+}
+
+.word-cell-text-suffix-middle {
+    color: #b91c1c;
+    /* red-700 */
+    font-weight: 700;
+}
+
+/* Slash Colors */
+.word-cell-slash {
+    color: #d6d3d1;
+    /* stone-300 */
+}
+
+.word-cell-slash-strong {
+    color: #57534e;
+    /* stone-600 */
+}
+
+.word-cell-slash-middle {
+    color: #a8a29e;
+    /* stone-400 */
+}
+
+/* Derivation Styles */
+.derivation-source {
+    color: #a8a29e;
+    /* stone-400 */
+    font-size: 0.75rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    margin-bottom: 0.125rem;
+}
+
+.derivation-arrow {
+    color: #d6d3d1;
+    /* stone-300 */
+    font-size: 10px;
+    line-height: 1;
+}
+
+.derivation-intermediate {
+    color: #78716c;
+    /* stone-500 */
+    font-size: 0.75rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    margin-bottom: 0.125rem;
+}
+
+.derivation-segment-added {
+    color: #059669;
+    /* emerald-600 */
+    font-weight: 700;
+}
+
+.derivation-segment-modified {
+    color: #d97706;
+    /* amber-600 */
+    font-weight: 700;
+}
+
+/* --- Project-wide Refactoring Styles --- */
+
+/* TableControl */
+.table-control-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    /* gap-2 */
+}
+
+.table-control-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    /* gap-3 */
+}
+
+.table-control-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    /* gap-2 */
+}
+
+/* WordCell */
+.word-cell-derivation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    /* gap-1 */
+    width: 100%;
+}
+
+.word-cell-segments-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.125rem;
+    /* gap-0.5 */
+}
+
+/* App Layout */
+.app-header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    /* gap-4 */
+}
+
+@media (min-width: 768px) {
+    .app-header-content {
+        flex-direction: row;
+    }
+}
+
+.mode-switcher-container,
+.view-mode-switcher-container {
+    display: flex;
+    background-color: #f5f5f4;
+    /* stone-100 */
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+}
+
+.app-grid-2-col {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+    /* gap-6 */
+}
+
+@media (min-width: 768px) {
+    .app-grid-2-col {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.app-grid-merge {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+    /* gap-4 */
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .app-grid-merge {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.app-footer-note {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    text-align: center;
+    color: #a8a29e;
+    /* stone-400 */
+}
+
+.app-footer-note-highlight {
+    color: #ef4444;
+    /* red-500 */
+    font-weight: 700;
+}
+
+/* Modal Styles */
+.modal-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* space-y-8 */
+}
+
+.modal-header-container {
+    text-align: center;
+}
+
+.modal-tags-container {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.match-item-text-info {
+    color: #3730a3;
+    /* indigo-800 */
+    font-size: 0.875rem;
+}
+
+.match-item-text-info-indigo {
+    color: #78716c;
+    /* stone-500 */
+    font-size: 0.875rem;
+}
+
+.match-item-text-word {
+    flex-grow: 1;
+    text-align: right;
+    font-size: 1.125rem;
+    font-family: 'Noto Serif Devanagari', serif;
+}
+
+.match-item-text-word-indigo {
+    flex-grow: 1;
+    text-align: right;
+    font-size: 1.125rem;
+    font-family: 'Noto Serif Devanagari', serif;
+    color: #312e81;
+    /* indigo-900 */
+}
+
+.no-matches-container {
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #fafaf9;
+    /* stone-50 */
+    border-radius: 0.5rem;
+    border: 1px dashed #e7e5e4;
+    /* stone-200 */
+}
+
+.no-matches-text {
+    color: #a8a29e;
+    /* stone-400 */
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+/* Legend */
+.legend-text {
+    font-size: 0.875rem;
+    /* text-sm */
+    font-family: 'Noto Serif Devanagari', serif;
+    /* font-serif sanskrit-text */
+    margin-top: 0.25rem;
+    /* mt-1 */
+}
+
+/* Icons */
+.icon-md {
+    width: 24px;
+    height: 24px;
+}

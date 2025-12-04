@@ -15,18 +15,18 @@ const TableControl = ({
     const rawTable = data[tableId];
 
     return (
-        <div className="table-control p-4 bg-white rounded-lg shadow-sm border border-stone-100 mb-4">
+        <div className="table-control-container">
             {/* Table Selector */}
-            <div className="table-select-wrapper mb-4">
+            <div className="table-select-wrapper">
                 {mode === 'verb' ? (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="table-control-group">
                         {Object.values(data).map(t => (
                             <button
                                 key={t.id}
                                 onClick={() => onTableChange(t.id)}
-                                className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${tableId === t.id
-                                        ? 'bg-indigo-600 text-white shadow-md'
-                                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                                className={`table-selector-btn ${tableId === t.id
+                                    ? 'table-selector-btn-active'
+                                    : 'table-selector-btn-inactive'
                                     }`}
                             >
                                 {t.name ? t.name.substring(0, 2) : t.id}
@@ -55,16 +55,16 @@ const TableControl = ({
 
             {/* Variant Selectors for Groups */}
             {rawTable.isGroup && (
-                <div className="controls-container flex flex-col gap-3">
+                <div className="controls-container table-control-row">
                     {/* Variant Tabs */}
-                    <div className="variant-tabs flex flex-wrap gap-2">
+                    <div className="variant-tabs table-control-tabs">
                         {rawTable.variants.map(v => (
                             <button
                                 key={v}
                                 onClick={() => onVariantChange(v)}
-                                className={`variant-tab px-3 py-1 rounded-full text-sm font-medium transition-colors ${variant === v
-                                    ? 'bg-indigo-100 text-indigo-700 border border-indigo-200'
-                                    : 'bg-stone-50 text-stone-600 hover:bg-stone-100 border border-stone-200'
+                                className={`variant-tab-btn ${variant === v
+                                    ? 'variant-tab-btn-active'
+                                    : 'variant-tab-btn-inactive'
                                     }`}
                             >
                                 {v}
@@ -73,14 +73,14 @@ const TableControl = ({
                     </div>
 
                     {/* Gender Tabs for Pronouns */}
-                    <div className="gender-tabs flex flex-wrap gap-2">
+                    <div className="gender-tabs table-control-tabs">
                         {["ALL", "M", "N", "F"].map(g => (
                             <button
                                 key={g}
                                 onClick={() => onGenderChange(g)}
-                                className={`gender-tab px-3 py-1 rounded-full text-sm font-medium transition-colors ${gender === g
-                                    ? 'bg-emerald-100 text-emerald-700 border border-emerald-200'
-                                    : 'bg-stone-50 text-stone-600 hover:bg-stone-100 border border-stone-200'
+                                className={`gender-tab-btn ${gender === g
+                                    ? 'gender-tab-btn-active'
+                                    : 'gender-tab-btn-inactive'
                                     }`}
                             >
                                 {g === "ALL" ? "All Genders" : (g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine"))}

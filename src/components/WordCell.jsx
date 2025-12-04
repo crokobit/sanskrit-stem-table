@@ -6,20 +6,20 @@ const WordCell = ({ cellData, base, onClick, sourceData }) => {
     const { parsedForms, strength } = parseCellData(cellData, base);
 
     let bgClass = "word-cell-default";
-    let textBaseClass = "text-stone-800";
-    let textSuffixClass = "text-red-600";
-    let slashClass = "text-stone-300";
+    let textBaseClass = "word-cell-text-base";
+    let textSuffixClass = "word-cell-text-suffix";
+    let slashClass = "word-cell-slash";
 
     if (strength === STRONG) {
         bgClass = "word-cell-strong";
-        textBaseClass = "text-stone-200";
-        textSuffixClass = "text-red-400 font-bold";
-        slashClass = "text-stone-600";
+        textBaseClass = "word-cell-text-base-strong";
+        textSuffixClass = "word-cell-text-suffix-strong";
+        slashClass = "word-cell-slash-strong";
     } else if (strength === MIDDLE) {
         bgClass = "word-cell-middle";
-        textBaseClass = "text-stone-700";
-        textSuffixClass = "text-red-700 font-bold";
-        slashClass = "text-stone-400";
+        textBaseClass = "word-cell-text-base-middle";
+        textSuffixClass = "word-cell-text-suffix-middle";
+        slashClass = "word-cell-slash-middle";
     }
 
     if (typeof cellData === 'object' && cellData.userMarked) {
@@ -42,35 +42,35 @@ const WordCell = ({ cellData, base, onClick, sourceData }) => {
         >
             {cellData.segments ? (
                 // Derivation View: Source -> Target
-                <div className="flex flex-col items-center gap-1 w-full">
+                <div className="word-cell-derivation-container">
                     {/* Source */}
                     {sourceData && (
-                        <div className="text-stone-400 text-xs font-mono mb-0.5">
+                        <div className="derivation-source">
                             {typeof sourceData === 'object' ? sourceData.t : sourceData}
                         </div>
                     )}
 
                     {/* Arrow 1 */}
                     {sourceData && (
-                        <div className="text-stone-300 text-[10px] leading-none">↓</div>
+                        <div className="derivation-arrow">↓</div>
                     )}
 
                     {/* Intermediate Step */}
                     {cellData.intermediate && (
                         <>
-                            <div className="text-stone-500 text-xs font-mono mb-0.5">
+                            <div className="derivation-intermediate">
                                 {cellData.intermediate}
                             </div>
-                            <div className="text-stone-300 text-[10px] leading-none">↓</div>
+                            <div className="derivation-arrow">↓</div>
                         </>
                     )}
 
                     {/* Target Segments */}
-                    <div className="flex flex-wrap justify-center gap-0.5">
+                    <div className="word-cell-segments-container">
                         {cellData.segments.map((seg, idx) => {
-                            let segClass = "text-stone-800";
-                            if (seg.type === "added") segClass = "text-emerald-600 font-bold";
-                            if (seg.type === "modified") segClass = "text-amber-600 font-bold";
+                            let segClass = "word-cell-text-base";
+                            if (seg.type === "added") segClass = "derivation-segment-added";
+                            if (seg.type === "modified") segClass = "derivation-segment-modified";
 
                             return (
                                 <span key={idx} className={segClass}>
