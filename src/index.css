@@ -339,6 +339,7 @@ body {
 .td-cell {
     padding: 0;
     vertical-align: middle;
+    text-align: center;
 }
 
 /* --- WordCell Component --- */
@@ -870,11 +871,83 @@ body {
     margin-left: 0.25rem;
     margin-right: 0.25rem;
 }
+
 /* Verb Cell Rules */
 .word-cell-border-black {
     box-shadow: inset 0 0 0 2px black;
 }
 
 .word-cell-border-red {
-    box-shadow: inset 0 0 0 2px #ef4444; /* red-500 */
+    box-shadow: inset 0 0 0 2px #ef4444;
+    /* red-500 */
+}
+
+/* Semantic Table Styles */
+.table-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+.table-title-text {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: #292524;
+}
+
+.derivation-toggle-btn {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+}
+
+.derivation-toggle-btn-active {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.derivation-toggle-btn-active:hover {
+    background-color: #fde68a;
+}
+
+.derivation-toggle-btn-inactive {
+    background-color: #f5f5f4;
+    color: #57534e;
+}
+
+.derivation-toggle-btn-inactive:hover {
+    background-color: #e7e5e4;
+}
+
+.table-description {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #78716c;
+    margin-bottom: 1rem;
+}
+
+.table-note-box {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: #fafaf9;
+    border-left: 4px solid #d6d3d1;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #57534e;
+    font-style: italic;
+}
+
+.th-gender-sub-highlight {
+    background-color: #fafaf9;
+}
+
+.td-highlight {
+    background-color: #fafaf9;
 }

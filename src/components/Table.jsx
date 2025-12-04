@@ -37,16 +37,16 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
     return (
         <div className="table-wrapper">
             {/* Header with Toggle */}
-            <div className="flex justify-between items-end mb-2">
-                <h2 className="text-xl font-bold text-stone-800">
+            <div className="table-header-container">
+                <h2 className="table-title-text">
                     {currentTable.name}
                 </h2>
                 {derivationRules && (
                     <button
                         onClick={() => setShowDerivation(!showDerivation)}
-                        className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${showDerivation
-                            ? 'bg-amber-100 text-amber-800 hover:bg-amber-200'
-                            : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                        className={`derivation-toggle-btn ${showDerivation
+                            ? 'derivation-toggle-btn-active'
+                            : 'derivation-toggle-btn-inactive'
                             }`}
                     >
                         {showDerivation ? 'Show Table' : 'Show Process'}
@@ -55,7 +55,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
             </div>
 
             {/* Description */}
-            <p className="text-sm text-stone-500 mb-4">{currentTable.description}</p>
+            <p className="table-description">{currentTable.description}</p>
 
             <div className="paradigm-table">
                 <div className="table-scroll-container">
@@ -72,7 +72,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                     <tr className="table-head-row-sub">
                                         {colLabels.map((_, idx) => (
                                             <React.Fragment key={idx}>
-                                                <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
+                                                <th className="th-gender">{currentTable.table1Label}</th><th className="th-gender th-gender-sub-highlight">{currentTable.table2Label}</th>
                                             </React.Fragment>
                                         ))}
                                     </tr>
@@ -102,7 +102,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                 </tr>
                             )}
                         </thead>
-                        <tbody className="divide-y divide-stone-100">
+                        <tbody>
                             {currentTable.data.map((row, rowIdx) => (
                                 <tr key={rowIdx} className={rowIdx % 2 === 0 ? 'tr-even' : 'tr-odd'}>
                                     {/* Case Label */}
@@ -153,7 +153,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                             if (eqMN && eqNF) {
                                                 // All equal
                                                 return (
-                                                    <td key={`${colIdx}-all`} colSpan={3} className="td-cell text-center">
+                                                    <td key={`${colIdx}-all`} colSpan={3} className="td-cell">
                                                         <WordCell
                                                             cellData={m}
                                                             base={currentTable.base}
@@ -165,14 +165,14 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                                 // M == N != F
                                                 return (
                                                     <React.Fragment key={colIdx}>
-                                                        <td colSpan={2} className="td-cell text-center border-r border-stone-200">
+                                                        <td colSpan={2} className="td-cell">
                                                             <WordCell
                                                                 cellData={m}
                                                                 base={currentTable.base}
                                                                 onClick={(w) => handleCellClick(w, rowIdx, colIdx, "M")} // or M/N?
                                                             />
                                                         </td>
-                                                        <td className="td-cell text-center">
+                                                        <td className="td-cell">
                                                             <WordCell
                                                                 cellData={f}
                                                                 base={currentTable.base}
@@ -185,14 +185,14 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                                 // M != N == F
                                                 return (
                                                     <React.Fragment key={colIdx}>
-                                                        <td className="td-cell text-center border-r border-stone-200">
+                                                        <td className="td-cell">
                                                             <WordCell
                                                                 cellData={m}
                                                                 base={currentTable.base}
                                                                 onClick={(w) => handleCellClick(w, rowIdx, colIdx, "M")}
                                                             />
                                                         </td>
-                                                        <td colSpan={2} className="td-cell text-center">
+                                                        <td colSpan={2} className="td-cell">
                                                             <WordCell
                                                                 cellData={n}
                                                                 base={currentTable.base}
@@ -205,21 +205,21 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                                 // All different (or M=F != N, treat as separate for visual clarity usually)
                                                 return (
                                                     <React.Fragment key={colIdx}>
-                                                        <td className="td-cell text-center border-r border-stone-200">
+                                                        <td className="td-cell">
                                                             <WordCell
                                                                 cellData={m}
                                                                 base={currentTable.base}
                                                                 onClick={(w) => handleCellClick(w, rowIdx, colIdx, "M")}
                                                             />
                                                         </td>
-                                                        <td className="td-cell text-center border-r border-stone-200">
+                                                        <td className="td-cell">
                                                             <WordCell
                                                                 cellData={n}
                                                                 base={currentTable.base}
                                                                 onClick={(w) => handleCellClick(w, rowIdx, colIdx, "N")}
                                                             />
                                                         </td>
-                                                        <td className="td-cell text-center">
+                                                        <td className="td-cell">
                                                             <WordCell
                                                                 cellData={f}
                                                                 base={currentTable.base}
@@ -236,7 +236,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                             // We can style them slightly differently if needed
                                             const isRight = cellData.origin === 'right';
                                             return (
-                                                <td key={colIdx} className={`td-cell ${isRight ? 'bg-stone-50' : ''}`}>
+                                                <td key={colIdx} className={`td-cell ${isRight ? 'td-highlight' : ''}`}>
                                                     <WordCell
                                                         cellData={cellData}
                                                         base={cellData.base || currentTable.base} // Use specific base for merged cells
@@ -269,7 +269,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
 
             {/* Note */}
             {currentTable.note && (
-                <div className="mb-4 p-3 bg-stone-50 border-l-4 border-stone-300 text-sm text-stone-600 italic">
+                <div className="table-note-box">
                     {currentTable.note}
                 </div>
             )}
