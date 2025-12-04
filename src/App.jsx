@@ -337,7 +337,7 @@ const App = () => {
                 )}
 
                 <div className="app-footer-note">
-                    Tap any word to link to other stems with the same <span className="app-footer-note-highlight">red ending</span>.
+                    Tap any word to link to other stems with the same {appMode === 'verb' ? "value" : <span className="app-footer-note-highlight">red ending</span>}.
                 </div>
             </main>
 
