@@ -37,19 +37,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
     return (
         <div className="table-wrapper">
             {/* Header with Toggle */}
-            <div className="table-header-container">
-                {derivationRules && (
-                    <button
-                        onClick={() => setShowDerivation(!showDerivation)}
-                        className={`derivation-toggle-btn ${showDerivation
-                            ? 'derivation-toggle-btn-active'
-                            : 'derivation-toggle-btn-inactive'
-                            }`}
-                    >
-                        {showDerivation ? 'Show Table' : 'Show Process'}
-                    </button>
-                )}
-            </div>
+
 
             {/* Description */}
             <p className="table-description">{currentTable.description}</p>
@@ -262,6 +250,21 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            {/* Header with Toggle */}
+            <div className="table-header-container">
+                {derivationRules && (
+                    <button
+                        onClick={() => setShowDerivation(!showDerivation)}
+                        className={`derivation-toggle-btn ${showDerivation
+                            ? 'derivation-toggle-btn-active'
+                            : 'derivation-toggle-btn-inactive'
+                            }`}
+                    >
+                        {showDerivation ? 'Show Table' : 'Show Process'}
+                    </button>
+                )}
             </div>
 
             {/* Note */}
