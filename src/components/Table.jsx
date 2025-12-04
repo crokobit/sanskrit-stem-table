@@ -38,9 +38,6 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
         <div className="table-wrapper">
             {/* Header with Toggle */}
             <div className="table-header-container">
-                <h2 className="table-title-text">
-                    {currentTable.name}
-                </h2>
                 {derivationRules && (
                     <button
                         onClick={() => setShowDerivation(!showDerivation)}
