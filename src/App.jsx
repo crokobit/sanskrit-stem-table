@@ -245,6 +245,7 @@ const App = () => {
                             currentTable={table1Data}
                             handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)}
                             rowLabels={currentRowLabels}
+                            data={currentData}
                         />
                     </>
                 )}

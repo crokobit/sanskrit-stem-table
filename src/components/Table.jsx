@@ -1,11 +1,20 @@
 import React from 'react';
 import WordCell from './WordCell';
+import { DERIVATION_RULES } from '../data/derivationRules';
 import { CASE_NAMES, COL_NAMES } from '../data/sanskritData';
 
-const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabels = COL_NAMES }) => {
+const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabels = COL_NAMES, data }) => {
+    const [showDerivation, setShowDerivation] = React.useState(false);
+
+    // Reset derivation view when table changes
+    React.useEffect(() => {
+        setShowDerivation(false);
+    }, [currentTable.id]);
+
     const isMerged = currentTable.isMerged;
     const isAllGenders = !isMerged && (currentTable.gender === "ALL" || (currentTable.data.length > 0 && currentTable.data[0].some(cell => typeof cell === 'object' && !cell.t && (cell.M || cell.N || cell.F))));
 
+    const derivationRules = DERIVATION_RULES[currentTable.id];
 
     // Helper to compare cell data for equality
     const areCellsEqual = (c1, c2) => {
@@ -15,8 +24,46 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
         return t1 === t2;
     };
 
+    // Helper to get source table data
+    const getSourceTableData = () => {
+        if (!derivationRules || !data) return null;
+        // In verb mode, data is passed as prop (VERB_DATA)
+        // We need to access the source table from it
+        return data[derivationRules.sourceId];
+    };
+
+    const sourceTable = showDerivation ? getSourceTableData() : null;
+
     return (
         <div className="table-wrapper">
+            {/* Header with Toggle */}
+            <div className="flex justify-between items-end mb-2">
+                <h2 className="text-xl font-bold text-stone-800">
+                    {currentTable.name}
+                </h2>
+                {derivationRules && (
+                    <button
+                        onClick={() => setShowDerivation(!showDerivation)}
+                        className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${showDerivation
+                            ? 'bg-amber-100 text-amber-800 hover:bg-amber-200'
+                            : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                            }`}
+                    >
+                        {showDerivation ? 'Show Table' : 'Show Process'}
+                    </button>
+                )}
+            </div>
+
+            {/* Description */}
+            <p className="text-sm text-stone-500 mb-4">{currentTable.description}</p>
+
+            {/* Note */}
+            {currentTable.note && (
+                <div className="mb-4 p-3 bg-stone-50 border-l-4 border-stone-300 text-sm text-stone-600 italic">
+                    {currentTable.note}
+                </div>
+            )}
+
             <div className="paradigm-table">
                 <div className="table-scroll-container">
                     <table className={`data-table ${isAllGenders ? 'complex-table' : ''}`}>
@@ -72,6 +119,27 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
 
                                     {/* Cells */}
                                     {row.map((cellData, colIdx) => {
+                                        // Inject segments if derivation is active
+                                        let displayData = cellData;
+                                        let sourceCellData = null;
+
+                                        if (showDerivation && derivationRules) {
+                                            const rule = derivationRules.rows[rowIdx][colIdx];
+                                            const segments = rule.segments;
+                                            const intermediate = rule.intermediate;
+
+                                            if (typeof cellData === 'object') {
+                                                displayData = { ...cellData, segments, intermediate };
+                                            } else {
+                                                displayData = { t: cellData, segments, intermediate };
+                                            }
+
+                                            // Get source cell data
+                                            if (sourceTable && sourceTable.data[rowIdx] && sourceTable.data[rowIdx][colIdx]) {
+                                                sourceCellData = sourceTable.data[rowIdx][colIdx];
+                                            }
+                                        }
+
                                         if (isAllGenders) {
                                             // Complex render for ALL genders
                                             // cellData is {M, N, F}
@@ -190,8 +258,9 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                                             return (
                                                 <td key={colIdx} className="td-cell">
                                                     <WordCell
-                                                        cellData={cellData}
+                                                        cellData={displayData}
                                                         base={currentTable.base}
+                                                        sourceData={sourceCellData}
                                                         onClick={(clickedWord, clickedGender) => handleCellClick(clickedWord, rowIdx, colIdx, clickedGender)}
                                                     />
                                                 </td>
@@ -205,12 +274,6 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                 </div>
             </div>
 
-            {currentTable.note && (
-                <div className="table-note">
-                    <span className="table-note-label">Note:</span>
-                    {currentTable.note}
-                </div>
-            )}
             {currentTable.memorizeNote && (
                 <div className="table-note-memorize">
                     Memorize: {currentTable.memorizeNote}
