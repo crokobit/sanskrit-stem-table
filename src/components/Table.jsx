@@ -57,13 +57,6 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
             {/* Description */}
             <p className="text-sm text-stone-500 mb-4">{currentTable.description}</p>
 
-            {/* Note */}
-            {currentTable.note && (
-                <div className="mb-4 p-3 bg-stone-50 border-l-4 border-stone-300 text-sm text-stone-600 italic">
-                    {currentTable.note}
-                </div>
-            )}
-
             <div className="paradigm-table">
                 <div className="table-scroll-container">
                     <table className={`data-table ${isAllGenders ? 'complex-table' : ''}`}>
@@ -273,6 +266,13 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                     </table>
                 </div>
             </div>
+
+            {/* Note */}
+            {currentTable.note && (
+                <div className="mb-4 p-3 bg-stone-50 border-l-4 border-stone-300 text-sm text-stone-600 italic">
+                    {currentTable.note}
+                </div>
+            )}
 
             {currentTable.memorizeNote && (
                 <div className="table-note-memorize">
