@@ -1198,16 +1198,16 @@ body {
 /* App Layout */
 .app-header-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    /* gap-4 */
+    gap: 0.5rem;
+    /* gap-2 */
 }
 
 @media (min-width: 768px) {
     .app-header-content {
-        flex-direction: row;
+        gap: 1rem;
     }
 }
 
