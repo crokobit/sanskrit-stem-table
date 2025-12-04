@@ -29,9 +29,9 @@ const WordCell = ({ cellData, base, onClick, sourceData }) => {
     // Custom Rules from verb.json
     if (typeof cellData === 'object' && cellData.rule) {
         if (cellData.rule === 'long_a_before_v_or_m') {
-            bgClass = `${bgClass} border-2 border-black`;
+            bgClass = `${bgClass} word-cell-border-black`;
         } else if (cellData.rule === 'del_previous_a') {
-            bgClass = `${bgClass} border-2 border-red-500`;
+            bgClass = `${bgClass} word-cell-border-red`;
         }
     }
 

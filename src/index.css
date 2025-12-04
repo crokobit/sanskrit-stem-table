@@ -870,3 +870,11 @@ body {
     margin-left: 0.25rem;
     margin-right: 0.25rem;
 }
+/* Verb Cell Rules */
+.word-cell-border-black {
+    box-shadow: inset 0 0 0 2px black;
+}
+
+.word-cell-border-red {
+    box-shadow: inset 0 0 0 2px #ef4444; /* red-500 */
+}
