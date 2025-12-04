@@ -1,7 +1,7 @@
 [
   {
     "id": "lat_p",
-    "name": "陳主 / Present (Laṭ) active",
+    "name": "陳主",
     "voice": "active",
     "tense": "lat",
     "description": "標準現在式",
@@ -34,7 +34,7 @@
   },
   {
     "id": "impv_p",
-    "name": "命主 / Imperative (Loṭ) active",
+    "name": "命主",
     "voice": "active",
     "tense": "impv",
     "description": "命令、請求",
@@ -67,7 +67,7 @@
   },
   {
     "id": "opt_p",
-    "name": "祈主 / Optative (Vidhiliṅ) active",
+    "name": "祈主",
     "voice": "active",
     "tense": "opt",
     "note": "由未主變來。先變 *am*、s、t、va、tam、tām、ma、ta、*ur*。之後 1.在现在时语干上加 ī。2.加变化过的派生语尾， 以元音起始的语尾前再插入 y。",
@@ -101,7 +101,7 @@
   },
   {
     "id": "impf_p",
-    "name": "未主 (未完成時) / Imperfect (Laṅ) active",
+    "name": "未主",
     "voice": "active",
     "tense": "impf",
     "description": "過去時",
@@ -134,9 +134,10 @@
   },
   {
     "id": "lat_a",
-    "name": "陳中 / Present (Laṭ) middle",
+    "name": "陳中",
     "voice": "middle",
     "tense": "lat",
+    "description": "標準現在式",
     "rows": [
       {
         "person": "1st",
@@ -166,9 +167,10 @@
   },
   {
     "id": "impv_a",
-    "name": "命中 (命令語氣) / Imperative (Loṭ) middle",
+    "name": "命中",
     "voice": "middle",
     "tense": "impv",
+    "description": "命令、請求",
     "rows": [
       {
         "person": "1st",
@@ -198,8 +200,9 @@
   },
   {
     "id": "opt_a",
-    "name": "祈中 (祈願語氣) / Optative (Vidhiliṅ) middle",
+    "name": "祈中",
     "voice": "middle",
+    "description": "義務，願，可能，表當然會發生，假設",
     "note": "由未中變來。先變為 *a*、thās、ta、vahi、*āthām*、*ātām*、 mahi、dhvam、*ran*。之後 1.在现在时语干上加 ī。2.加变化过的派生语尾， 以元音起始的语尾前再插入 y。",
     "tense": "opt",
     "rows": [
@@ -231,10 +234,10 @@
   },
   {
     "id": "impf_a",
-    "name": "未中 (未完成時) / Imperfect (Laṅ) middle",
+    "name": "未中",
     "voice": "middle",
     "tense": "impf",
-    "description": "",
+    "description": "過去時",
     "rows": [
       {
         "person": "1st",
