@@ -22,10 +22,12 @@ export function parseCellData(cellData, tableBase) {
         text = cellData;
     }
 
+    if (!text) text = ""; // Safeguard against undefined/null
+
     const forms = text.split("/").map(w => w.trim());
 
     const parsedForms = forms.map(f => {
-        if (f.startsWith(tableBase)) {
+        if (tableBase && typeof tableBase === 'string' && f.startsWith(tableBase)) {
             return {
                 full: f,
                 base: tableBase,
@@ -157,12 +159,12 @@ const wrapCell = (cellData) => {
 };
 
 // 1. Find matches for same Red Suffix
-export function findMatchingForms(targetSuffix, currentTableId) {
+export function findMatchingForms(targetSuffix, currentTableId, data = DATA) {
     if (!targetSuffix) return [];
 
     const rawMatches = [];
 
-    Object.values(DATA).forEach(entry => {
+    Object.values(data).forEach(entry => {
         const processTable = (table, tableId, variantName = null, genderKey = null) => {
             const rows = table.data || table.rows;
             if (!rows) return;
@@ -246,7 +248,7 @@ export function findMatchingForms(targetSuffix, currentTableId) {
 }
 
 // 2. New Function: Find matches for Same Case & Number
-export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId) {
+export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId, data = DATA) {
     const matches = [];
 
     // We need to find ALL occurrences of the word in the matched table to build the infoStr
@@ -286,7 +288,7 @@ export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId) {
     // So for "Phalam", it should say "中單一二".
     // So yes, for every match found in "Same Case Number" section, we want to know where ELSE that word appears in THAT table.
 
-    Object.values(DATA).forEach(entry => {
+    Object.values(data).forEach(entry => {
         // We don't skip current table here because we might want to see other variants/genders of the same group
 
         const processTable = (table, tableId, variantName = null, genderKey = null) => {

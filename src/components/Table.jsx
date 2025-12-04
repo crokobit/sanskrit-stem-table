@@ -2,7 +2,7 @@ import React from 'react';
 import WordCell from './WordCell';
 import { CASE_NAMES, COL_NAMES } from '../data/sanskritData';
 
-const Table = ({ currentTable, handleCellClick }) => {
+const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabels = COL_NAMES }) => {
     const isMerged = currentTable.isMerged;
     const isAllGenders = !isMerged && (currentTable.gender === "ALL" || (currentTable.data.length > 0 && currentTable.data[0].some(cell => typeof cell === 'object' && !cell.t && (cell.M || cell.N || cell.F))));
 
@@ -24,43 +24,41 @@ const Table = ({ currentTable, handleCellClick }) => {
                             {isMerged ? (
                                 <>
                                     <tr className="table-head-row">
-                                        <th className="th-case" rowSpan={2}>格</th>
-                                        <th className="th-number" colSpan={2}>單 (1)</th>
-                                        <th className="th-number" colSpan={2}>雙 (2)</th>
-                                        <th className="th-number" colSpan={2}>複 (3+)</th>
+                                        <th className="th-case" rowSpan={2}></th>
+                                        {colLabels.map((label, idx) => (
+                                            <th key={idx} className="th-number" colSpan={2}>{label}</th>
+                                        ))}
                                     </tr>
                                     <tr className="table-head-row-sub">
-                                        {/* Singular */}
-                                        <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
-                                        {/* Dual */}
-                                        <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
-                                        {/* Plural */}
-                                        <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
+                                        {colLabels.map((_, idx) => (
+                                            <React.Fragment key={idx}>
+                                                <th className="th-gender text-xs">{currentTable.table1Label}</th><th className="th-gender text-xs bg-stone-50">{currentTable.table2Label}</th>
+                                            </React.Fragment>
+                                        ))}
                                     </tr>
                                 </>
                             ) : isAllGenders ? (
                                 <>
                                     <tr className="table-head-row">
-                                        <th className="th-case" rowSpan={2}>格</th>
-                                        <th className="th-number" colSpan={3}>單 (1)</th>
-                                        <th className="th-number" colSpan={3}>雙 (2)</th>
-                                        <th className="th-number" colSpan={3}>複 (3+)</th>
+                                        <th className="th-case" rowSpan={2}></th>
+                                        {colLabels.map((label, idx) => (
+                                            <th key={idx} className="th-number" colSpan={3}>{label}</th>
+                                        ))}
                                     </tr>
                                     <tr className="table-head-row-sub">
-                                        {/* Singular */}
-                                        <th className="th-gender">陽</th><th className="th-gender">中</th><th className="th-gender">陰</th>
-                                        {/* Dual */}
-                                        <th className="th-gender">陽</th><th className="th-gender">中</th><th className="th-gender">陰</th>
-                                        {/* Plural */}
-                                        <th className="th-gender">陽</th><th className="th-gender">中</th><th className="th-gender">陰</th>
+                                        {colLabels.map((_, idx) => (
+                                            <React.Fragment key={idx}>
+                                                <th className="th-gender">陽</th><th className="th-gender">中</th><th className="th-gender">陰</th>
+                                            </React.Fragment>
+                                        ))}
                                     </tr>
                                 </>
                             ) : (
                                 <tr className="table-head-row">
-                                    <th className="th-case">格</th>
-                                    <th className="th-number">單 (1)</th>
-                                    <th className="th-number">雙 (2)</th>
-                                    <th className="th-number">複 (3+)</th>
+                                    <th className="th-case"></th>
+                                    {colLabels.map((label, idx) => (
+                                        <th key={idx} className="th-number">{label}</th>
+                                    ))}
                                 </tr>
                             )}
                         </thead>
@@ -69,7 +67,7 @@ const Table = ({ currentTable, handleCellClick }) => {
                                 <tr key={rowIdx} className={rowIdx % 2 === 0 ? 'tr-even' : 'tr-odd'}>
                                     {/* Case Label */}
                                     <td className="td-case-label">
-                                        {CASE_NAMES[rowIdx]}
+                                        {rowLabels[rowIdx]}
                                     </td>
 
                                     {/* Cells */}

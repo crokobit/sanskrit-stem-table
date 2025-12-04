@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DATA, COL_NAMES, CASE_NAMES } from './data/sanskritData';
+import { VERB_DATA, PERSON_NAMES } from './data/verbData';
 import { parseCellData, findMatchingForms, findSameCaseNumberForms, formatOccurrences, extractGenderData, mergeTableData, formatStemLabel, getGenderLabel } from './utils/sanskritUtils';
 import Table from './components/Table';
 import Legend from './components/Legend';
@@ -7,6 +8,9 @@ import Modal from './components/Modal';
 import TableControl from './components/TableControl';
 
 const App = () => {
+    // App Mode: 'noun' or 'verb'
+    const [appMode, setAppMode] = useState('noun');
+
     // View Mode: 'single', 'compare', 'merge'
     const [viewMode, setViewMode] = useState('single');
 
@@ -23,9 +27,15 @@ const App = () => {
     const [selectedCell, setSelectedCell] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    // Determine current data source
+    const currentData = appMode === 'noun' ? DATA : VERB_DATA;
+    const currentRowLabels = appMode === 'noun' ? CASE_NAMES : PERSON_NAMES;
+
     // Helper to update defaults when table changes
     const updateDefaults = (tableId, setVariant, setGender) => {
-        const table = DATA[tableId];
+        const table = currentData[tableId];
+        if (!table) return; // Guard against invalid ID when switching modes
+
         if (table.isGroup) {
             setVariant(table.defaultVariant);
             setGender("ALL");
@@ -37,13 +47,26 @@ const App = () => {
         }
     };
 
+    // Reset tables when mode changes
+    useEffect(() => {
+        const firstKey = Object.keys(currentData)[0];
+        const secondKey = Object.keys(currentData)[1] || firstKey;
+
+        setTable1Id(firstKey);
+        setTable2Id(secondKey);
+
+        // Defaults will be updated by the other effects
+    }, [appMode]);
+
     // Effects for defaults
-    useEffect(() => { updateDefaults(table1Id, setTable1Variant, setTable1Gender); }, [table1Id]);
-    useEffect(() => { updateDefaults(table2Id, setTable2Variant, setTable2Gender); }, [table2Id]);
+    useEffect(() => { updateDefaults(table1Id, setTable1Variant, setTable1Gender); }, [table1Id, currentData]);
+    useEffect(() => { updateDefaults(table2Id, setTable2Variant, setTable2Gender); }, [table2Id, currentData]);
 
     // Helper to get processed table data
     const getProcessedTable = (tableId, variant, gender) => {
-        const rawTable = DATA[tableId];
+        const rawTable = currentData[tableId];
+        if (!rawTable) return null; // Handle transition states
+
         let effectiveVariant = variant;
         let effectiveGender = gender;
 
@@ -63,7 +86,6 @@ const App = () => {
                 gender: effectiveGender === "M" ? "陽" : (effectiveGender === "N" ? "中" : "陰"),
                 data: mappedRows,
                 base: variantData.base || rawTable.base,
-                base: variantData.base || rawTable.base,
                 hasStrength: rawTable.hasStrength, // Preserve flags
                 stemStrength: rawTable.stemStrength // Preserve stem strength data
             };
@@ -75,7 +97,7 @@ const App = () => {
     const table2Data = getProcessedTable(table2Id, table2Variant, table2Gender);
 
     // Merged Data
-    const mergedData = viewMode === 'merge' ? mergeTableData(table1Data, table2Data) : null;
+    const mergedData = (viewMode === 'merge' && table1Data && table2Data) ? mergeTableData(table1Data, table2Data) : null;
 
     const handleCellClick = (cellData, rowIdx, colIdx, clickedGender = null, tableContext = null) => {
         // tableContext is the table object (table1Data or table2Data) passed explicitly
@@ -92,7 +114,7 @@ const App = () => {
         let displaySuffixes = [];
 
         parsedForms.forEach(part => {
-            const matches = findMatchingForms(part.suffix, effectiveTable.id); // Use effectiveTable.id
+            const matches = findMatchingForms(part.suffix, effectiveTable.id, currentData); // Use effectiveTable.id
             if (matches.length > 0) {
                 allMatches = [...allMatches, ...matches];
                 displaySuffixes.push(part.suffix);
@@ -125,7 +147,7 @@ const App = () => {
         });
         const currentInfoStr = currentTableMatches.length > 0 ? currentTableMatches[0].infoStr : formatOccurrences([{ r: rowIdx, c: colIdx }]);
 
-        const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id)
+        const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id, currentData)
             .filter(m => {
                 // Hide all stem tables in Demonstrative/Pronouns (tad_group) except yad
                 if (m.tableId === "tad_group") {
@@ -141,7 +163,7 @@ const App = () => {
             tableGender: targetGender ? (targetGender === "M" ? "陽" : (targetGender === "N" ? "中" : "陰")) : effectiveTable.gender,
             matches: otherMatches,
             sameCaseNumberMatches: sameCaseNumberMatches,
-            caseLabel: `${COL_NAMES[colIdx]}${CASE_NAMES[rowIdx]}`
+            caseLabel: `${COL_NAMES[colIdx]}${currentRowLabels[rowIdx]}`
         });
         setIsModalOpen(true);
     };
@@ -154,12 +176,31 @@ const App = () => {
         setIsModalOpen(false);
     };
 
+    if (!table1Data || !table2Data) return <div>Loading...</div>;
+
     return (
         <div className="app-container">
 
             {/* Header */}
             <header className="app-header">
                 <div className="header-content flex flex-col md:flex-row justify-between items-center gap-4">
+
+                    {/* Mode Switcher (Noun/Verb) */}
+                    <div className="mode-switcher flex bg-stone-100 rounded-lg p-1">
+                        <button
+                            onClick={() => setAppMode('noun')}
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${appMode === 'noun' ? 'bg-white text-emerald-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
+                        >
+                            Noun
+                        </button>
+                        <button
+                            onClick={() => setAppMode('verb')}
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${appMode === 'verb' ? 'bg-white text-emerald-600 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
+                        >
+                            Verb
+                        </button>
+                    </div>
+
                     {/* View Mode Switcher */}
                     <div className="view-mode-switcher flex bg-stone-100 rounded-lg p-1">
                         <button
@@ -196,9 +237,15 @@ const App = () => {
                             onTableChange={setTable1Id}
                             onVariantChange={setTable1Variant}
                             onGenderChange={setTable1Gender}
+                            data={currentData}
+                            mode={appMode}
                         />
                         {table1Data.hasStrength && <Legend stemStrength={table1Data.stemStrength} />}
-                        <Table currentTable={table1Data} handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)} />
+                        <Table
+                            currentTable={table1Data}
+                            handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)}
+                            rowLabels={currentRowLabels}
+                        />
                     </>
                 )}
 
@@ -212,9 +259,15 @@ const App = () => {
                                 onTableChange={setTable1Id}
                                 onVariantChange={setTable1Variant}
                                 onGenderChange={setTable1Gender}
+                                data={currentData}
+                                mode={appMode}
                             />
                             {table1Data.hasStrength && <Legend stemStrength={table1Data.stemStrength} />}
-                            <Table currentTable={table1Data} handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)} />
+                            <Table
+                                currentTable={table1Data}
+                                handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)}
+                                rowLabels={currentRowLabels}
+                            />
                         </div>
                         <div className="compare-col">
                             <TableControl
@@ -224,9 +277,15 @@ const App = () => {
                                 onTableChange={setTable2Id}
                                 onVariantChange={setTable2Variant}
                                 onGenderChange={setTable2Gender}
+                                data={currentData}
+                                mode={appMode}
                             />
                             {table2Data.hasStrength && <Legend stemStrength={table2Data.stemStrength} />}
-                            <Table currentTable={table2Data} handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table2Data)} />
+                            <Table
+                                currentTable={table2Data}
+                                handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table2Data)}
+                                rowLabels={currentRowLabels}
+                            />
                         </div>
                     </div>
                 )}
@@ -241,6 +300,8 @@ const App = () => {
                                 onTableChange={setTable1Id}
                                 onVariantChange={setTable1Variant}
                                 onGenderChange={setTable1Gender}
+                                data={currentData}
+                                mode={appMode}
                             />
                             <TableControl
                                 tableId={table2Id}
@@ -249,9 +310,15 @@ const App = () => {
                                 onTableChange={setTable2Id}
                                 onVariantChange={setTable2Variant}
                                 onGenderChange={setTable2Gender}
+                                data={currentData}
+                                mode={appMode}
                             />
                         </div>
-                        <Table currentTable={mergedData} handleCellClick={handleCellClick} />
+                        <Table
+                            currentTable={mergedData}
+                            handleCellClick={handleCellClick}
+                            rowLabels={currentRowLabels}
+                        />
                     </>
                 )}
 
@@ -272,36 +339,14 @@ const App = () => {
                         <div className="text-center">
                             <div className="modal-word-display">
                                 {selectedCell.rawWord.split("/").map((w, i) => {
-                                    // We need base for parsing. 
-                                    // We can try to guess base or pass it in selectedCell?
-                                    // Actually parseCellData was called before setting selectedCell.
-                                    // But here we re-parse for display?
-                                    // Wait, the original code re-parsed inside the render:
-                                    // const parts = parseCellData(w, DATA[currentTableId].base).parsedForms[0];
-                                    // Now currentTableId might be ambiguous.
-                                    // We should probably store the parsed parts in selectedCell state to avoid re-parsing with wrong base.
-                                    // Or just store the base in selectedCell.
-                                    // Let's assume we can get base from selectedCell matches or just pass it.
-
-                                    // Quick fix: The original code used DATA[currentTableId].base.
-                                    // We should probably just display the word without re-parsing if possible, 
-                                    // or use the base from the table that was clicked.
-                                    // Let's try to find the base.
-                                    // For now, let's just use the raw word.
                                     return (
                                         <span key={i} className="modal-word-part">
                                             {w}
-                                            {/* We lose the red suffix coloring if we don't parse. 
-                                                But parsing needs base. 
-                                                Let's assume we can get base from the first match? 
-                                                Or we can pass base to selectedCell.
-                                            */}
                                         </span>
                                     )
                                 })}
                             </div>
 
-                            {/* ... rest of modal ... */}
                             {/* Consolidated Current Cell Info */}
                             <div className="modal-info-row">
                                 {selectedCell.rawWord}
