@@ -26,18 +26,32 @@ const WordCell = ({ cellData, base, onClick }) => {
         bgClass = `${bgClass} word-cell-marked`;
     }
 
+    // Custom Rules from verb.json
+    if (typeof cellData === 'object' && cellData.rule) {
+        if (cellData.rule === 'long_a_before_v_or_m') {
+            bgClass = `${bgClass} border-2 border-black`;
+        } else if (cellData.rule === 'del_previous_a') {
+            bgClass = `${bgClass} border-2 border-red-500`;
+        }
+    }
+
     return (
         <button
             onClick={() => onClick(cellData)}
             className={`word-cell-btn ${bgClass}`}
         >
-            {parsedForms.map((part, idx) => (
-                <span key={idx} className="word-text-wrapper">
-                    <span className={textBaseClass}>{part.base}</span>
-                    <span className={`${textSuffixClass} font-medium`}>{part.suffix}</span>
-                    {idx < parsedForms.length - 1 && <span className={`mx-1 ${slashClass}`}>/</span>}
-                </span>
-            ))}
+            {parsedForms.map((part, idx) => {
+                // If base is empty (e.g. verbs currently), treat suffix as base color (black)
+                const effectiveSuffixClass = part.base ? textSuffixClass : textBaseClass;
+
+                return (
+                    <span key={idx} className="word-text-wrapper">
+                        <span className={textBaseClass}>{part.base}</span>
+                        <span className={`${effectiveSuffixClass} font-medium`}>{part.suffix}</span>
+                        {idx < parsedForms.length - 1 && <span className={`mx-1 ${slashClass}`}>/</span>}
+                    </span>
+                );
+            })}
         </button>
     );
 };
