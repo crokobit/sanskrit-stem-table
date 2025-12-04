@@ -108,13 +108,16 @@ const App = () => {
             effectiveTable = cellData.origin === 'left' ? table1Data : table2Data;
         }
 
-        const { parsedForms } = parseCellData(cellData, effectiveTable.base);
+        const tableBase = effectiveTable.base || ""; // Handle undefined base for verbs
+
+        const { parsedForms } = parseCellData(cellData, tableBase);
 
         let allMatches = [];
         let displaySuffixes = [];
 
         parsedForms.forEach(part => {
-            const matches = findMatchingForms(part.suffix, effectiveTable.id, currentData); // Use effectiveTable.id
+            // Pass currentRowLabels to findMatchingForms so it can format occurrences correctly
+            const matches = findMatchingForms(part.suffix, effectiveTable.id, currentData, currentRowLabels);
             if (matches.length > 0) {
                 allMatches = [...allMatches, ...matches];
                 displaySuffixes.push(part.suffix);
@@ -145,9 +148,12 @@ const App = () => {
             }
             return true;
         });
-        const currentInfoStr = currentTableMatches.length > 0 ? currentTableMatches[0].infoStr : formatOccurrences([{ r: rowIdx, c: colIdx }]);
 
-        const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id, currentData)
+        // Pass currentRowLabels to formatOccurrences
+        const currentInfoStr = currentTableMatches.length > 0 ? currentTableMatches[0].infoStr : formatOccurrences([{ r: rowIdx, c: colIdx }], currentRowLabels);
+
+        // Pass currentRowLabels to findSameCaseNumberForms
+        const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id, currentData, currentRowLabels)
             .filter(m => {
                 // Hide all stem tables in Demonstrative/Pronouns (tad_group) except yad
                 if (m.tableId === "tad_group") {
@@ -156,11 +162,18 @@ const App = () => {
                 return true;
             });
 
+        let tableGenderLabel = effectiveTable.gender;
+        if (targetGender) {
+            tableGenderLabel = (targetGender === "M" ? "陽" : (targetGender === "N" ? "中" : "陰"));
+        } else if (!tableGenderLabel && appMode === 'verb') {
+            tableGenderLabel = ""; // No gender for verbs
+        }
+
         setSelectedCell({
             rawWord: typeof cellData === 'object' ? cellData.t : cellData,
             suffixes: displaySuffixes,
             currentInfoStr: currentInfoStr,
-            tableGender: targetGender ? (targetGender === "M" ? "陽" : (targetGender === "N" ? "中" : "陰")) : effectiveTable.gender,
+            tableGender: tableGenderLabel,
             matches: otherMatches,
             sameCaseNumberMatches: sameCaseNumberMatches,
             caseLabel: `${COL_NAMES[colIdx]}${currentRowLabels[rowIdx]}`
@@ -369,7 +382,7 @@ const App = () => {
                         <div>
                             <div className="modal-section-header">
                                 <h4 className="modal-section-title">
-                                    Other stems with same red part
+                                    Other {appMode === 'verb' ? 'tables' : 'stems'} with same red part
                                 </h4>
                             </div>
 
@@ -416,7 +429,7 @@ const App = () => {
                                         className="match-item-indigo"
                                     >
                                         <div className="match-content-indigo">
-                                            <span className="match-stem-badge">{match.shortStem}</span>
+                                            <span className="match-stem-badge">{formatStemLabel(match.table)}</span>
                                             <span className="text-stone-500 text-sm">
                                                 {getGenderLabel(match.gender)}{match.infoStr}
                                             </span>

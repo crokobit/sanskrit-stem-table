@@ -63,7 +63,7 @@ export function getGenderLabel(genderCode) {
 }
 
 // Helper to format occurrences into "雙三四五"
-export function formatOccurrences(occurrences) {
+export function formatOccurrences(occurrences, rowLabels = CASE_NAMES) {
     occurrences.sort((a, b) => {
         if (a.c !== b.c) return a.c - b.c;
         return a.r - b.r;
@@ -79,7 +79,7 @@ export function formatOccurrences(occurrences) {
     Object.keys(byCol).sort().forEach(cIdx => {
         const colName = COL_NAMES[cIdx];
         const rows = byCol[cIdx].sort((a, b) => a - b);
-        const rowNames = rows.map(r => CASE_NAMES[r]).join("");
+        const rowNames = rows.map(r => rowLabels[r]).join("");
         parts.push(`${colName}${rowNames}`);
     });
 
@@ -159,7 +159,7 @@ const wrapCell = (cellData) => {
 };
 
 // 1. Find matches for same Red Suffix
-export function findMatchingForms(targetSuffix, currentTableId, data = DATA) {
+export function findMatchingForms(targetSuffix, currentTableId, data = DATA, rowLabels = CASE_NAMES) {
     if (!targetSuffix) return [];
 
     const rawMatches = [];
@@ -225,8 +225,15 @@ export function findMatchingForms(targetSuffix, currentTableId, data = DATA) {
     });
 
     return Object.values(grouped).map(group => {
-        const infoStr = formatOccurrences(group.occurrences);
+        // Use rowLabels passed in (which might be Person names if we are in verb mode)
+        // BUT wait, if we are searching across ALL data (nouns and verbs mixed?), we need to know which labels to use for EACH match.
+        // However, currently the app separates Noun Mode and Verb Mode. 'data' passed in is either DATA or VERB_DATA.
+        // So rowLabels passed in should be correct for the 'data' being searched.
+        const infoStr = formatOccurrences(group.occurrences, rowLabels);
+
         let tableName = group.table.stem;
+        if (!tableName) tableName = group.table.name || group.tableId; // Fallback for verbs
+
         if (group.variantName) {
             tableName = `${group.variantName} (${group.genderKey})`;
         }
@@ -234,7 +241,7 @@ export function findMatchingForms(targetSuffix, currentTableId, data = DATA) {
         return {
             tableId: group.tableId,
             tableName: tableName,
-            shortStem: group.table.shortStem || group.table.stem,
+            shortStem: group.table.shortStem || group.table.stem || group.table.name, // Fallback for verbs
             gender: group.genderKey ? group.genderKey : group.table.gender,
             word: group.word,
             suffix: group.suffix,
@@ -248,45 +255,8 @@ export function findMatchingForms(targetSuffix, currentTableId, data = DATA) {
 }
 
 // 2. New Function: Find matches for Same Case & Number
-export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId, data = DATA) {
+export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId, data = DATA, rowLabels = CASE_NAMES) {
     const matches = [];
-
-    // We need to find ALL occurrences of the word in the matched table to build the infoStr
-    // But wait, findSameCaseNumberForms is supposed to find *other* words that match the *current* cell's case/number?
-    // "其他同數同格同詞形" -> "Other same-number same-case same-word-form"
-    // Actually, the user request says: "The 其他同數同格同詞形 sections, need to show like 中雙三四五"
-    // This implies that for the matches found (which are presumably same word form in same/other tables),
-    // we want to show *all* the places that word appears in *that* table.
-
-    // The current logic of findSameCaseNumberForms:
-    // It iterates all tables.
-    // It looks at [rowIdx][colIdx] (same case/number).
-    // It checks if the word there matches... wait, the current implementation DOES NOT check if the word matches!
-    // It just pushes the cell at that position?
-    // Let's re-read the function.
-    // It pushes { ... word: word ... }.
-    // It seems it just lists *what is at that position* in other tables?
-    // "其他同數同格詞形" -> "Other forms with same number and case".
-    // If I am at "Devasya" (Gen Sg), I want to see what other tables have at Gen Sg.
-    // e.g. "Phalasya".
-    // But the user said "The 其他同數同格同詞形 sections... 也就是要把那個表同樣詞形的有那個數那幾格的資訊野標出來"
-    // "That table's same word form's occupied number/cases info mark out".
-    // This implies we are looking for *matches* of the word form?
-    // Wait, "同數同格" means "Same Number Same Case".
-    // "同詞形" means "Same Word Form".
-    // The section title in App.jsx is "其他同數同格詞形" (Other Same Number Case Forms).
-    // But the user request says "其他同數同格同詞形 sections".
-    // Maybe the user means "Other stems that have the SAME FORM in the SAME CASE/NUMBER"?
-    // OR "For the matches found in 'Same Case Number', show their full distribution"?
-
-    // Let's look at App.jsx again.
-    // `const sameCaseNumberMatches = findSameCaseNumberForms(rowIdx, colIdx, effectiveTable.id);`
-    // And in the UI: `{match.word}`.
-    // If I click "Devasya" (Gen Sg), and I see "Phalasya" (Gen Sg) in the list.
-    // Does "Phalasya" appear elsewhere? No.
-    // But if I click "Devas" (Nom Sg), I might see "Phalam" (Nom Sg)? No, Phalam is Nom/Acc.
-    // So for "Phalam", it should say "中單一二".
-    // So yes, for every match found in "Same Case Number" section, we want to know where ELSE that word appears in THAT table.
 
     Object.values(data).forEach(entry => {
         // We don't skip current table here because we might want to see other variants/genders of the same group
@@ -295,6 +265,9 @@ export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId, data = D
             const rows = table.data || table.rows;
             if (!rows) return;
             if (table.excludeFromAnalysis) return;
+
+            // Check bounds
+            if (!rows[rowIdx] || !rows[rowIdx][colIdx]) return;
 
             const cellData = rows[rowIdx][colIdx];
             let actualCell = cellData;
@@ -323,11 +296,11 @@ export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId, data = D
                 });
             });
 
-            const infoStr = formatOccurrences(occurrences);
+            const infoStr = formatOccurrences(occurrences, rowLabels);
 
             matches.push({
                 tableId: tableId,
-                shortStem: table.shortStem || table.stem,
+                shortStem: table.shortStem || table.stem || table.name, // Fallback for verbs
                 gender: genderKey || table.gender, // This might be "M", "N", "F" or "陽"...
                 word: word,
                 variantName: variantName,
@@ -356,6 +329,13 @@ export function findSameCaseNumberForms(rowIdx, colIdx, currentTableId, data = D
 // Helper to format stem label for UI (e.g. "陰 -ī (多音節)")
 export function formatStemLabel(table) {
     if (!table) return "";
+
+    // If it's a verb (no gender), just return name or ID
+    if (!table.gender && !table.stem) {
+        const name = table.name || table.id;
+        // Return first 2 characters if it's a string
+        return typeof name === 'string' ? name.substring(0, 2) : name;
+    }
 
     const genderMap = { "M": "陽", "N": "中", "F": "陰", "m": "陽", "n": "中", "f": "陰" };
     // Handle "三性" or other custom gender strings if present in data, otherwise map standard codes
