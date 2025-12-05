@@ -319,7 +319,6 @@ export const VERB_DATA = {
         "data": [
             [
                 {
-                    "rule": "del_previous_a",
                     "t": "i"
                 },
                 {
