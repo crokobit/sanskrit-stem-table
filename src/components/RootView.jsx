@@ -26,16 +26,25 @@ const RootView = () => {
                 <p className="root-class-description">{currentClassData.description}</p>
 
                 {currentClassData.items.length > 0 ? (
-                    <div className="root-items-grid">
-                        {currentClassData.items.map((item, index) => (
-                            <div key={index} className="root-item-card">
-                                <div className="root-item-info">
-                                    <span className="root-item-value">{item.root.value}</span>
-                                    <span className="root-item-type">【{item.root.type}】</span>
-                                    <span className="root-item-def">{item.root.def}</span>
+                    <div className="root-groups-container">
+                        {currentClassData.items.map((group, groupIndex) => (
+                            <div key={groupIndex} className="root-group">
+                                {group.description && (
+                                    <h3 className="root-group-title">{group.description}</h3>
+                                )}
+                                <div className="root-items-grid">
+                                    {group.exceptions && group.exceptions.map((item, itemIndex) => (
+                                        <div key={itemIndex} className="root-item-card">
+                                            <div className="root-item-info">
+                                                <span className="root-item-value">{item.root.value}</span>
+                                                <span className="root-item-type">【{item.root.type}】</span>
+                                                <span className="root-item-def">{item.root.def}</span>
+                                            </div>
+                                            <div className="root-item-arrow">→</div>
+                                            <div className="root-item-form">{item.form}</div>
+                                        </div>
+                                    ))}
                                 </div>
-                                <div className="root-item-arrow">→</div>
-                                <div className="root-item-form">{item.form}</div>
                             </div>
                         ))}
                     </div>

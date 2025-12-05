@@ -2,15 +2,20 @@ export const ROOT_DATA = {
     1: {
         id: 'root_1',
         label: 'Class 1',
-        description: '第一類動詞特例',
+        description: '第一類動詞特例 陳主',
         items: [
-            { root: { value: '√ṛ', type: '1P', def: '去，走' }, form: 'ṛcchati' },
-            { root: { value: '√yam', type: '1P', def: '控制' }, form: 'yacchati' },
-            { root: { value: '√guh', type: '1U', def: '掩' }, form: 'gūhati' },
-            { root: { value: '√ghrā', type: '1P', def: '嗅' }, form: 'jighrati' },
-            { root: { value: '√pā', type: '1P', def: '饮' }, form: 'pibati' },
-            { root: { value: '√sad', type: '1P', def: '坐' }, form: 'sīdati' },
-            { root: { value: '√sthā', type: '1P', def: '住' }, form: 'tiṣṭhati' }
+            {
+                description: '不規則動詞',
+                exceptions: [
+                    { root: { value: '√ṛ', type: '1P', def: '去，走' }, form: 'ṛcchati' },
+                    { root: { value: '√yam', type: '1P', def: '控制' }, form: 'yacchati' },
+                    { root: { value: '√guh', type: '1U', def: '掩' }, form: 'gūhati' },
+                    { root: { value: '√ghrā', type: '1P', def: '嗅' }, form: 'jighrati' },
+                    { root: { value: '√pā', type: '1P', def: '饮' }, form: 'pibati' },
+                    { root: { value: '√sad', type: '1P', def: '坐' }, form: 'sīdati' },
+                    { root: { value: '√sthā', type: '1P', def: '住' }, form: 'tiṣṭhati' }
+                ]
+            }
         ]
     },
     2: { id: 'root_2', label: 'Class 2', description: 'Class 2 Verbs', items: [] },
