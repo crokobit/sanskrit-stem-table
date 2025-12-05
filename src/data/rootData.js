@@ -11,7 +11,7 @@ export const ROOT_DATA = {
                     { root: { value: '√yam', type: '1P', def: '控制' }, form: 'yacchati' },
                     { root: { value: '√guh', type: '1U', def: '掩' }, form: 'gūhati' },
                     { root: { value: '√ghrā', type: '1P', def: '嗅' }, form: 'jighrati' },
-                    { root: { value: '√pā', type: '1P', def: '饮' }, form: 'pibati' },
+                    { root: { value: '√pā', type: '1P', def: '飲' }, form: 'pibati' },
                     { root: { value: '√sad', type: '1P', def: '坐' }, form: 'sīdati' },
                     { root: { value: '√sthā', type: '1P', def: '住' }, form: 'tiṣṭhati' }
                 ]
@@ -30,19 +30,19 @@ export const ROOT_DATA = {
             {
                 description: '不規則動詞',
                 exceptions: [
-                    { root: { value: '√iṣ', type: '6P', def: '希求，许' }, form: 'icchati' },
-                    { root: { value: '√prach', type: '6P', def: '问' }, form: 'pṛcchati' }
+                    { root: { value: '√iṣ', type: '6P', def: '希求，許' }, form: 'icchati' },
+                    { root: { value: '√prach', type: '6P', def: '問' }, form: 'pṛcchati' }
                 ]
             },
             {
-                description: '有些第 6 类动词变位时，在词根尾音前插入同类的鼻音。例如，尾音是腭音(c、ch、j、jh)，则插入ñ;尾音是齿音(t、th、d、dh)，则插入n ;尾音是唇音(p、ph、b、bh)， 则插入 m。尾音是咝音(ś、ṣ、s)或 h，则插入 ṃ(在写本中，ṃ 和鼻音字母常替换使用。 亦即所有辅音字母前要加鼻音时，都可能写成 ṃ)。常见的有以下几个:',
+                description: '有些第 6 類動詞變位時，在詞根尾音前插入同類的鼻音。例如，尾音是腭音(c、ch、j、jh)，則插入ñ;尾音是齒音(t、th、d、dh)，則插入n ;尾音是唇音(p、ph、b、bh)， 則插入 m。尾音是噝音(ś、ṣ、s)或 h，則插入 ṃ(在寫本中，ṃ 和鼻音字母常替換使用。 亦即所有輔音字母前要加鼻音時，都可能寫成 ṃ)。常見的有以下幾個:',
                 exceptions: [
-                    { root: { value: '√sic', type: '6U', def: '滴，使...变湿' }, form: 'siñcati' },
-                    { root: { value: '√muc', type: '6U', def: '释放，解脱' }, form: 'muñcati' },
-                    { root: { value: '√lup', type: '6U', def: '毁坏' }, form: 'lumpati' },
+                    { root: { value: '√sic', type: '6U', def: '滴，使...變濕' }, form: 'siñcati' },
+                    { root: { value: '√muc', type: '6U', def: '釋放，解脫' }, form: 'muñcati' },
+                    { root: { value: '√lup', type: '6U', def: '毀壞' }, form: 'lumpati' },
                     { root: { value: '√kṛt', type: '6P', def: '割，砍' }, form: 'kṛntati' },
-                    { root: { value: '√vid', type: '6U', def: '发现，找到' }, form: 'vindati' },
-                    { root: { value: '√lip', type: '6U', def: '涂' }, form: 'limpati' }
+                    { root: { value: '√vid', type: '6U', def: '發現，找到' }, form: 'vindati' },
+                    { root: { value: '√lip', type: '6U', def: '塗' }, form: 'limpati' }
                 ]
             }
         ]

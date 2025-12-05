@@ -156,7 +156,7 @@ export const DATA = {
         gender: "中",
         example: "śuci (pure)",
         base: "śuc",
-        note: "以 i 收尾的形容词，中单四五六七格，双六七，可用陽性變格",
+        note: "以 i 收尾的形容詞，中單四五六七格，雙六七，可用陽性變格",
         data: [
             ["śuci", "śucinī", "śucīni"],
             ["śuci", "śucinī", "śucīni"],
@@ -423,7 +423,7 @@ export const DATA = {
         gender: "通",
         example: "yuṣmad (you)",
         base: "",
-        note: "斜线后的形式不可出现在句首，不可用在 ca、eva、vā 等不变词前，也不能出现在韵脚。",
+        note: "斜線後的形式不可出現在句首，不可用在 ca、eva、vā 等不變詞前，也不能出現在韻腳。",
         data: [
             ["tvam", "yuvām", "yūyam"],
             ["tvām / tvā", "yuvām / vām", "yuṣmān / vas"],
@@ -442,7 +442,7 @@ export const DATA = {
         gender: "通",
         example: "asmad (I/we)",
         base: "",
-        note: "斜线后的形式不可出现在句首，也不可用在 ca、eva、vā 等小词前。单数第五格也可是 mattas。",
+        note: "斜線後的形式不可出現在句首，也不可用在 ca、eva、vā 等小詞前。單數第五格也可是 mattas。",
         data: [
             ["aham", "āvām", "vayam"],
             ["mām / mā", "āvām / nau", "asmān / nas"],
@@ -478,7 +478,7 @@ export const DATA = {
             },
             "etad": {
                 stem: "etad", example: "this", gender: "三性", base: "et",
-                note: "近指。同 tad，在 tad 变格前加前缀 e 即可。sas 和 eṣas 句内连声时，遇 a 变 so' 和 eṣo'，遇其他元音和辅音丢失 s。",
+                note: "近指。同 tad，在 tad 變格前加前綴 e 即可。sas 和 eṣas 句內連聲時，遇 a 變 so' 和 eṣo'，遇其他元音和輔音丟失 s。",
                 rows: [
                     [{ M: { t: "eṣas", userMarked: true }, N: { t: "etad", userMarked: true }, F: { t: "eṣā", userMarked: true } }, { M: "etau", N: "ete", F: "ete" }, { M: "ete", N: "etāni", F: "etās" }],
                     [{ M: "etam", N: { t: "etad", userMarked: true }, F: "etām" }, { M: "etau", N: "ete", F: "ete" }, { M: "etān", N: "etāni", F: "etās" }],
@@ -492,7 +492,7 @@ export const DATA = {
             },
             "yad": {
                 stem: "yad", example: "who/which", gender: "三性", base: "y",
-                note: "那個。关系代词。变格同 tad，将 t 替换为 y 即可。",
+                note: "那個。關係代詞。變格同 tad，將 t 替換為 y 即可。",
                 rows: [
                     [{ M: { t: "yas", userMarked: true }, N: { t: "yad", userMarked: true }, F: { t: "yā", userMarked: true } }, { M: "yau", N: "ye", F: "ye" }, { M: "ye", N: "yāni", F: "yās" }],
                     [{ M: "yam", N: { t: "yad", userMarked: true }, F: "yām" }, { M: "yau", N: "ye", F: "ye" }, { M: "yān", N: "yāni", F: "yās" }],
@@ -506,7 +506,7 @@ export const DATA = {
             },
             "sarva": {
                 stem: "sarva", example: "all", gender: "三性", base: "sarv",
-                note: "所有，全部。中单一、二用 -am 代替 -ad，其余与 tad 相同。viśva 变格同此。",
+                note: "所有，全部。中單一、二用 -am 代替 -ad，其餘與 tad 相同。viśva 變格同此。",
                 rows: [
                     [{ M: "sarvas", N: { t: "sarvam", d: true, userMarked: true }, F: "sarvā" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarve", N: "sarvāṇi", F: "sarvās" }],
                     [{ M: { t: "sarvam", userMarked: true }, N: { t: "sarvam", d: true, userMarked: true }, F: "sarvām" }, { M: "sarvau", N: "sarve", F: "sarve" }, { M: "sarvān", N: "sarvāṇi", F: "sarvās" }],
@@ -521,7 +521,7 @@ export const DATA = {
             "purva": {
                 stem: "pūrva", example: "eastern/prior", gender: "三性", base: "pūrv",
                 excludeFromAnalysis: true,
-                note: "pūrva, para, avara, dakṣiṇa, uttara, apara, adhara 这七个词，在表达方位以及时间的概念，并且不是专有名词时，按代词 sarva 变格。其他情况下，则按 以 a 收尾的名词和形容词变格。例如:dakṣiṇa 当“右，南方”讲时按代词变，当“灵活， 熟练”讲时按形容词变。uttara 表示“北方”时通常按代词变，但与 kuru 连用构成专有名 词 uttarāḥ kuravaḥ 北俱卢洲时，则按名词变。上述九词按代词变时，阳/中单五、七也可以按名词变。",
+                note: "pūrva, para, avara, dakṣiṇa, uttara, apara, adhara 這七個詞，在表達方位以及時間的概念，並且不是專有名詞時，按代詞 sarva 變格。其他情況下，則按 以 a 收尾的名詞和形容詞變格。例如:dakṣiṇa 當“右，南方”講時按代詞變，當“靈活， 熟練”講時按形容詞變。uttara 表示“北方”時通常按代詞變，但與 kuru 連用構成專有名 詞 uttarāḥ kuravaḥ 北俱盧洲時，則按名詞變。上述九詞按代詞變時，陽/中單五、七也可以按名詞變。",
                 rows: [
                     [{ M: "pūrvas", N: { t: "pūrvam", d: true, userMarked: true }, F: "pūrvā" }, { M: "pūrvau", N: "pūrve", F: "pūrve" }, { M: "pūrve", N: "pūrvāṇi", F: "pūrvās" }],
                     [{ M: { t: "pūrvam", userMarked: true }, N: { t: "pūrvam", d: true, userMarked: true }, F: "pūrvām" }, { M: "pūrvau", N: "pūrve", F: "pūrve" }, { M: "pūrvān", N: "pūrvāṇi", F: "pūrvās" }],
@@ -536,7 +536,7 @@ export const DATA = {
             "sva": {
                 stem: "sva", example: "own/self", gender: "三性", base: "sv",
                 excludeFromAnalysis: true,
-                note: "sva 一词有四个意思: (1)【阳】自我(ātman) (2)【形】属于自己的(ātmīya) (3) 【阳】亲属(jñāti) (4)【阳、中】财富(dhana)。表达前两个意义时，按形容词性代词 sarva 变格;阳复一可以有两种变化:sve 或 svās。表达后两个意义时，按名词变格。上述九词按代词变时，阳/中单五、七也可以按名词变。",
+                note: "sva 一詞有四個意思: (1)【陽】自我(ātman) (2)【形】屬於自己的(ātmīya) (3) 【陽】親屬(jñāti) (4)【陽、中】財富(dhana)。表達前兩個意義時，按形容詞性代詞 sarva 變格;陽複一可以有兩種變化:sve 或 svās。表達後兩個意義時，按名詞變格。上述九詞按代詞變時，陽/中單五、七也可以按名詞變。",
                 rows: [
                     [{ M: { t: "sve / svās", userMarked: true }, N: { t: "svam", d: true, userMarked: true }, F: "svā" }, { M: "svau", N: "sve", F: "sve" }, { M: "sve", N: "svāṇi", F: "svās" }],
                     [{ M: { t: "svam", userMarked: true }, N: { t: "svam", d: true, userMarked: true }, F: "svām" }, { M: "svau", N: "sve", F: "sve" }, { M: "svān", N: "svāṇi", F: "svās" }],
@@ -551,7 +551,7 @@ export const DATA = {
             "antara": {
                 stem: "antara", example: "outer/inner", gender: "三性", base: "antar",
                 excludeFromAnalysis: true,
-                note: "antara 一词有三种意义: (1)外部 (2)内(衣) (3)中间。用前两个意义时，需按 形容词性代词 sarva 变格;阳复一可以有两种变化:antare 或 antarās，前者是按代词变的， 后者是按名词变的。上述九词按代词变时，阳/中单五、七也可以按名词变。",
+                note: "antara 一詞有三種意義: (1)外部 (2)內(衣) (3)中間。用前兩個意義時，需按 形容詞性代詞 sarva 變格;陽複一可以有兩種變化:antare 或 antarās，前者是按代詞變的， 後者是按名詞變的。上述九詞按代詞變時，陽/中單五、七也可以按名詞變。",
                 rows: [
                     [{ M: { t: "antare / antarās", userMarked: true }, N: { t: "antaram", d: true, userMarked: true }, F: "antarā" }, { M: "antarau", N: "antare", F: "antare" }, { M: "antare", N: "antarāṇi", F: "antarās" }],
                     [{ M: { t: "antaram", userMarked: true }, N: { t: "antaram", d: true, userMarked: true }, F: "antarām" }, { M: "antarau", N: "antare", F: "antare" }, { M: "antarān", N: "antarāṇi", F: "antarās" }],
@@ -566,7 +566,7 @@ export const DATA = {
             "prathama": {
                 stem: "prathama", example: "first", gender: "三性", base: "pratham",
                 excludeFromAnalysis: true,
-                note: "prathama【形】第一、carama【形】最末的、以 taya 为后缀的词、alpa【形】少许、 ardha【形、阳、中】一半、katipaya【形】一些，这六个词，复一可按代词 sarva 变。例如 prathama 的阳复一为 prathame 或 prathamās。",
+                note: "prathama【形】第一、carama【形】最末的、以 taya 為後綴的詞、alpa【形】少許、 ardha【形、陽、中】一半、katipaya【形】一些，這六個詞，複一可按代詞 sarva 變。例如 prathama 的陽複一為 prathame 或 prathamās。",
                 rows: [
                     [{ M: "prathamas", N: { t: "prathamam", d: true, userMarked: true }, F: "prathamā" }, { M: "prathamau", N: "prathame", F: "prathame" }, { M: { t: "prathame / prathamās", userMarked: true }, N: "prathamāni", F: "prathamās" }],
                     [{ M: { t: "prathamam", userMarked: true }, N: { t: "prathamam", d: true, userMarked: true }, F: "prathamām" }, { M: "prathamau", N: "prathame", F: "prathame" }, { M: "prathamān", N: "prathamāni", F: "prathamās" }],
@@ -581,7 +581,7 @@ export const DATA = {
             "nema": {
                 stem: "nema", example: "several", gender: "三性", base: "nem",
                 excludeFromAnalysis: true,
-                note: "nema【形】几个，复数第一格两可 neme 或 nemās，其余按代词 sarva 变。",
+                note: "nema【形】幾個，複數第一格兩可 neme 或 nemās，其餘按代詞 sarva 變。",
                 rows: [
                     [{ M: "nemas", N: { t: "nemam", d: true, userMarked: true }, F: "nemā" }, { M: "nemau", N: "neme", F: "neme" }, { M: { t: "neme / nemās", userMarked: true }, N: "nemāni", F: "nemās" }],
                     [{ M: { t: "nemam", userMarked: true }, N: { t: "nemam", d: true, userMarked: true }, F: "nemām" }, { M: "nemau", N: "neme", F: "neme" }, { M: "nemān", N: "nemāni", F: "nemās" }],
@@ -595,7 +595,7 @@ export const DATA = {
             },
             "kim": {
                 stem: "kim", example: "what/who", gender: "三性", base: "k",
-                note: "什麼。疑问代词。阳 kas，阴 kā，中 kim。中单一、二为 kim，其余同 tad。",
+                note: "什麼。疑問代詞。陽 kas，陰 kā，中 kim。中單一、二為 kim，其餘同 tad。",
                 rows: [
                     [{ M: { t: "kas", userMarked: true }, N: { t: "kim", userMarked: true }, F: { t: "kā", userMarked: true } }, { M: "kau", N: "ke", F: "ke" }, { M: "ke", N: "kāni", F: "kās" }],
                     [{ M: "kam", N: { t: "kim", userMarked: true }, F: "kām" }, { M: "kau", N: "ke", F: "ke" }, { M: "kān", N: "kāni", F: "kās" }],
@@ -609,7 +609,7 @@ export const DATA = {
             },
             "eka": {
                 stem: "eka", example: "one", gender: "三性", base: "ek",
-                note: "复数表示“一些”。变格规则同 sarva。",
+                note: "複數表示“一些”。變格規則同 sarva。",
                 rows: [
                     [{ M: "ekas", N: cell("ekam", null, true), F: "ekā" }, { M: "ekau", N: "eke", F: "eke" }, { M: "eke", N: "ekāni", F: "ekās" }],
                     [{ M: "ekam", N: cell("ekam", null, true), F: "ekām" }, { M: "ekau", N: "eke", F: "eke" }, { M: "ekān", N: "ekāni", F: "ekās" }],

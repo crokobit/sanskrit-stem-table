@@ -94,7 +94,7 @@ export const VERB_DATA = {
         "name": "祈主",
         "voice": "active",
         "tense": "opt",
-        "note": "由未主變來。先變 *am*、s、t、va、tam、tām、ma、ta、*ur*。之後 1.在现在时语干上加 ī。2.加变化过的派生语尾， 以元音起始的语尾前再插入 y。",
+        "note": "由未主變來。先變 *am*、s、t、va、tam、tām、ma、ta、*ur*。之後 1.在現在時語幹上加 ī。2.加變化過的派生語尾， 以元音起始的語尾前再插入 y。",
         "description": "義務，願，可能，表當然會發生，假設",
         "data": [
             [
@@ -272,7 +272,7 @@ export const VERB_DATA = {
         "name": "祈中",
         "voice": "middle",
         "description": "義務，願，可能，表當然會發生，假設",
-        "note": "由未中變來。先變為 *a*、thās、ta、vahi、*āthām*、*ātām*、 mahi、dhvam、*ran*。之後 1.在现在时语干上加 ī。2.加变化过的派生语尾， 以元音起始的语尾前再插入 y。",
+        "note": "由未中變來。先變為 *a*、thās、ta、vahi、*āthām*、*ātām*、 mahi、dhvam、*ran*。之後 1.在現在時語幹上加 ī。2.加變化過的派生語尾， 以元音起始的語尾前再插入 y。",
         "tense": "opt",
         "data": [
             [
