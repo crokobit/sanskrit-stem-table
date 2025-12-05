@@ -6,6 +6,7 @@ import Table from './components/Table';
 import Legend from './components/Legend';
 import Modal from './components/Modal';
 import TableControl from './components/TableControl';
+import RootView from './components/RootView';
 
 const App = () => {
     // App Mode: 'noun' or 'verb'
@@ -28,7 +29,7 @@ const App = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Determine current data source
-    const currentData = appMode === 'noun' ? DATA : VERB_DATA;
+    const currentData = appMode === 'noun' ? DATA : (appMode === 'verb' ? VERB_DATA : {});
     const currentRowLabels = appMode === 'noun' ? CASE_NAMES : PERSON_NAMES;
 
     // Helper to update defaults when table changes
@@ -189,7 +190,7 @@ const App = () => {
         setIsModalOpen(false);
     };
 
-    if (!table1Data || !table2Data) return <div>Loading...</div>;
+    if (appMode !== 'root' && (!table1Data || !table2Data)) return <div>Loading...</div>;
 
     return (
         <div className="app-container">
@@ -212,36 +213,46 @@ const App = () => {
                         >
                             Verb
                         </button>
+                        <button
+                            onClick={() => setAppMode('root')}
+                            className={`app-btn ${appMode === 'root' ? 'app-btn-mode-active' : 'app-btn-inactive'}`}
+                        >
+                            Root
+                        </button>
                     </div>
 
-                    {/* View Mode Switcher */}
-                    <div className="view-mode-switcher view-mode-switcher-container">
-                        <button
-                            onClick={() => setViewMode('single')}
-                            className={`app-btn ${viewMode === 'single' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
-                        >
-                            Single
-                        </button>
-                        <button
-                            onClick={() => setViewMode('compare')}
-                            className={`app-btn ${viewMode === 'compare' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
-                        >
-                            Compare
-                        </button>
-                        <button
-                            onClick={() => setViewMode('merge')}
-                            className={`app-btn ${viewMode === 'merge' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
-                        >
-                            Merge
-                        </button>
-                    </div>
+                    {/* View Mode Switcher - Only show for Noun/Verb */}
+                    {appMode !== 'root' && (
+                        <div className="view-mode-switcher view-mode-switcher-container">
+                            <button
+                                onClick={() => setViewMode('single')}
+                                className={`app-btn ${viewMode === 'single' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
+                            >
+                                Single
+                            </button>
+                            <button
+                                onClick={() => setViewMode('compare')}
+                                className={`app-btn ${viewMode === 'compare' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
+                            >
+                                Compare
+                            </button>
+                            <button
+                                onClick={() => setViewMode('merge')}
+                                className={`app-btn ${viewMode === 'merge' ? 'app-btn-view-active' : 'app-btn-inactive'}`}
+                            >
+                                Merge
+                            </button>
+                        </div>
+                    )}
                 </div>
             </header>
 
             {/* Main Content */}
             <main className="main-content">
 
-                {viewMode === 'single' && (
+                {appMode === 'root' && <RootView />}
+
+                {appMode !== 'root' && viewMode === 'single' && (
                     <>
                         <TableControl
                             tableId={table1Id}
@@ -263,7 +274,7 @@ const App = () => {
                     </>
                 )}
 
-                {viewMode === 'compare' && (
+                {appMode !== 'root' && viewMode === 'compare' && (
                     <div className="app-grid-2-col">
                         <div className="compare-col">
                             <TableControl
@@ -304,7 +315,7 @@ const App = () => {
                     </div>
                 )}
 
-                {viewMode === 'merge' && (
+                {appMode !== 'root' && viewMode === 'merge' && (
                     <>
                         <div className="app-grid-merge">
                             <TableControl

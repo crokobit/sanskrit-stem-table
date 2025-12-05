@@ -1370,3 +1370,121 @@ body {
     color: #44403c;
     /* stone-700 */
 }
+
+/* Root View Styles */
+.root-view-container {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.root-class-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.root-class-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.root-class-btn:hover {
+    background-color: #f8fafc;
+}
+
+.root-class-btn-active {
+    background-color: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.root-class-btn-active:hover {
+    background-color: #2563eb;
+}
+
+.root-content-area {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.root-class-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.root-class-description {
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+
+.root-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.root-item-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: #f8fafc;
+}
+
+.root-item-root {
+    font-weight: 600;
+    color: #334155;
+}
+
+.root-item-arrow {
+    color: #94a3b8;
+    padding: 0 0.5rem;
+}
+
+.root-item-form {
+    color: #ef4444; /* Red color for the form as requested/implied by "red ending" context usually, or just to match image style */
+    font-weight: 500;
+}
+
+.root-empty-state {
+    text-align: center;
+    color: #94a3b8;
+    padding: 3rem;
+    font-style: italic;
+}
+
+/* Updated Root Item Styles */
+.root-item-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #334155;
+}
+
+.root-item-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.root-item-type {
+    font-weight: 600;
+    color: #000; /* Bold black for type */
+}
+
+.root-item-def {
+    color: #475569;
+}
