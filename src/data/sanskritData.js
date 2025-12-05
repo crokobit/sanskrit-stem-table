@@ -193,16 +193,16 @@ export const DATA = {
         gender: "中",
         example: "madhu (honey)",
         base: "madh",
-        note: "單一二呼不變，複一二呼母音拉長後加 ni。全部為標準語尾。但語尾開頭前為母音的話，加n。例外為複六為 madhūnām",
+        memorizeNote: "標準語尾。語尾開頭前為母音的話，語尾前加n。子音直接加。例外:複一二u變ū，複六為madhūnām",
         data: [
-            ["madhu", "madhunī", "madhūni"],
-            ["madhu", "madhunī", "madhūni"],
+            ["madhu", "madhunī", { t: "madhūni", userMarked: true }],
+            ["madhu", "madhunī", { t: "madhūni", userMarked: true }],
             ["madhunā", "madhubhyām", "madhubhis"],
             ["madhune", "madhubhyām", "madhubhyas"],
             ["madhunas", "madhubhyām", "madhubhyas"],
             ["madhunas", "madhunos", "madhūnām"],
             ["madhuni", "madhunos", "madhuṣu"],
-            ["madhu / madho", "madhunī", "madhūni"]
+            [{ t: "madhu / madho", userMarked: true }, "madhunī", "madhūni"]
         ]
     },
     "vadhu_fem": {
@@ -212,17 +212,17 @@ export const DATA = {
         gender: "陰",
         example: "vadhū (woman)",
         base: "vadh",
+        memorizeNote: "標準詞尾，母音開頭語尾前+ v ,再前ū消失。子音直接加。例外：單一vadhūm,複二同單ㄧ為vadhūs",
         data: [
             ["vadhūs", "vadhvau", "vadhvas"],
-            ["vadhūm", "vadhvau", "vadhūs"],
+            [{ t: "vadhūm", userMarked: true }, "vadhvau", { t: "vadhūs", userMarked: true }],
             ["vadhvā", "vadhūbhyām", "vadhūbhis"],
             ["vadhvai", "vadhūbhyām", "vadhūbhyas"],
             ["vadhvās", "vadhūbhyām", "vadhūbhyas"],
             ["vadhvās", "vadhvos", "vadhūnām"],
             ["vadhvām", "vadhvos", "vadhūṣu"],
-            ["vadhu", "vadhvau", "vadhvas"]
-        ],
-        memorizeNote: "規則詞尾，母音開頭 + v , 前變變短u， 子音直接加"
+            [{ t: "vadhu", userMarked: true }, "vadhvau", "vadhvas"]
+        ]
     },
     "bhu_fem": {
         id: "bhu_fem",
@@ -230,6 +230,7 @@ export const DATA = {
         shortStem: "-ū",
         gender: "陰",
         example: "bhū (earth)",
+        memorizeNote: "",
         base: "bh",
         data: [
             ["bhūs", "bhuvau", "bhuvas"],
