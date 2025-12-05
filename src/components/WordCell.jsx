@@ -26,7 +26,7 @@ const WordCell = ({ cellData, base, onClick, sourceData }) => {
         bgClass = `${bgClass} word-cell-marked`;
     }
 
-    // Custom Rules from verb.json
+    // Custom Rules
     if (typeof cellData === 'object' && cellData.rule) {
         if (cellData.rule === 'long_a_before_v_or_m') {
             bgClass = `${bgClass} word-cell-border-black`;
