@@ -42,7 +42,7 @@ export const VERB_DATA = {
                 },
                 {
                     "rule": "del_previous_a",
-                    "t": "anti"
+                    "t": "nti"
                 }
             ]
         ]
