@@ -15,6 +15,18 @@ export const ROOT_DATA = {
                     { root: { value: '√sad', type: '1P', def: '坐' }, form: 'sīdati' },
                     { root: { value: '√sthā', type: '1P', def: '住' }, form: 'tiṣṭhati' }
                 ]
+            },
+            {
+                description: '有些不規則的第 1 類動詞，在變位時與第 4 類動詞相似。例如:',
+                exceptions: [
+                    { root: { value: '√dhe', type: '1P', def: '啜飲' }, form: 'dhayati' },
+                    { root: { value: '√hve', type: '1U', def: '呼喊' }, form: 'hvayati' },
+                    { root: { value: '√gai', type: '1P', def: '唱歌' }, form: 'gāyati' }
+                ]
+            },
+            {
+                description: '詞根√dṛś【1P】看，見，現在時語幹為 paśya，√dṛś【1P】無現在時主動語態，現在主動被√paś【4U】看，見(僅現在時語幹)替換再加 ya，陳主單三為 paśyati。但陳被單三為 dṛśyate，√paś 的被動被√dṛś 代替。致使•陳主單三又為 darśayati。',
+                exceptions: []
             }
         ]
     },
