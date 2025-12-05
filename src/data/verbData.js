@@ -49,7 +49,7 @@ export const VERB_DATA = {
                         "text": "tas"
                     },
                     {
-                        "text": "anti",
+                        "text": "nti",
                         "rule": "del_previous_a"
                     }
                 ]
