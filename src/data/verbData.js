@@ -230,7 +230,6 @@ export const VERB_DATA = {
         "voice": "middle",
         "tense": "impv",
         "description": "假設、希望、未來行為、命令、勸告、祈願、請求",
-
         "data": [
             [
                 {
