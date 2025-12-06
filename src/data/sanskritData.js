@@ -250,6 +250,7 @@ export const DATA = {
         gender: "陽",
         example: "pitṛ (father)",
         base: "pit",
+        note: " 第三至七格及呼格同行动名词的变格规律。",
         data: [
             ["pitā", "pitarau", "pitaras"],
             ["pitaram", "pitarau", "pitṝn"],
@@ -268,6 +269,7 @@ export const DATA = {
         gender: "陰",
         example: "mātṛ (mother)",
         base: "māt",
+        note: " 第三至七格及呼格同行动名词的变格规律。",
         data: [
             ["mātā", "mātarau", "mātaras"],
             ["mātaram", "mātarau", "mātṝs"],

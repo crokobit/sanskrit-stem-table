@@ -95,7 +95,7 @@ export const VERB_DATA = {
         "voice": "active",
         "tense": "opt",
         "note": "由未主變來。先變 *am*、s、t、va、tam、tām、ma、ta、*ur*。之後 1.在現在時語幹上加 ī。2.加變化過的派生語尾， 以元音起始的語尾前再插入 y。",
-        "description": "義務，願，可能，表當然會發生，假設",
+        "description": "應，願，可能，表當然會發生，假設",
         "data": [
             [
                 {
