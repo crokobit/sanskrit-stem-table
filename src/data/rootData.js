@@ -138,7 +138,127 @@ export const ROOT_DATA = {
         id: 'root_causative',
         label: '致使式',
         description: '+aya, 且非第十類',
-        items: []
+        items: [
+            {
+                description: '1. 以 ā, ṛ 或複合母音收尾的詞根(複合母音用 ā 代替後)，在致使式標誌 aya 前插入 p。',
+                exceptions: [
+                    { root: { value: '√dā', type: '3U', def: '給，布施' }, form: 'dāpaya-' },
+                    { root: { value: '√dhā', type: '3U', def: '放置' }, form: 'dhāpaya-' },
+                    { root: { value: '√gai', type: '1P', def: '歌唱' }, form: 'gāpaya-' },
+                    { root: { value: '√do', type: '4P', def: '切割' }, form: 'dāpaya-' },
+                    { root: { value: '√śrā', type: '2P', def: '煮' }, form: 'śrāpaya-' },
+                    { root: { value: '√ṛ', type: '1P', def: '去' }, form: 'arpaya-送' },
+                    { root: { value: '√de', type: '1Ā', def: '保護' }, form: 'dāpaya-' },
+                    { root: { value: '√dhyai', type: '1P', def: '沉思' }, form: 'dhyāpaya-' }
+                ]
+            },
+            {
+                description: '2. 以 ā 或複合母音收尾的詞根(複合母音用 ā 代替後)，在致使式標誌 aya 前插入 y。',
+                exceptions: [
+                    { root: { value: '√pā', type: '1P', def: '喝' }, form: 'pāyaya-飲' },
+                    { root: { value: '√śo', type: '4P', def: '磨礪，磨快' }, form: 'śāyaya-' },
+                    { root: { value: '√vye', type: '4U', def: '遮蓋' }, form: 'vyāyaya-' },
+                    { root: { value: '√hve', type: '1U', def: '呼喊' }, form: 'hvāyaya-' },
+                    { root: { value: '√so', type: '4P', def: '毀' }, form: 'sāyaya-' },
+                    { root: { value: '√ve', type: '1U', def: '編織' }, form: 'vāyaya-' }
+                ]
+            },
+            {
+                description: '3. 有些以 ā 或複合母音收尾的詞根，在加 p 的致使式中，ā 或者縮短，或者不變。',
+                exceptions: [
+                    { root: { value: '√jñā', type: '9U', def: '知，識' }, form: 'jñāpaya-或 jñapaya-通知' },
+                    { root: { value: '√snā', type: '2P', def: '洗澡' }, form: 'snāpaya-或 snapaya-洗' },
+                    { root: { value: '√glai', type: '1P', def: '疲倦，變弱' }, form: 'glāpaya-或 glapaya-' },
+                    { root: { value: '√mlai', type: '1P', def: '枯萎，褪色' }, form: 'mlāpaya-或 mlapaya-' },
+                    { root: { value: 'su-√snā', type: '', def: '' }, form: 'susnāpaya- (√snā 與 √glai 兩動詞如果有前綴則只取長母音 ā 形式)' },
+                    { root: { value: 'pari-√glai', type: '', def: '' }, form: 'pariglāpaya-' }
+                ]
+            },
+            {
+                description: '4. 部分以 ā 或以複合母音收尾的詞根，存在不規則變化。',
+                exceptions: [
+                    { root: { value: '√pā', type: '2P', def: '保護' }, form: 'pālaya-' },
+                    { root: { value: '√daridrā', type: '2P', def: '貧困，匱乏' }, form: 'daridraya-' },
+                    { root: { value: '√kṣai', type: '1P', def: '燃燒' }, form: 'kṣapaya-' }
+                ]
+            },
+            {
+                description: '5. 有些以 i、ī、u、ū 收尾的詞根也通過加 p 構成致使式，但不規則。',
+                exceptions: [
+                    { root: { value: 'adhi-√i', type: '2U', def: '學' }, form: 'adhyāpaya-教' },
+                    { root: { value: '√ci', type: '5U', def: '積累，堆積' }, form: 'cāpaya- / cāyaya-' },
+                    { root: { value: '√smi', type: '1Ā', def: '微笑' }, form: 'smāpaya- / smāyaya-' },
+                    { root: { value: '√hrī', type: '3P', def: '羞恥，慚愧' }, form: 'hrepaya-' },
+                    { root: { value: '√ruh', type: '1P', def: '生長' }, form: 'ropaya- / rohaya-' },
+                    { root: { value: '√ji', type: '1P', def: '戰勝' }, form: 'jāpaya-' },
+                    { root: { value: '√krī', type: '9U', def: '購買' }, form: 'krāpaya-' },
+                    { root: { value: '√bhī', type: '3Ā', def: '焦慮' }, form: 'bhīṣaya- / bhāpaya-' }
+                ]
+            },
+            {
+                description: '6. 短音節中間或起始的 a 有時三合。',
+                exceptions: [
+                    { root: { value: '√pat', type: '1P', def: '倒' }, form: 'pātaya-' },
+                    { root: { value: '√cam', type: '1P', def: '啜飲' }, form: 'cāmaya-' },
+                    { root: { value: '√kam', type: '1Ā', def: '愛，欲' }, form: 'kāmaya-' },
+                    { root: { value: '√jan', type: '4Ā', def: '出生' }, form: 'janaya-生(及物) [有時不變]' },
+                    { root: { value: '√prath', type: '1Ā', def: '增長' }, form: 'prathaya-擴 [有時不變]' },
+                    { root: { value: '√vyadh', type: '4P', def: '刺穿，傷害，打擊' }, form: 'vyadhaya- [有時不變]' },
+                    { root: { value: '√tvar', type: '1Ā', def: '速疾' }, form: 'tvaraya-催 [有時不變]' },
+                    { root: { value: '√gam', type: '1P', def: '去' }, form: 'gamaya-領，送 [有時不變]' }
+                ]
+            },
+            {
+                description: '7. 以-am、-an、-al、-ar、-ad、-ap、aṭ 收尾的詞根，一般 a 不拉長。',
+                exceptions: [
+                    { root: { value: '√kram', type: '1U、4P', def: '走' }, form: 'kramaya-' },
+                    { root: { value: '√nam', type: '1P', def: '鞠躬，致敬' }, form: 'namaya-' },
+                    { root: { value: '√ghaṭ', type: '1Ā', def: '從事' }, form: 'ghaṭaya-' },
+                    { root: { value: '√cal', type: '1P', def: '搖動' }, form: 'calaya-' },
+                    { root: { value: '√jval', type: '1P', def: '燃燒，發光' }, form: 'jvalaya-' },
+                    { root: { value: '√dhvan', type: '1、10P', def: '發聲' }, form: 'dhvanaya-' },
+                    { root: { value: '√prath', type: '1Ā', def: '增長' }, form: 'prathaya-擴' },
+                    { root: { value: '√lag', type: '1P', def: '粘連，執著' }, form: 'lagaya-' },
+                    { root: { value: '√svan', type: '1P', def: '發聲' }, form: 'svanaya-' },
+                    { root: { value: '√gam', type: '1P', def: '去' }, form: 'gamaya-' },
+                    { root: { value: '√ram', type: '1Ā', def: '遊戲，娛樂' }, form: 'ramaya-' },
+                    { root: { value: '√krand', type: '1P', def: '悲泣' }, form: 'krandaya-' },
+                    { root: { value: '√jñap', type: '10P', def: '知道；殺' }, form: 'jñapaya-' },
+                    { root: { value: '√naṭ', type: '1P', def: '跳舞' }, form: 'naṭaya- / nāṭaya-' },
+                    { root: { value: '√mad', type: '4P', def: '迷醉' }, form: 'madaya- / mādaya-' },
+                    { root: { value: '√tvar', type: '1Ā', def: '速疾' }, form: 'tvaraya-催' },
+                    { root: { value: '√vyadh', type: '4P', def: '刺穿，傷害，打擊' }, form: 'vyadhaya-' }
+                ]
+            },
+            {
+                description: '8. 在 aya 前，若詞根尾音是母音，則該尾音要三合。',
+                exceptions: [
+                    { root: { value: '√bhū', type: '1P', def: '是，存在，成' }, form: 'bhāvaya-' },
+                    { root: { value: '√kṛ', type: '8U', def: '做' }, form: 'kāraya-使做' }
+                ]
+            },
+            {
+                description: '9. 其他不規則變化:',
+                exceptions: [
+                    { root: { value: '√i', type: '2P', def: '走' }, form: 'gamaya-送' },
+                    { root: { value: '√ci', type: '10U', def: '聚集' }, form: 'capaya- / cayaya-' },
+                    { root: { value: '√jāgṛ', type: '2P', def: '清醒，覺醒' }, form: 'jāgaraya-' },
+                    { root: { value: '√smṛ', type: '1P', def: '記憶' }, form: 'smaraya- / smāraya-' },
+                    { root: { value: '√sidh', type: '4P', def: '成就' }, form: 'sodhaya- / sādhaya-' },
+                    { root: { value: '√śad', type: '1、6Ā', def: '毀滅' }, form: 'śādaya- / śātaya-' },
+                    { root: { value: '√rabh', type: '1Ā', def: '渴望' }, form: 'rambhaya-' },
+                    { root: { value: '√sphur', type: '6P', def: '顫抖' }, form: 'sphoraya- / sphāraya-' },
+                    { root: { value: '√dhū', type: '5、9、10U', def: '搖動' }, form: 'dhūnaya- / dhāvaya-' },
+                    { root: { value: 'prati-√i', type: '2P', def: '返回' }, form: 'pratyāyaya-' },
+                    { root: { value: '√prī', type: '9U', def: '喜愛' }, form: 'prīṇaya-' },
+                    { root: { value: '√bhī', type: '3P', def: '害怕' }, form: 'bhāyaya-' },
+                    { root: { value: '√mṛj', type: '1P', def: '擦拭，清潔' }, form: 'mārjaya-' },
+                    { root: { value: '√han', type: '2P', def: '殺，傷害' }, form: 'ghātaya-' },
+                    { root: { value: '√labh', type: '1Ā', def: '獲得，接受' }, form: 'lambhaya-' },
+                    { root: { value: '√duṣ', type: '4P', def: '變壞' }, form: 'dūṣayati / doṣaya-' }
+                ]
+            }
+        ]
     },
     denominative: {
         id: 'root_denominative',
