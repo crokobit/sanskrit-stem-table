@@ -3,7 +3,7 @@ import WordCell from './WordCell';
 import { DERIVATION_RULES } from '../data/derivationRules';
 import { CASE_NAMES, COL_NAMES } from '../data/sanskritData';
 
-const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabels = COL_NAMES, data }) => {
+const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabels = COL_NAMES, data, onTableSwitch }) => {
     const [showDerivation, setShowDerivation] = React.useState(false);
 
     // Reset derivation view when table changes
@@ -253,7 +253,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
             </div>
 
             {/* Header with Toggle */}
-            <div className="table-header-container">
+            <div className="table-header-container" style={{ justifyContent: 'flex-start', display: 'flex', gap: '8px', alignItems: 'center' }}>
                 {derivationRules && (
                     <button
                         onClick={() => setShowDerivation(!showDerivation)}
@@ -265,6 +265,15 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                         {showDerivation ? 'Show Table' : 'Show Process'}
                     </button>
                 )}
+                {currentTable.relatedTables && currentTable.relatedTables.map(related => (
+                    <button
+                        key={related.id}
+                        onClick={() => onTableSwitch && onTableSwitch(related.id)}
+                        className="derivation-toggle-btn derivation-toggle-btn-inactive"
+                    >
+                        {related.label}
+                    </button>
+                ))}
             </div>
 
             {/* Note */}

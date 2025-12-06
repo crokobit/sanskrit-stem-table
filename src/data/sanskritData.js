@@ -288,7 +288,11 @@ export const DATA = {
         base: "kart",
         hasStrength: true,
         stemStrength: { strong: "kartār", middle: "kartṛ", weak: "kartr" },
-        note: "kartrī【陰】照 nadī 變格。",
+        note: "kartrī【陰】照 nadī 變格。svasṛ【阴】姐妹、naptṛ【阳】孙子与行动名词性变格相同。唯 svasṛ 复数第二格为 svasṝs。",
+        relatedTables: [
+            { id: "svasr_fem", label: "svasṛ【陰】姐妹" },
+            { id: "naptr_masc", label: "naptṛ【陽】孫" }
+        ],
         data: [
             [{ t: "kartā", s: STRONG, userMarked: true }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
             [{ t: "kartāram", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartṝn", s: WEAK, userMarked: true }],
@@ -298,6 +302,58 @@ export const DATA = {
             [{ t: "kartur", s: WEAK, userMarked: true }, { t: "kartros", s: WEAK }, { t: "kartṝṇām", s: WEAK, userMarked: true }],
             [{ t: "kartari", s: WEAK, userMarked: true }, { t: "kartros", s: WEAK }, { t: "kartṛṣu", s: MIDDLE }],
             [{ t: "kartar", s: STRONG, userMarked: true }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }]
+        ]
+    },
+    "svasr_fem": {
+        id: "svasr_fem",
+        stem: "ṛ-stem Sister (Irregular)",
+        shortStem: "-ṛ",
+        gender: "陰",
+        example: "svasṛ (sister)",
+        base: "svas",
+        hasStrength: true,
+        stemStrength: { strong: "svasār", middle: "svasṛ", weak: "svasr" },
+        note: "與 kartṛ 變格相同，唯複數第二格為 svasṝs。",
+        excludeFromDropdown: true,
+        relatedTables: [
+            { id: "r_masc", label: "kartṛ【陽】行動者" },
+            { id: "naptr_masc", label: "naptṛ【陽】孫" }
+        ],
+        data: [
+            [{ t: "svasā", s: STRONG }, { t: "svasārau", s: STRONG }, { t: "svasāras", s: STRONG }],
+            [{ t: "svasāram", s: STRONG }, { t: "svasārau", s: STRONG }, { t: "svasṝs", s: WEAK, userMarked: true }],
+            [{ t: "svasrā", s: WEAK }, { t: "svasṛbhyām", s: MIDDLE }, { t: "svasṛbhis", s: MIDDLE }],
+            [{ t: "svasre", s: WEAK }, { t: "svasṛbhyām", s: MIDDLE }, { t: "svasṛbhyas", s: MIDDLE }],
+            [{ t: "svasur", s: WEAK }, { t: "svasṛbhyām", s: MIDDLE }, { t: "svasṛbhyas", s: MIDDLE }],
+            [{ t: "svasur", s: WEAK }, { t: "svasros", s: WEAK }, { t: "svasṝṇām", s: WEAK }],
+            [{ t: "svasari", s: WEAK }, { t: "svasros", s: WEAK }, { t: "svasṛṣu", s: MIDDLE }],
+            [{ t: "svasar", s: STRONG }, { t: "svasārau", s: STRONG }, { t: "svasāras", s: STRONG }]
+        ]
+    },
+    "naptr_masc": {
+        id: "naptr_masc",
+        stem: "ṛ-stem Grandson",
+        shortStem: "-ṛ",
+        gender: "陽",
+        example: "naptṛ (grandson)",
+        base: "napt",
+        hasStrength: true,
+        stemStrength: { strong: "naptār", middle: "naptṛ", weak: "naptr" },
+        note: "與 kartṛ 變格完全相同。",
+        excludeFromDropdown: true,
+        relatedTables: [
+            { id: "r_masc", label: "kartṛ【陽】行動者" },
+            { id: "svasr_fem", label: "svasṛ【陰】姐妹" }
+        ],
+        data: [
+            [{ t: "naptā", s: STRONG }, { t: "naptārau", s: STRONG }, { t: "naptāras", s: STRONG }],
+            [{ t: "naptāram", s: STRONG }, { t: "naptārau", s: STRONG }, { t: "naptṝn", s: WEAK }],
+            [{ t: "naptrā", s: WEAK }, { t: "naptṛbhyām", s: MIDDLE }, { t: "naptṛbhis", s: MIDDLE }],
+            [{ t: "naptre", s: WEAK }, { t: "naptṛbhyām", s: MIDDLE }, { t: "naptṛbhyas", s: MIDDLE }],
+            [{ t: "naptur", s: WEAK }, { t: "naptṛbhyām", s: MIDDLE }, { t: "naptṛbhyas", s: MIDDLE }],
+            [{ t: "naptur", s: WEAK }, { t: "naptros", s: WEAK }, { t: "naptṝṇām", s: WEAK }],
+            [{ t: "naptari", s: WEAK }, { t: "naptros", s: WEAK }, { t: "naptṛṣu", s: MIDDLE }],
+            [{ t: "naptar", s: STRONG }, { t: "naptārau", s: STRONG }, { t: "naptāras", s: STRONG }]
         ]
     },
     "r_neut": {
