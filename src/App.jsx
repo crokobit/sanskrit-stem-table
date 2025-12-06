@@ -278,7 +278,7 @@ const App = () => {
                             handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)}
                             rowLabels={currentRowLabels}
                             data={currentData}
-                            onTableSwitch={(newId) => setTable1Id(newId)}
+                            onTableSwitch={(newId, variant, gender) => switchTable(newId, variant, gender)}
                         />
                     </>
                 )}
@@ -301,7 +301,7 @@ const App = () => {
                                 currentTable={table1Data}
                                 handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table1Data)}
                                 rowLabels={currentRowLabels}
-                                onTableSwitch={(newId) => setTable1Id(newId)}
+                                onTableSwitch={(newId, variant, gender) => switchTable(newId, variant, gender)}
                             />
                         </div>
                         <div className="compare-col">
@@ -320,7 +320,7 @@ const App = () => {
                                 currentTable={table2Data}
                                 handleCellClick={(d, r, c, g) => handleCellClick(d, r, c, g, table2Data)}
                                 rowLabels={currentRowLabels}
-                                onTableSwitch={(newId) => setTable2Id(newId)}
+                                onTableSwitch={(newId, variant, gender) => setTable2Id(newId)} // Keep Table 2 simple for now or implement full switch if needed
                             />
                         </div>
                     </div>

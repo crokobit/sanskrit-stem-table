@@ -273,7 +273,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                 {currentTable.relatedTables && currentTable.relatedTables.map(related => (
                     <button
                         key={related.id}
-                        onClick={() => onTableSwitch && onTableSwitch(related.id)}
+                        onClick={() => onTableSwitch && onTableSwitch(related.id, related.variant, related.gender)}
                         className="derivation-toggle-btn derivation-toggle-btn-inactive"
                     >
                         {related.label}

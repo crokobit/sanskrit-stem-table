@@ -73,20 +73,22 @@ const TableControl = ({
                     </div>
 
                     {/* Gender Tabs for Pronouns */}
-                    <div className="gender-tabs table-control-tabs">
-                        {["ALL", "M", "N", "F"].map(g => (
-                            <button
-                                key={g}
-                                onClick={() => onGenderChange(g)}
-                                className={`gender-tab-btn ${gender === g
-                                    ? 'gender-tab-btn-active'
-                                    : 'gender-tab-btn-inactive'
-                                    }`}
-                            >
-                                {g === "ALL" ? "All Genders" : (g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine"))}
-                            </button>
-                        ))}
-                    </div>
+                    {!rawTable.hideGenderTabs && (
+                        <div className="gender-tabs table-control-tabs">
+                            {["ALL", "M", "N", "F"].map(g => (
+                                <button
+                                    key={g}
+                                    onClick={() => onGenderChange(g)}
+                                    className={`gender-tab-btn ${gender === g
+                                        ? 'gender-tab-btn-active'
+                                        : 'gender-tab-btn-inactive'
+                                        }`}
+                                >
+                                    {g === "ALL" ? "All Genders" : (g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine"))}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
         </div>
