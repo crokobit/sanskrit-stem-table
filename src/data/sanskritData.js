@@ -103,14 +103,14 @@ export const DATA = {
         example: "mati (mind)",
         base: "mat",
         data: [
-            ["matis", "matī", "matayas"],
-            ["matim", "matī", "matīs"],
+            [{ t: "matis", userMarked: true }, "matī", { t: "matayas", userMarked: true }],
+            [{ t: "matim", userMarked: true }, "matī", { t: "matīs", userMarked: true }],
             ["matyā", "matibhyām", "matibhis"],
             ["matye / matyai", "matibhyām", "matibhyas"],
             ["mates / matyās", "matibhyām", "matibhyas"],
-            ["mates / matyās", "matyos", "matīnām"],
+            ["mates / matyās", "matyos", { t: "matīnām", userMarked: true }],
             ["matau / matyām", "matyos", "matiṣu"],
-            ["mate", "matī", "matayas"]
+            [{ t: "mate", userMarked: true }, "matī", { t: "matayas", userMarked: true }]
         ]
     },
     "nadi_fem": {
