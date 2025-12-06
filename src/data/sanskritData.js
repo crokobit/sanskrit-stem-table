@@ -1,6 +1,6 @@
 import { cell, STRONG, MIDDLE, WEAK } from '../utils/sanskritUtils';
 import { tad_group } from './tadGroupData';
-import { consonant_ending } from './consonantEndingData';
+import { consonant_ending, marut, vac, dvis, apad, jagat, ruj, dis, vis, lih } from './consonantEndingData';
 
 export const CASE_NAMES = ["一", "二", "三", "四", "五", "六", "七", "呼"];
 export const COL_NAMES = ["單", "雙", "複"];
@@ -644,152 +644,15 @@ export const DATA = {
     "tad_group": tad_group,
     // --- Consonant Ending Group ---
     "consonant_ending": consonant_ending,
-    // --- Individual Consonant Tables (Hidden from Dropdown) ---
-    "apad": {
-        id: "apad",
-        stem: "t-stem Feminine",
-        shortStem: "-t",
-        gender: "陰",
-        example: "āpad (misfortune)",
-        base: "āpa",
-        groupId: "consonant_ending",
-        excludeFromDropdown: true,
-        relatedTables: [
-            { id: "consonant_ending", variant: "consonant-ended", label: "marut【陽】風" },
-            { id: "jagat", label: "jagat【中】眾生" }
-        ],
-        data: [
-            ["āpat", "āpadau", "āpadas"],
-            ["āpadam", "āpadau", "āpadas"],
-            ["āpadā", "āpadbhyām", "āpadbhis"],
-            ["āpade", "āpadbhyām", "āpadbhyas"],
-            ["āpadas", "āpadbhyām", "āpadbhyas"],
-            ["āpadas", "āpados", "āpadām"],
-            ["āpadi", "āpados", "āpatsu"],
-            ["āpat", "āpadau", "āpadas"]
-        ]
-    },
-    "jagat": {
-        id: "jagat",
-        stem: "t-stem Neuter",
-        shortStem: "-t",
-        gender: "中",
-        example: "jagat (world)",
-        base: "jaga",
-        groupId: "consonant_ending",
-        excludeFromDropdown: true,
-        note: "jaganti*: 作為強語干，插入鼻音加強。",
-        relatedTables: [
-            { id: "consonant_ending", variant: "consonant-ended", label: "marut【陽】風" },
-            { id: "apad", label: "āpad【陰】不幸" }
-        ],
-        data: [
-            ["jagat", "jagatī", { t: "jaganti", userMarked: true }],
-            ["jagat", "jagatī", { t: "jaganti", userMarked: true }],
-            ["jagatā", "jagadbhyām", "jagadbhis"],
-            ["jagate", "jagadbhyām", "jagadbhyas"],
-            ["jagatas", "jagadbhyām", "jagadbhyas"],
-            ["jagatas", "jagatos", "jagatām"],
-            ["jagati", "jagatos", "jagatsu"],
-            ["jagat", "jagatī", "jaganti"]
-        ]
-    },
-    "ruj": {
-        id: "ruj",
-        stem: "k-stem Feminine",
-        shortStem: "-k",
-        gender: "陰",
-        example: "ruj (disease)",
-        base: "ru",
-        groupId: "consonant_ending",
-        excludeFromDropdown: true,
-        relatedTables: [
-            { id: "consonant_ending", variant: "k-ended", label: "vāc【陰】語言" },
-            { id: "dis", label: "diś【陰】方位" }
-        ],
-        data: [
-            ["ruk", "rujau", "rujas"],
-            ["rujam", "rujau", "rujas"],
-            ["rujā", "rugbhyām", "rugbhis"],
-            ["ruje", "rugbhyām", "rugbhyas"],
-            ["rujas", "rugbhyām", "rugbhyas"],
-            ["rujas", "rujos", "rujām"],
-            ["ruji", "rujos", "rukṣu"],
-            ["ruk", "rujau", "rujas"]
-        ]
-    },
-    "dis": {
-        id: "dis",
-        stem: "k-stem Feminine",
-        shortStem: "-k",
-        gender: "陰",
-        example: "diś (direction)",
-        base: "di",
-        groupId: "consonant_ending",
-        excludeFromDropdown: true,
-        relatedTables: [
-            { id: "consonant_ending", variant: "k-ended", label: "vāc【陰】語言" },
-            { id: "ruj", label: "ruj【陰】疾病" }
-        ],
-        data: [
-            ["dik", "diśau", "diśas"],
-            ["diśam", "diśau", "diśas"],
-            ["diśā", "digbhyām", "digbhis"],
-            ["diśe", "digbhyām", "digbhyas"],
-            ["diśas", "digbhyām", "digbhyas"],
-            ["diśas", "diśos", "diśām"],
-            ["diśi", "diśos", "dikṣu"],
-            ["dik", "diśau", "diśas"]
-        ]
-    },
-    "vis": {
-        id: "vis",
-        stem: "ṭ-stem Masculine",
-        shortStem: "-ṭ",
-        gender: "陽",
-        example: "viś (clan)",
-        base: "vi",
-        groupId: "consonant_ending",
-        excludeFromDropdown: true,
-        relatedTables: [
-            { id: "consonant_ending", variant: "ṭ-ended", label: "dviṣ【陽】敵人" },
-            { id: "lih", label: "lih【形】舔" }
-        ],
-        data: [
-            ["viṭ", "viśau", "viśas"],
-            ["viśam", "viśau", "viśas"],
-            ["viśā", "viḍbhyām", "viḍbhis"],
-            ["viśe", "viḍbhyām", "viḍbhyas"],
-            ["viśas", "viḍbhyām", "viḍbhyas"],
-            ["viśas", "viśos", "viśām"],
-            ["viśi", "viśos", "viṭsu"],
-            ["viṭ", "viśau", "viśas"]
-        ]
-    },
-    "lih": {
-        id: "lih",
-        stem: "ṭ-stem Adjective",
-        shortStem: "-ṭ",
-        gender: "形",
-        example: "lih (licking)",
-        base: "li",
-        groupId: "consonant_ending",
-        excludeFromDropdown: true,
-        relatedTables: [
-            { id: "consonant_ending", variant: "ṭ-ended", label: "dviṣ【陽】敵人" },
-            { id: "vis", label: "viś【陽】吠舍" }
-        ],
-        data: [
-            ["liṭ", "lihau", "lihas"],
-            ["liham", "lihau", "lihas"],
-            ["lihā", "liḍbhyām", "liḍbhis"],
-            ["lihe", "liḍbhyām", "liḍbhyas"],
-            ["lihas", "liḍbhyām", "liḍbhyas"],
-            ["lihas", "lihos", "lihām"],
-            ["lihi", "lihos", "liṭsu"],
-            ["liṭ", "lihau", "lihas"]
-        ]
-    },
+    "marut": marut,
+    "vac": vac,
+    "dvis": dvis,
+    "apad": apad,
+    "jagat": jagat,
+    "ruj": ruj,
+    "dis": dis,
+    "vis": vis,
+    "lih": lih,
     "o_masc": {
         id: "o_masc",
         stem: "o-stem Masc/Fem",
