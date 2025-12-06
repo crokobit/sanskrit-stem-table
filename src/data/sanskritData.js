@@ -288,6 +288,7 @@ export const DATA = {
         base: "kart",
         hasStrength: true,
         stemStrength: { strong: "kartār", middle: "kartṛ", weak: "kartr" },
+        note: "kartrī【陰】照 nadī 變格。",
         data: [
             [{ t: "kartā", s: STRONG, userMarked: true }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
             [{ t: "kartāram", s: STRONG }, { t: "kartārau", s: STRONG }, { t: "kartṝn", s: WEAK, userMarked: true }],
@@ -306,6 +307,7 @@ export const DATA = {
         gender: "中",
         example: "kartṛ (doer - neuter)",
         base: "kart",
+        note: "照vāri變格，但單三四五六七，雙六七照陽姓變格",
         data: [
             ["kartṛ", "kartṛṇī", "kartṝṇi"],
             ["kartṛ", "kartṛṇī", "kartṝṇi"],
@@ -315,24 +317,6 @@ export const DATA = {
             ["kartur / kartṛṇas", "kartros / kartṛṇos", "kartṝṇām"],
             ["kartari / kartṛṇi", "kartros / kartṛṇos", "kartṛṣu"],
             ["kartar / kartṛ", "kartṛṇī", "kartṝṇi"]
-        ]
-    },
-    "r_fem": {
-        id: "r_fem",
-        stem: "ṛ-stem Agent Fem",
-        shortStem: "-ṛ",
-        gender: "陰",
-        example: "kartrī (doer - fem)",
-        base: "kartr",
-        data: [
-            ["kartrī", "kartryau", "kartryas"],
-            ["kartrīm", "kartryau", "kartrīs"],
-            ["kartryā", "kartrībhyām", "kartrībhis"],
-            ["kartryai", "kartrībhyām", "kartrībhyas"],
-            ["kartryās", "kartrībhyām", "kartrībhyas"],
-            ["kartryās", "kartryos", "kartrīnām"],
-            ["kartryām", "kartryos", "kartrīṣu"],
-            ["kartri", "kartryau", "kartryas"]
         ]
     },
     "bhavat_masc": {
