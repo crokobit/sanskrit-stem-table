@@ -138,6 +138,7 @@ export const VERB_DATA = {
         "voice": "active",
         "tense": "impf",
         "description": "過去時",
+        "note": "以輔音開頭的語幹，前面加上 a；以元音開頭的語幹，把開頭的元音三合。詞根有前綴，則前加的 a 位於前綴和語幹之間。",
         "data": [
             [
                 {
@@ -316,6 +317,7 @@ export const VERB_DATA = {
         "voice": "middle",
         "tense": "impf",
         "description": "過去時",
+        "note": "以輔音開頭的語幹，前面加上 a；以元音開頭的語幹，把開頭的元音三合。詞根有前綴，則前加的 a 位於前綴和語幹之間。",
         "data": [
             [
                 {
