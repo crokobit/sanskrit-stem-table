@@ -243,6 +243,31 @@ export const DATA = {
             ["bhūs", "bhuvau", "bhuvas"]
         ]
     },
+    "visvapa_masc": {
+        id: "visvapa_masc",
+        stem: "Root-stem (ā-stem)",
+        shortStem: "-ā 陽 複合詞",
+        gender: "陽",
+        example: "viśvapā (protector of all)",
+        base: "viśvap",
+        hasStrength: true,
+        stemStrength: { strong: "viśvapā", middle: "viśvapā", weak: "viśvap" },
+        note: "詞根語幹：由詞根轉化而來，多數是單音節語幹，意義與詞根直接相關。例如：\n√pā【2P】保護 → pā【陽、陰】保護，保護者\n•複合詞：詞根語幹加名詞或代詞組成複合詞。如：\nviśva【代】一切 + pā → viśvapā【陽、陰】保護一切，保護一切者\n詞根語幹和複合詞的變格基本是規則的。但也有以下特殊情況：\n❶ 以 ā 收尾的詞根語幹構成複合詞時，弱語幹(母音起始的格尾)，複二除外，ā 要脫落掉。\n除了這類不規則的，基本沒有以 ā 收尾的陽性名詞，以 ā 收尾的常為陰性。此類詞還有以下單詞等：\ngopā (go+√pā)【陽】護牛者，放牛人，庇護者。\nśaṅkhadhmā (śaṅkha+√dhmā)【陽】吹海螺者，吹螺號者。\nsomapā (soma+√pā)【陽】喝蘇摩汁者，有資格喝蘇摩汁者；行蘇摩祭者。\ndhūmrapā (dhūmra+√pā)【陽】吸煙者。\nbaladā (bala+√dā)【陽】力量給予者，賜予力量者。",
+        excludeFromDropdown: true,
+        relatedTables: [
+            { id: "r_masc", label: "kartṛ【陽】行動者" }
+        ],
+        data: [
+            [{ t: "viśvapās", s: STRONG }, { t: "viśvapau", s: STRONG }, { t: "viśvapās", s: STRONG }],
+            [{ t: "viśvapām", s: STRONG }, { t: "viśvapau", s: STRONG }, { t: "viśvapās", s: WEAK, userMarked: true }],
+            [{ t: "viśvapā", s: WEAK }, { t: "viśvapābhyām", s: MIDDLE }, { t: "viśvapābhis", s: MIDDLE }],
+            [{ t: "viśvape", s: WEAK }, { t: "viśvapābhyām", s: MIDDLE }, { t: "viśvapābhyas", s: MIDDLE }],
+            [{ t: "viśvapas", s: WEAK }, { t: "viśvapābhyām", s: MIDDLE }, { t: "viśvapābhyas", s: MIDDLE }],
+            [{ t: "viśvapas", s: WEAK }, { t: "viśvapos", s: WEAK }, { t: "viśvapām", s: WEAK }],
+            [{ t: "viśvapi", s: WEAK }, { t: "viśvapos", s: WEAK }, { t: "viśvapāsu", s: MIDDLE }],
+            [{ t: "viśvapās", s: STRONG }, { t: "viśvapau", s: STRONG }, { t: "viśvapās", s: STRONG }]
+        ]
+    },
     "pitr": {
         id: "pitr",
         stem: "ṛ-stem Kinship Masc",
@@ -293,7 +318,8 @@ export const DATA = {
         note: "kartrī【陰】照 nadī 變格。svasṛ【阴】姐妹、naptṛ【阳】孙子与行动名词性变格相同。唯 svasṛ 复数第二格为 svasṝs。",
         relatedTables: [
             { id: "svasr_fem", label: "svasṛ【陰】姐妹" },
-            { id: "naptr_masc", label: "naptṛ【陽】孫" }
+            { id: "naptr_masc", label: "naptṛ【陽】孫" },
+            { id: "visvapa_masc", label: "viśvapā【陽】保護一切者" }
         ],
         data: [
             [{ t: "kartā", s: STRONG, userMarked: true }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
