@@ -40,7 +40,7 @@ const TableControl = ({
                             onChange={(e) => onTableChange(e.target.value)}
                             className="table-select w-full"
                         >
-                            {Object.values(data).filter(t => !t.excludeFromDropdown).map(t => (
+                            {Object.values(data).filter(t => !t.excludeFromDropdown || t.id === tableId).map(t => (
                                 <option key={t.id} value={t.id}>
                                     {t.name ? t.name : `${formatStemLabel(t)} — ${t.example ? (t.shortStem === '-ṛ' ? t.example : t.example.replace(/\s*\(.*?\)\s*/g, '')) : ''}`}
                                 </option>
