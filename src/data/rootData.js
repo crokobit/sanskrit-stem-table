@@ -2,7 +2,7 @@ export const ROOT_DATA = {
     1: {
         id: 'root_1',
         label: 'Class 1',
-        description: '第一類動詞特例 陳主',
+        description: '二合+a',
         items: [
             {
                 description: '不規則動詞',
@@ -35,10 +35,10 @@ export const ROOT_DATA = {
     4: {
         id: 'root_4',
         label: 'Class 4',
-        description: '第四類動詞特例 陳主',
+        description: '+ya',
         items: [
             {
-                description: '一般是在詞根後面加 ya 形成現在時語幹，再加原始語尾。但以 am 收尾的詞根在形成現在時語幹時，am 拉長為 ām。',
+                description: '+ya 但以 am 收尾的詞根在形成現在時語幹時，am 拉長為 ām。',
                 exceptions: [
                     { root: { value: '√tam', type: '4P', def: '傷心' }, form: 'tāmyati' },
                     { root: { value: '√bhram', type: '1, 4P', def: '閒逛' }, form: 'bhrāmyati' },
@@ -53,7 +53,7 @@ export const ROOT_DATA = {
                 ]
             },
             {
-                description: '注意幾個特殊的:',
+                description: '特殊的:',
                 exceptions: [
                     { root: { value: '√vyadh', type: '4P', def: '刺' }, form: 'vidhyati' },
                     { root: { value: '√kram', type: '1U, 4P', def: '越過' }, form: 'kramyati' },
@@ -67,7 +67,7 @@ export const ROOT_DATA = {
     6: {
         id: 'root_6',
         label: 'Class 6',
-        description: '第六類動詞特例 陳主',
+        description: '+a',
         items: [
             {
                 description: '不規則動詞',
