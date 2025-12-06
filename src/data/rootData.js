@@ -32,7 +32,37 @@ export const ROOT_DATA = {
     },
     2: { id: 'root_2', label: 'Class 2', description: 'Class 2 Verbs', items: [] },
     3: { id: 'root_3', label: 'Class 3', description: 'Class 3 Verbs', items: [] },
-    4: { id: 'root_4', label: 'Class 4', description: 'Class 4 Verbs', items: [] },
+    4: {
+        id: 'root_4',
+        label: 'Class 4',
+        description: '第四類動詞特例 陳主',
+        items: [
+            {
+                description: '一般是在詞根後面加 ya 形成現在時語幹，再加原始語尾。但以 am 收尾的詞根在形成現在時語幹時，am 拉長為 ām。',
+                exceptions: [
+                    { root: { value: '√tam', type: '4P', def: '傷心' }, form: 'tāmyati' },
+                    { root: { value: '√bhram', type: '1, 4P', def: '閒逛' }, form: 'bhrāmyati' },
+                    { root: { value: '√mad', type: '4P', def: '醉' }, form: 'mādyati' }
+                ]
+            },
+            {
+                description: '一些以 o 收尾的第 4 類動詞在形成現在時語幹時，o 變為 ya。常見的有兩個:',
+                exceptions: [
+                    { root: { value: '√do', type: '4P', def: '切' }, form: 'dyati' },
+                    { root: { value: 'ava-√so', type: '4P', def: '終結，決定' }, form: 'avasyati' }
+                ]
+            },
+            {
+                description: '注意幾個特殊的:',
+                exceptions: [
+                    { root: { value: '√vyadh', type: '4P', def: '刺' }, form: 'vidhyati' },
+                    { root: { value: '√kram', type: '1U, 4P', def: '越過' }, form: 'kramyati' },
+                    { root: { value: 'ā-√cam', type: '1P', def: '啜飲' }, form: 'ācāmati' },
+                    { root: { value: '√cam', type: '1P', def: '啜飲' }, form: 'camati' }
+                ]
+            }
+        ]
+    },
     5: { id: 'root_5', label: 'Class 5', description: 'Class 5 Verbs', items: [] },
     6: {
         id: 'root_6',
