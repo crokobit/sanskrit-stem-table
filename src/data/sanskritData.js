@@ -524,15 +524,16 @@ export const DATA = {
         base: "bhav",
         hasStrength: true,
         stemStrength: { strong: "bhavant", weak: "bhavat" },
+        note: "注意t加濁輔音變d。阴性不分强弱语干，由弱语干加 ī 构成→ bhavatī，并按照 nadī 变格",
         data: [
-            [{ t: "bhavān", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }],
+            [{ t: "bhavān", s: STRONG, userMarked: true }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }],
             [{ t: "bhavantam", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavatas", s: WEAK }],
             [{ t: "bhavatā", s: WEAK }, { t: "bhavadbhyām", s: WEAK }, { t: "bhavadbhis", s: WEAK }],
             [{ t: "bhavate", s: WEAK }, { t: "bhavadbhyām", s: WEAK }, { t: "bhavadbhyas", s: WEAK }],
             [{ t: "bhavatas", s: WEAK }, { t: "bhavadbhyām", s: WEAK }, { t: "bhavadbhyas", s: WEAK }],
             [{ t: "bhavatas", s: WEAK }, { t: "bhavatos", s: WEAK }, { t: "bhavatām", s: WEAK }],
             [{ t: "bhavati", s: WEAK }, { t: "bhavatos", s: WEAK }, { t: "bhavatsu", s: WEAK }],
-            [{ t: "bhavan / bhos", s: STRONG }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }]
+            [{ t: "bhavan / bhos", s: STRONG, userMarked: true }, { t: "bhavantau", s: STRONG }, { t: "bhavantas", s: STRONG }]
         ]
     },
     "jivat_masc": {
