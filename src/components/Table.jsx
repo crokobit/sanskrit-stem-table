@@ -217,11 +217,16 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
 
                                         } else if (isMerged) {
                                             // Merged View Render
-                                            // cellData has .origin ('left' or 'right')
-                                            // We can style them slightly differently if needed
+                                            // cellData has .origin ('left', 'right', or 'merged')
                                             const isRight = cellData.origin === 'right';
+                                            const isMergedCell = cellData.origin === 'merged';
+
                                             return (
-                                                <td key={colIdx} className={`td-cell ${isRight ? 'td-highlight' : ''}`}>
+                                                <td
+                                                    key={colIdx}
+                                                    className={`td-cell ${isRight ? 'td-highlight' : ''} ${isMergedCell ? 'td-merged-highlight' : ''}`}
+                                                    colSpan={cellData.colSpan || 1}
+                                                >
                                                     <WordCell
                                                         cellData={cellData}
                                                         base={cellData.base || currentTable.base} // Use specific base for merged cells

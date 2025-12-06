@@ -953,6 +953,11 @@ body {
     background-color: #fafaf9;
 }
 
+.td-merged-highlight {
+    background-color: #fafaf9;
+    /* bg-stone-50 */
+}
+
 /* --- Table Control Styles --- */
 .table-control-container {
     border-radius: 0.5rem;

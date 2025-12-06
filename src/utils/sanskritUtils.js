@@ -134,8 +134,23 @@ export const mergeTableData = (table1, table2) => {
         // Interleave: [Col1_T1, Col1_T2, Col2_T1, Col2_T2, Col3_T1, Col3_T2]
         const newRow = [];
         for (let i = 0; i < 3; i++) {
-            newRow.push({ ...wrapCell(row1[i]), origin: 'left', base: table1.base });
-            newRow.push({ ...wrapCell(row2[i]), origin: 'right', base: table2.base });
+            const cell1 = wrapCell(row1[i]);
+            const cell2 = wrapCell(row2[i]);
+
+            // Check if content is identical
+            if (cell1.t === cell2.t) {
+                // Merge into one cell
+                newRow.push({
+                    ...cell2, // Use cell2 props (right side)
+                    origin: 'merged', // Special origin for merged cells
+                    base: table2.base, // Use table2 base
+                    colSpan: 2 // Span 2 columns
+                });
+            } else {
+                // Keep separate
+                newRow.push({ ...cell1, origin: 'left', base: table1.base });
+                newRow.push({ ...cell2, origin: 'right', base: table2.base });
+            }
         }
         return newRow;
     });
