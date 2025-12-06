@@ -92,5 +92,40 @@ export const ROOT_DATA = {
     7: { id: 'root_7', label: 'Class 7', description: 'Class 7 Verbs', items: [] },
     8: { id: 'root_8', label: 'Class 8', description: 'Class 8 Verbs', items: [] },
     9: { id: 'root_9', label: 'Class 9', description: 'Class 9 Verbs', items: [] },
-    10: { id: 'root_10', label: 'Class 10', description: 'Class 10 Verbs', items: [] },
+    10: {
+        id: 'root_10',
+        label: 'Class 10',
+        description: '加強 + aya',
+        items: [
+            {
+                description: '1. 詞根若以母音 i、u、ṛ 開頭，或者 i、u、ṛ 在中間，則二合。',
+                exceptions: [
+                    { root: { value: '√cur', type: '10P', def: '偷' }, form: 'corayati' },
+                    { root: { value: '√vid', type: '2P', def: '知' }, form: 'vedayati [致使]使知' }
+                ]
+            },
+            {
+                description: '2. 如果詞根母音是長音或複合母音，或者詞根母音是短音，但它後面有兩個輔音，則不用二合。',
+                exceptions: [
+                    { root: { value: '√pīḍ', type: '10U', def: '折磨' }, form: 'pīḍayati' },
+                    { root: { value: '√cint', type: '10U', def: '思考' }, form: 'cintayati' }
+                ]
+            },
+            {
+                description: '3. 詞根若以母音 a 開頭，或者 a 在中間，有時三合，有時不變。',
+                exceptions: [
+                    { root: { value: '√kṣal', type: '10U', def: '洗' }, form: 'kṣālayati' },
+                    { root: { value: '√jan', type: '1P, 4Ā', def: '生' }, form: 'janayati 生，[致使]使出生' }
+                ]
+            },
+            {
+                description: '4. 詞根若以母音收尾，則該母音三合。(*根據詞內連聲規則，ai 和 au 在遇到母音時分別變為 āy 和 āv。)',
+                exceptions: [
+                    { root: { value: '√dhṛ', type: '1U', def: '持' }, form: 'dhārayati 持，承擔，支撐' },
+                    { root: { value: '√bhī', type: '3P', def: '恐懼' }, form: 'bhāyayati 使恐懼，使害怕' },
+                    { root: { value: '√bhū', type: '1P, Ā', def: '有，存在' }, form: 'bhāvayati 使有，使存在' }
+                ]
+            }
+        ]
+    },
 };
