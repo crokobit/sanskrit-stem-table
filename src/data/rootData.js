@@ -158,4 +158,140 @@ export const ROOT_DATA = {
             }
         ]
     },
+    passive: {
+        id: 'root_passive',
+        label: '被動',
+        description: '+ya',
+        items: [
+            {
+                description: '1 詞根以 ā 收尾，直接加 ya 形成語幹。',
+                exceptions: [
+                    { root: { value: '√pā', type: '2P', def: '保護' }, form: 'pāyate' },
+                    { root: { value: '√jñā', type: '9P', def: '知' }, form: 'jñāyate' }
+                ]
+            },
+            {
+                description: '2 部分以 ā 或複合母音收尾的詞根替換為 ī。',
+                exceptions: [
+                    { root: { value: '√dā', type: '3U', def: '給' }, form: 'dīyate' },
+                    { root: { value: '√do', type: '4P', def: '切' }, form: 'dīyate' },
+                    { root: { value: '√dhā', type: '3U', def: '置' }, form: 'dhīyate' },
+                    { root: { value: '√mā', type: '4Ā', def: '量' }, form: 'mīyate' },
+                    { root: { value: '√sthā', type: '1U', def: '站立' }, form: 'sthīyate' },
+                    { root: { value: '√pā', type: '1P', def: '飲' }, form: 'pīyate' },
+                    { root: { value: '√hā', type: '3P', def: '捨棄' }, form: 'hīyate' },
+                    { root: { value: '√so', type: '4P', def: '終結' }, form: 'sīyate' },
+                    { root: { value: '√gai', type: '1P', def: '唱' }, form: 'gīyate' },
+                    { root: { value: '√de', type: '1Ā', def: '保護' }, form: 'dīyate' },
+                    { root: { value: '√dhe', type: '1P', def: '吸吮' }, form: 'dhīyate' }
+                ]
+            },
+            {
+                description: '3 詞根尾音 e、ai、o 替換為 ā 再執行 1。',
+                exceptions: [
+                    { root: { value: '√mlai', type: '1P', def: '凋謝' }, form: 'mlāyate' },
+                    { root: { value: '√cho', type: '4P', def: '切斷' }, form: 'chāyate' },
+                    { root: { value: '√dhyai', type: '1P', def: '想' }, form: 'dhyāyate' }
+                ]
+            },
+            {
+                description: '4 詞根尾音 i、u 通常拉長。',
+                exceptions: [
+                    { root: { value: '√ji', type: '1P', def: '勝' }, form: 'jīyate' },
+                    { root: { value: '√stu', type: '2U', def: '讚頌' }, form: 'stūyate' },
+                    { root: { value: '√śru', type: '5P', def: '聽' }, form: 'śrūyate' }
+                ]
+            },
+            {
+                description: '5 詞根以 ṛ 收尾，其前為單輔音時變為 ri；若 ṛ 前面有兩個輔音，則 ṛ 二合為 ar。',
+                exceptions: [
+                    { root: { value: '√kṛ', type: '8U', def: '做' }, form: 'kriyate' },
+                    { root: { value: '√smṛ', type: '1P', def: '憶' }, form: 'smaryate' }
+                ]
+            },
+            {
+                description: '6 詞根尾音 ṝ 變為 īr；但若 ṝ 前是唇音，則 ṝ 變為 ūr。',
+                exceptions: [
+                    { root: { value: '√tṝ', type: '1P', def: '渡' }, form: 'tīryate' },
+                    { root: { value: '√kṝ', type: '6P', def: '散' }, form: 'kīryate' },
+                    { root: { value: '√pṝ', type: '3, 9P', def: '充滿' }, form: 'pūryate' }
+                ]
+            },
+            {
+                description: '8 詞根弱化類：部分詞根開頭或居中的 ya、va、ra 變為 i、u、ṛ。',
+                exceptions: [
+                    { root: { value: '√vac', type: '2P', def: '說' }, form: 'ucyate' },
+                    { root: { value: '√vap', type: '1U', def: '播種' }, form: 'upyate' },
+                    { root: { value: '√vas', type: '1P', def: '居住' }, form: 'uṣyate' },
+                    { root: { value: '√vah', type: '1U', def: '運載' }, form: 'uhyate' },
+                    { root: { value: '√svap', type: '2P', def: '睡' }, form: 'supyate' },
+                    { root: { value: '√yaj', type: '1U', def: '祭祀' }, form: 'ijyate' },
+                    { root: { value: '√grah', type: '9U', def: '抓住' }, form: 'gṛhyate' },
+                    { root: { value: '√pracch', type: '6P', def: '問' }, form: 'pṛcchyate' },
+                    { root: { value: '√hve', type: '1U', def: '呼喚' }, form: 'hūyate' }
+                ]
+            },
+            {
+                description: '9 詞根弱化類：倒數第二位的鼻音脫落。',
+                exceptions: [
+                    { root: { value: '√añj', type: '7P', def: '塗' }, form: 'ajyate' },
+                    { root: { value: '√bandh', type: '9P', def: '縛' }, form: 'badhyate' },
+                    { root: { value: '√bhañj', type: '7P', def: '折斷' }, form: 'bhajyate' },
+                    { root: { value: '√daṃś', type: '1P', def: '咬' }, form: 'daśyate' },
+                    { root: { value: '√granth', type: '1, 9P, 10U, 1Ā', def: '結' }, form: 'grathyate' },
+                    { root: { value: '√rañj', type: '1, 4U', def: '染' }, form: 'rajyate' },
+                    { root: { value: '√svañj', type: '1Ā', def: '擁抱' }, form: 'svajyate' },
+                    { root: { value: '√indh', type: '7Ā', def: '點燃' }, form: 'idhyate' },
+                    { root: { value: '√skand', type: '1P', def: '跳' }, form: 'skadyate' },
+                    { root: { value: '√manth', type: '1, 9P', def: '攪' }, form: 'mathyate' },
+                    { root: { value: '√stambh', type: '1Ā, 5, 9P', def: '支撐' }, form: 'stabhyate' },
+                    { root: { value: '√syand', type: '1Ā', def: '流' }, form: 'syadyate' },
+                    { root: { value: '√dhvaṃs', type: '1Ā', def: '毀滅' }, form: 'dhvasyate' },
+                    { root: { value: '√bhraṃś', type: '1, 4Ā', def: '墮落' }, form: 'bhraśyate' },
+                    { root: { value: '√śaṃs', type: '1P', def: '讚頌' }, form: 'śasyate' },
+                    { root: { value: '√sraṃs', type: '1Ā', def: '掉落' }, form: 'srasyate' }
+                ]
+            },
+            {
+                description: '現在時體系(sārvadhātuka)之外的被動語態。\n1 現在時體系之外的一般時態(ārdhadhātuka)中，被動語態通常由中間語態兼任，有時甚至現在時體系中，中間語態的形式也可以表示被動的意義，在閱讀中需靠語境判斷。',
+                exceptions: []
+            },
+            {
+                description: '一般時態的不定過去時被動第三人稱單數是例外，用 i 結尾的形態。詞根末尾的母音三合，中間的 i、u、ṛ 二合。',
+                exceptions: [
+                    { root: { value: '√kṛ', type: '8U', def: '做' }, form: 'akāri [不定過去被動單三]' }
+                ]
+            },
+            {
+                description: '4. 形成被動語態時的不規則動詞。\n1 部分動詞具有完全不規則的被動語態變化，又或有兩種形式。',
+                exceptions: [
+                    { root: { value: '√ṛ', type: '1P', def: '去' }, form: 'aryate' },
+                    { root: { value: '√śās', type: '2P', def: '教導' }, form: 'śiṣyate' },
+                    { root: { value: '√śās', type: '2Ā', def: '希望' }, form: 'śāsyate' },
+                    { root: { value: '√śī', type: '2Ā', def: '臥' }, form: 'śayyate' },
+                    { root: { value: '√khan', type: '1U', def: '挖' }, form: 'khanyate / khāyate' },
+                    { root: { value: '√tan', type: '8U', def: '伸展' }, form: 'tanyate / tāyate' },
+                    { root: { value: '√jan', type: '4Ā', def: '生' }, form: 'janyate / jāyate' }
+                ]
+            },
+            {
+                description: '2 部分無被動形式的動詞，用其他動詞的語幹替代。',
+                exceptions: [
+                    { root: { value: '√as', type: '2P', def: '是' }, form: '⇒ √bhū【1P】→ bhūyate' },
+                    { root: { value: '√ghas', type: '1, 2P', def: '吃' }, form: '⇒ √ad【2P】→ adyate' },
+                    { root: { value: '√cakṣ', type: '2Ā', def: '看' }, form: '⇒ √khyā【2P】→ khyāyate' },
+                    { root: { value: '√brū', type: '2U', def: '說' }, form: '⇒ √vac【2P】→ ucyate' }
+                ]
+            },
+            {
+                description: '3 同一詞根，主動語態(parasmaipada)和中間語態(ātmanepada)形成的被動形式不同。',
+                exceptions: [
+                    { root: { value: '√śās', type: '2Ā', def: '希望' }, form: 'śāsyate' },
+                    { root: { value: '√śās', type: '2P', def: '教導' }, form: 'śiṣyate' },
+                    { root: { value: '√vas', type: '2Ā', def: '穿' }, form: 'vasyate' },
+                    { root: { value: '√vas', type: '1P', def: '居住' }, form: 'uṣyate' }
+                ]
+            }
+        ]
+    }
 };
