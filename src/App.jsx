@@ -73,10 +73,15 @@ const App = () => {
         let effectiveGender = gender;
 
         if (rawTable.isGroup) {
-            if (!effectiveVariant) effectiveVariant = rawTable.defaultVariant;
+            // Ensure effectiveVariant is valid for this group
+            if (!effectiveVariant || !rawTable.data[effectiveVariant]) {
+                effectiveVariant = rawTable.defaultVariant;
+            }
             if (!effectiveGender) effectiveGender = "ALL";
 
             const variantData = rawTable.data[effectiveVariant];
+            if (!variantData) return null; // Safety fallback
+
             const mappedRows = variantData.rows.map(row =>
                 row.map(cell => extractGenderData(cell, effectiveGender))
             );

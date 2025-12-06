@@ -809,8 +809,12 @@ export const DATA = {
     // --- Consonant Ending Group ---
     "consonant_ending": {
         id: "consonant_ending",
+        name: "輔音結尾 marut 陽",
         isGroup: true,
-        stem: "Consonant Ending",
+        stem: "t-stem Masculine",
+        shortStem: "-t",
+        gender: "陽",
+        example: "marut (wind)",
         variants: ["consonant-ended", "k-ended", "ṭ-ended"],
         defaultVariant: "consonant-ended",
         hideGenderTabs: true,
@@ -894,6 +898,7 @@ export const DATA = {
         gender: "陰",
         example: "āpad (misfortune)",
         base: "āpa",
+        groupId: "consonant_ending",
         excludeFromDropdown: true,
         relatedTables: [
             { id: "consonant_ending", variant: "consonant-ended", label: "marut【陽】風" },
@@ -917,6 +922,7 @@ export const DATA = {
         gender: "中",
         example: "jagat (world)",
         base: "jaga",
+        groupId: "consonant_ending",
         excludeFromDropdown: true,
         note: "jaganti*: 作為強語干，插入鼻音加強。",
         relatedTables: [
@@ -924,8 +930,8 @@ export const DATA = {
             { id: "apad", label: "āpad【陰】不幸" }
         ],
         data: [
-            ["jagat", "jagatī", "jaganti"],
-            ["jagat", "jagatī", "jaganti"],
+            ["jagat", "jagatī", { t: "jaganti", userMarked: true }],
+            ["jagat", "jagatī", { t: "jaganti", userMarked: true }],
             ["jagatā", "jagadbhyām", "jagadbhis"],
             ["jagate", "jagadbhyām", "jagadbhyas"],
             ["jagatas", "jagadbhyām", "jagadbhyas"],
@@ -941,6 +947,7 @@ export const DATA = {
         gender: "陰",
         example: "ruj (disease)",
         base: "ru",
+        groupId: "consonant_ending",
         excludeFromDropdown: true,
         relatedTables: [
             { id: "consonant_ending", variant: "k-ended", label: "vāc【陰】語言" },
@@ -964,6 +971,7 @@ export const DATA = {
         gender: "陰",
         example: "diś (direction)",
         base: "di",
+        groupId: "consonant_ending",
         excludeFromDropdown: true,
         relatedTables: [
             { id: "consonant_ending", variant: "k-ended", label: "vāc【陰】語言" },
@@ -987,6 +995,7 @@ export const DATA = {
         gender: "陽",
         example: "viś (clan)",
         base: "vi",
+        groupId: "consonant_ending",
         excludeFromDropdown: true,
         relatedTables: [
             { id: "consonant_ending", variant: "ṭ-ended", label: "dviṣ【陽】敵人" },
@@ -1010,6 +1019,7 @@ export const DATA = {
         gender: "形",
         example: "lih (licking)",
         base: "li",
+        groupId: "consonant_ending",
         excludeFromDropdown: true,
         relatedTables: [
             { id: "consonant_ending", variant: "ṭ-ended", label: "dviṣ【陽】敵人" },

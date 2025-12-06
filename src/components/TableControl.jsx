@@ -14,6 +14,12 @@ const TableControl = ({
 }) => {
     const rawTable = data[tableId];
 
+    // Determine if we should show variants (tabs)
+    // If current table is a group, show its variants.
+    // If current table is part of a group (has groupId), show that group's variants.
+    const groupTable = rawTable.isGroup ? rawTable : (rawTable.groupId ? data[rawTable.groupId] : null);
+    const showVariants = groupTable && groupTable.variants;
+
     return (
         <div className="table-control-container">
             {/* Table Selector */}
@@ -53,42 +59,46 @@ const TableControl = ({
                 )}
             </div>
 
-            {/* Variant Selectors for Groups */}
-            {rawTable.isGroup && (
-                <div className="controls-container table-control-row">
-                    {/* Variant Tabs */}
-                    <div className="variant-tabs table-control-tabs">
-                        {rawTable.variants.map(v => (
-                            <button
-                                key={v}
-                                onClick={() => onVariantChange(v)}
-                                className={`variant-tab-btn ${variant === v
-                                    ? 'variant-tab-btn-active'
-                                    : 'variant-tab-btn-inactive'
-                                    }`}
-                            >
-                                {v}
-                            </button>
-                        ))}
-                    </div>
+            {/* Variant Tabs (if applicable) */}
+            {showVariants && (
+                <div className="variant-tabs table-control-tabs">
+                    {groupTable.variants.map(v => (
+                        <button
+                            key={v}
+                            onClick={() => {
+                                if (tableId !== groupTable.id) {
+                                    onTableChange(groupTable.id);
+                                    setTimeout(() => onVariantChange(v), 0);
+                                } else {
+                                    onVariantChange(v);
+                                }
+                            }}
+                            className={`variant-tab-btn ${variant === v
+                                ? 'variant-tab-btn-active'
+                                : 'variant-tab-btn-inactive'
+                                }`}
+                        >
+                            {v}
+                        </button>
+                    ))}
+                </div>
+            )}
 
-                    {/* Gender Tabs for Pronouns */}
-                    {!rawTable.hideGenderTabs && (
-                        <div className="gender-tabs table-control-tabs">
-                            {["ALL", "M", "N", "F"].map(g => (
-                                <button
-                                    key={g}
-                                    onClick={() => onGenderChange(g)}
-                                    className={`gender-tab-btn ${gender === g
-                                        ? 'gender-tab-btn-active'
-                                        : 'gender-tab-btn-inactive'
-                                        }`}
-                                >
-                                    {g === "ALL" ? "All Genders" : (g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine"))}
-                                </button>
-                            ))}
-                        </div>
-                    )}
+            {/* Gender Tabs for Pronouns */}
+            {rawTable.isGroup && !rawTable.hideGenderTabs && (
+                <div className="gender-tabs table-control-tabs">
+                    {["ALL", "M", "N", "F"].map(g => (
+                        <button
+                            key={g}
+                            onClick={() => onGenderChange(g)}
+                            className={`gender-tab-btn ${gender === g
+                                ? 'gender-tab-btn-active'
+                                : 'gender-tab-btn-inactive'
+                                }`}
+                        >
+                            {g === "ALL" ? "All Genders" : (g === "M" ? "Masculine" : (g === "N" ? "Neuter" : "Feminine"))}
+                        </button>
+                    ))}
                 </div>
             )}
         </div>
