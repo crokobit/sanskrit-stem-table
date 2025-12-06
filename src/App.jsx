@@ -7,6 +7,7 @@ import Legend from './components/Legend';
 import Modal from './components/Modal';
 import TableControl from './components/TableControl';
 import RootView from './components/RootView';
+import SandhiRules from './components/SandhiRules';
 
 const App = () => {
     // App Mode: 'noun' or 'verb'
@@ -190,7 +191,7 @@ const App = () => {
         setIsModalOpen(false);
     };
 
-    if (appMode !== 'root' && (!table1Data || !table2Data)) return <div>Loading...</div>;
+    if (appMode !== 'root' && appMode !== 'sandhi' && (!table1Data || !table2Data)) return <div>Loading...</div>;
 
     return (
         <div className="app-container">
@@ -219,10 +220,16 @@ const App = () => {
                         >
                             Root
                         </button>
+                        <button
+                            onClick={() => setAppMode('sandhi')}
+                            className={`app-btn ${appMode === 'sandhi' ? 'app-btn-mode-active' : 'app-btn-inactive'}`}
+                        >
+                            Sandhi
+                        </button>
                     </div>
 
                     {/* View Mode Switcher - Only show for Noun/Verb */}
-                    {appMode !== 'root' && (
+                    {appMode !== 'root' && appMode !== 'sandhi' && (
                         <div className="view-mode-switcher view-mode-switcher-container">
                             <button
                                 onClick={() => setViewMode('single')}
@@ -251,8 +258,9 @@ const App = () => {
             <main className="main-content">
 
                 {appMode === 'root' && <RootView />}
+                {appMode === 'sandhi' && <SandhiRules />}
 
-                {appMode !== 'root' && viewMode === 'single' && (
+                {appMode !== 'root' && appMode !== 'sandhi' && viewMode === 'single' && (
                     <>
                         <TableControl
                             tableId={table1Id}
@@ -275,7 +283,7 @@ const App = () => {
                     </>
                 )}
 
-                {appMode !== 'root' && viewMode === 'compare' && (
+                {appMode !== 'root' && appMode !== 'sandhi' && viewMode === 'compare' && (
                     <div className="app-grid-2-col">
                         <div className="compare-col">
                             <TableControl
@@ -318,7 +326,7 @@ const App = () => {
                     </div>
                 )}
 
-                {appMode !== 'root' && viewMode === 'merge' && (
+                {appMode !== 'root' && appMode !== 'sandhi' && viewMode === 'merge' && (
                     <>
                         <div className="app-grid-merge">
                             <TableControl

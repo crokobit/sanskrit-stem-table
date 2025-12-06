@@ -1493,3 +1493,77 @@ body {
 .root-item-def {
     color: #475569;
 }
+
+/* Sandhi Rules Styles */
+.red {
+    color: #b91c1c; /* red-700 */
+    font-weight: bold;
+}
+
+.blue {
+    color: #1d4ed8; /* blue-700 */
+    font-weight: bold;
+}
+
+/* Sandhi Component Styles */
+.sandhi-container {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e7e5e4;
+}
+
+.sandhi-rule-block {
+    margin-bottom: 1.5rem;
+}
+
+.sandhi-rule-text {
+    font-weight: 700;
+    color: #44403c; /* stone-700 */
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.sandhi-examples-list {
+    list-style-type: none;
+    padding-left: 1rem;
+    margin: 0;
+}
+
+.sandhi-example-item {
+    margin-bottom: 0.5rem;
+    color: #57534e; /* stone-600 */
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Sandhi Dropdown Styles */
+.sandhi-controls {
+    margin-bottom: 1.5rem;
+}
+
+.sandhi-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e7e5e4; /* stone-200 */
+    border-radius: 0.5rem;
+    background-color: #fafaf9; /* stone-50 */
+    color: #44403c; /* stone-700 */
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+}
+
+.sandhi-select:focus {
+    outline: none;
+    border-color: #b91c1c; /* red-700 */
+    box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.1);
+}
