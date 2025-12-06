@@ -299,6 +299,10 @@ export const ROOT_DATA = {
                     { root: { value: '√vas', type: '2Ā', def: '穿' }, form: 'vasyate' },
                     { root: { value: '√vas', type: '1P', def: '居住' }, form: 'uṣyate' }
                 ]
+            },
+            {
+                description: '命令語氣被動語態:詞根弱化，加 ya，再加上面所列語尾。',
+                exceptions: []
             }
         ]
     }

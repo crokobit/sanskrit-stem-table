@@ -230,6 +230,7 @@ export const VERB_DATA = {
         "voice": "middle",
         "tense": "impv",
         "description": "命令、請求、祈願",
+
         "data": [
             [
                 {
