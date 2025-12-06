@@ -52,7 +52,7 @@ export const VERB_DATA = {
         "name": "命主",
         "voice": "active",
         "tense": "impv",
-        "description": "命令、請求、祈願",
+        "description": "假設、希望、未來行為、命令、勸告、祈願、請求",
         "data": [
             [
                 {
@@ -229,7 +229,7 @@ export const VERB_DATA = {
         "name": "命中",
         "voice": "middle",
         "tense": "impv",
-        "description": "命令、請求、祈願",
+        "description": "假設、希望、未來行為、命令、勸告、祈願、請求",
 
         "data": [
             [
