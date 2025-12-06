@@ -5,6 +5,8 @@ export const marut = {
     gender: "陽",
     example: "marut (wind)",
     base: "maru",
+    groupId: "consonant_ending",
+    excludeFromDropdown: true,
     note: "大多数以辅音收尾的名词只有一个语干。由 t 停顿的语干。",
     relatedTables: [
         { id: "apad", label: "āpad【陰】不幸" },
@@ -29,6 +31,8 @@ export const vac = {
     gender: "陰",
     example: "vāc (speech)",
     base: "vā",
+    groupId: "consonant_ending",
+    excludeFromDropdown: true,
     note: "以 k 停顿的语干。c 收尾的语干大部分以 k 停顿。",
     relatedTables: [
         { id: "ruj", label: "ruj【陰】疾病" },
@@ -53,6 +57,8 @@ export const dvis = {
     gender: "陽",
     example: "dviṣ (enemy)",
     base: "dvi",
+    groupId: "consonant_ending",
+    excludeFromDropdown: true,
     note: "以 ṭ 停顿的语干。大多數 ś 和 ṣ 收尾的語干，一些以 h 收尾的語干。",
     relatedTables: [
         { id: "vis", label: "viś【陽】吠舍" },
@@ -80,7 +86,7 @@ export const apad = {
     groupId: "consonant_ending",
     excludeFromDropdown: true,
     relatedTables: [
-        { id: "consonant_ending", variant: "consonant-ended", label: "marut【陽】風" },
+        { id: "consonant_ending", variant: "-t 陽 -- marut", label: "marut【陽】風" },
         { id: "jagat", label: "jagat【中】眾生" }
     ],
     data: [
@@ -106,7 +112,7 @@ export const jagat = {
     excludeFromDropdown: true,
     note: "jaganti*: 作為強語干，插入鼻音加強。",
     relatedTables: [
-        { id: "consonant_ending", variant: "consonant-ended", label: "marut【陽】風" },
+        { id: "consonant_ending", variant: "-t 陽 -- marut", label: "marut【陽】風" },
         { id: "apad", label: "āpad【陰】不幸" }
     ],
     data: [
@@ -131,7 +137,7 @@ export const ruj = {
     groupId: "consonant_ending",
     excludeFromDropdown: true,
     relatedTables: [
-        { id: "consonant_ending", variant: "k-ended", label: "vāc【陰】語言" },
+        { id: "consonant_ending", variant: "-k 陰 -- vac", label: "vāc【陰】語言" },
         { id: "dis", label: "diś【陰】方位" }
     ],
     data: [
@@ -156,7 +162,7 @@ export const dis = {
     groupId: "consonant_ending",
     excludeFromDropdown: true,
     relatedTables: [
-        { id: "consonant_ending", variant: "k-ended", label: "vāc【陰】語言" },
+        { id: "consonant_ending", variant: "-k 陰 -- vac", label: "vāc【陰】語言" },
         { id: "ruj", label: "ruj【陰】疾病" }
     ],
     data: [
@@ -181,7 +187,7 @@ export const vis = {
     groupId: "consonant_ending",
     excludeFromDropdown: true,
     relatedTables: [
-        { id: "consonant_ending", variant: "ṭ-ended", label: "dviṣ【陽】敵人" },
+        { id: "consonant_ending", variant: "-ṭ 陽 -- dvis", label: "dviṣ【陽】敵人" },
         { id: "lih", label: "lih【形】舔" }
     ],
     data: [
@@ -206,7 +212,7 @@ export const lih = {
     groupId: "consonant_ending",
     excludeFromDropdown: true,
     relatedTables: [
-        { id: "consonant_ending", variant: "ṭ-ended", label: "dviṣ【陽】敵人" },
+        { id: "consonant_ending", variant: "-ṭ 陽 -- dvis", label: "dviṣ【陽】敵人" },
         { id: "vis", label: "viś【陽】吠舍" }
     ],
     data: [
@@ -225,12 +231,12 @@ export const consonant_ending = {
     id: "consonant_ending",
     name: "輔音結尾",
     isGroup: true,
-    variants: ["consonant-ended", "k-ended", "ṭ-ended"],
-    defaultVariant: "consonant-ended",
+    variants: ["-t 陽 -- marut", "-k 陰 -- vac", "-ṭ 陽 -- dvis"],
+    defaultVariant: "-t 陽 -- marut",
     hideGenderTabs: true,
     data: {
-        "consonant-ended": marut,
-        "k-ended": vac,
-        "ṭ-ended": dvis
+        "-t 陽 -- marut": marut,
+        "-k 陰 -- vac": vac,
+        "-ṭ 陽 -- dvis": dvis
     }
 };
