@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ROOT_DATA } from '../data/rootData';
 
 const RootView = () => {
-    const [selectedClass, setSelectedClass] = useState(1);
+    const [selectedClass, setSelectedClass] = useState('1');
     const currentClassData = ROOT_DATA[selectedClass];
 
     return (
@@ -12,10 +12,10 @@ const RootView = () => {
                 {Object.keys(ROOT_DATA).map((classNum) => (
                     <button
                         key={classNum}
-                        onClick={() => setSelectedClass(Number(classNum))}
-                        className={`root-class-btn ${selectedClass === Number(classNum) ? 'root-class-btn-active' : 'root-class-btn-inactive'}`}
+                        onClick={() => setSelectedClass(classNum)}
+                        className={`root-class-btn ${selectedClass === classNum ? 'root-class-btn-active' : 'root-class-btn-inactive'}`}
                     >
-                        {classNum}
+                        {ROOT_DATA[classNum].label}
                     </button>
                 ))}
             </div>

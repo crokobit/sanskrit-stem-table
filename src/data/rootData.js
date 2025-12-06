@@ -1,7 +1,7 @@
 export const ROOT_DATA = {
     1: {
         id: 'root_1',
-        label: 'Class 1',
+        label: '1',
         description: '二合+a',
         items: [
             {
@@ -30,11 +30,11 @@ export const ROOT_DATA = {
             }
         ]
     },
-    2: { id: 'root_2', label: 'Class 2', description: 'Class 2 Verbs', items: [] },
-    3: { id: 'root_3', label: 'Class 3', description: 'Class 3 Verbs', items: [] },
+    2: { id: 'root_2', label: '2', description: 'Class 2 Verbs', items: [] },
+    3: { id: 'root_3', label: '3', description: 'Class 3 Verbs', items: [] },
     4: {
         id: 'root_4',
-        label: 'Class 4',
+        label: '4',
         description: '+ya',
         items: [
             {
@@ -63,10 +63,10 @@ export const ROOT_DATA = {
             }
         ]
     },
-    5: { id: 'root_5', label: 'Class 5', description: 'Class 5 Verbs', items: [] },
+    5: { id: 'root_5', label: '5', description: 'Class 5 Verbs', items: [] },
     6: {
         id: 'root_6',
-        label: 'Class 6',
+        label: '6',
         description: '+a',
         items: [
             {
@@ -86,15 +86,21 @@ export const ROOT_DATA = {
                     { root: { value: '√vid', type: '6U', def: '發現，找到' }, form: 'vindati' },
                     { root: { value: '√lip', type: '6U', def: '塗' }, form: 'limpati' }
                 ]
+            },
+            {
+                description: 'ṛ 的特殊內連聲: ṛ 作第 6 類動詞詞根尾音，後加 a 形成語幹時，ṛ 要變為 riy。即:√-ṛ + a = √-riy + a→√-riya',
+                exceptions: [
+                    { root: { value: '√mṛ', type: '6Ā', def: '死亡' }, form: 'mriyate [中間語態單數第三人稱]' }
+                ]
             }
         ]
     },
-    7: { id: 'root_7', label: 'Class 7', description: 'Class 7 Verbs', items: [] },
-    8: { id: 'root_8', label: 'Class 8', description: 'Class 8 Verbs', items: [] },
-    9: { id: 'root_9', label: 'Class 9', description: 'Class 9 Verbs', items: [] },
+    7: { id: 'root_7', label: '7', description: 'Class 7 Verbs', items: [] },
+    8: { id: 'root_8', label: '8', description: 'Class 8 Verbs', items: [] },
+    9: { id: 'root_9', label: '9', description: 'Class 9 Verbs', items: [] },
     10: {
         id: 'root_10',
-        label: 'Class 10',
+        label: '10',
         description: '加強 + aya',
         items: [
             {
@@ -124,6 +130,30 @@ export const ROOT_DATA = {
                     { root: { value: '√dhṛ', type: '1U', def: '持' }, form: 'dhārayati 持，承擔，支撐' },
                     { root: { value: '√bhī', type: '3P', def: '恐懼' }, form: 'bhāyayati 使恐懼，使害怕' },
                     { root: { value: '√bhū', type: '1P, Ā', def: '有，存在' }, form: 'bhāvayati 使有，使存在' }
+                ]
+            }
+        ]
+    },
+    causative: {
+        id: 'root_causative',
+        label: '致使式',
+        description: '+aya, 且非第十類',
+        items: []
+    },
+    denominative: {
+        id: 'root_denominative',
+        label: '名動詞',
+        description: '名詞語幹後加 ya，少數加 sya',
+        items: [
+            {
+                description: '很多以 aya 結尾的名動詞也可以直接視為第 10 類動詞，比如 gaṇayati 他計數，可以認為原形是名動詞√gaṇay【a 名動】計數,直接加語尾變來的，也可以視為第10類動詞√gaṇ【10U】 加 aya 再加語尾變來的。再比如 daṇḍayati 他打，其動詞原形可以視為√daṇḍ【10U】或√daṇḍaya 【名動】。kathayati 他講，其動詞原形可以視為√kath【10U】或√kathaya【名動】。',
+                exceptions: [
+                    { root: { value: 'gaṇa', type: '陽', def: '數，類' }, form: '√gaṇaya 【名動】 計數' },
+                    { root: { value: '√gaṇ', type: '10U', def: '計算' }, form: '+aya -> √gaṇaya 計數' },
+                    { root: { value: 'daṇḍa', type: '陽', def: '棍棒，懲罰' }, form: '√daṇḍaya 【名動】' },
+                    { root: { value: '√daṇḍ', type: '10U', def: '懲罰' }, form: '+aya -> √daṇḍaya 打' },
+                    { root: { value: 'katha', type: '陽', def: '言詞，故事' }, form: '√kathaya 【名動】' },
+                    { root: { value: '√kath', type: '10U', def: '敘述' }, form: '+aya -> √kathaya 講' }
                 ]
             }
         ]
