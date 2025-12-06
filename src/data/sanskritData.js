@@ -121,14 +121,14 @@ export const DATA = {
         example: "nadī (river)",
         base: "nad",
         data: [
-            ["nadī", "nadyau", "nadyas"],
-            ["nadīm", "nadyau", "nadīs"],
+            [{ t: "nadī", userMarked: true }, "nadyau", "nadyas"],
+            [{ t: "nadīm", userMarked: true }, "nadyau", { t: "nadīs", userMarked: true }],
             ["nadyā", "nadībhyām", "nadībhis"],
-            ["nadyai", "nadībhyām", "nadībhyas"],
+            [{ t: "nadyai", userMarked: true }, "nadībhyām", "nadībhyas"],
             ["nadyās", "nadībhyām", "nadībhyas"],
-            ["nadyās", "nadyos", "nadīnām"],
-            ["nadyām", "nadyos", "nadīṣu"],
-            ["nadi", "nadyau", "nadyas"]
+            ["nadyās", "nadyos", { t: "nadīnām", userMarked: true }],
+            [{ t: "nadyām", userMarked: true }, "nadyos", "nadīṣu"],
+            [{ t: "nadi", userMarked: true }, "nadyau", "nadyas"]
         ]
     },
     "dhi_fem": {
