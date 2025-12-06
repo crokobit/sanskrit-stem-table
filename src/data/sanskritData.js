@@ -544,6 +544,7 @@ export const DATA = {
         base: "jīv",
         hasStrength: true,
         stemStrength: { strong: "jīvant", weak: "jīvat" },
+        memorizeNote: "强语干:现在时语干+nt (陈主复三去 i); 弱语干:现在时语干+t (陈主复三去 i 和 n)",
         data: [
             [{ t: "jīvan", s: STRONG }, { t: "jīvantau", s: STRONG }, { t: "jīvantas", s: STRONG }],
             [{ t: "jīvantam", s: STRONG }, { t: "jīvantau", s: STRONG }, { t: "jīvatas", s: WEAK }],
@@ -564,7 +565,7 @@ export const DATA = {
         base: "jīva",
         hasStrength: true,
         stemStrength: { strong: "jīvant", weak: "jīvat" },
-        note: "第 1、4、10 類動詞，雙數一、二、呼格為 jīvantī。其餘同陽性。",
+        memorizeNote: "强语干:现在时语干+nt (陈主复三去 i); 弱语干:现在时语干+t (陈主复三去 i 和 n); 雙數一、二、呼格為 jīvantī。其餘同陽性。",
         data: [
             [{ t: "jīvat", s: WEAK }, { t: "jīvantī", s: STRONG, userMarked: true }, { t: "jīvanti", s: STRONG }],
             [{ t: "jīvat", s: WEAK }, { t: "jīvantī", s: STRONG, userMarked: true }, { t: "jīvanti", s: STRONG }],
