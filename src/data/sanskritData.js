@@ -230,7 +230,7 @@ export const DATA = {
         shortStem: "-ū",
         gender: "陰",
         example: "bhū (earth)",
-        memorizeNote: "標準詞尾，母音開頭語尾前+ v ,再前u不變。子音直接加。例外：單一vadhūm,複二同單ㄧ為vadhūs",
+        memorizeNote: "標準詞尾，母音開頭語尾前+ v ,再前u不變。子音直接加。",
         base: "bh",
         data: [
             ["bhūs", "bhuvau", "bhuvas"],
