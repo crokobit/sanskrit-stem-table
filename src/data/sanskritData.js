@@ -129,6 +129,10 @@ export const DATA = {
             ["nadyās", "nadyos", { t: "nadīnām", userMarked: true }],
             [{ t: "nadyām", userMarked: true }, "nadyos", "nadīṣu"],
             [{ t: "nadi", userMarked: true }, "nadyau", "nadyas"]
+        ],
+        relatedTables: [
+            { id: "gramani_fem", label: "grāmaṇī【陽、陰】村長" },
+            { id: "yavakri_fem", label: "yavakrī【陽、陰】買大麥者" }
         ]
     },
     "dhi_fem": {
@@ -147,6 +151,58 @@ export const DATA = {
             ["dhiyas / dhiyās", "dhiyos", "dhiyām / dhīnām"],
             ["dhiyi / dhiyām", "dhiyos", "dhīṣu"],
             ["dhīs", "dhiyau", "dhiyas"]
+        ],
+        relatedTables: [
+            { id: "gramani_fem", label: "grāmaṇī【陽、陰】村長" },
+            { id: "yavakri_fem", label: "yavakrī【陽、陰】買大麥者" }
+        ]
+    },
+    "gramani_fem": {
+        id: "gramani_fem",
+        stem: "Root-stem (ī-stem) Yan",
+        shortStem: "-ī",
+        gender: "陽、陰",
+        example: "grāmaṇī (village leader)",
+        base: "grāmaṇ",
+        note: "以 ī 收尾的詞根語幹構成複合詞時，遇以元音起始的格尾，若 ī 前只有一個輔音，則 ī 變為 y (下表斜體部分)。\n例如: grāma-nī【陽、陰】村長",
+        excludeFromDropdown: true,
+        data: [
+            ["grāmaṇīs", "grāmaṇyau", "grāmaṇyas"],
+            ["grāmaṇyam", "grāmaṇyau", "grāmaṇyas"],
+            [{ t: "grāmaṇyā", userMarked: true }, "grāmaṇībhyām", "grāmaṇībhis"],
+            [{ t: "grāmaṇye / grāmaṇyai", userMarked: true }, "grāmaṇībhyām", "grāmaṇībhyas"],
+            [{ t: "grāmaṇyas / grāmaṇyās", userMarked: true }, "grāmaṇībhyām", "grāmaṇībhyas"],
+            [{ t: "grāmaṇyas / grāmaṇyās", userMarked: true }, "grāmaṇyos", { t: "grāmaṇyām / grāmaṇīnām", userMarked: true }],
+            [{ t: "grāmaṇyi / grāmaṇyām", userMarked: true }, "grāmaṇyos", "grāmaṇīṣu"],
+            ["grāmaṇīs", "grāmaṇyau", "grāmaṇyas"]
+        ],
+        relatedTables: [
+            { id: "dhi_fem", label: "dhī【陰】思想" },
+            { id: "nadi_fem", label: "nadī【陰】河流" }
+        ]
+    },
+    "yavakri_fem": {
+        id: "yavakri_fem",
+        stem: "Root-stem (ī-stem) Iyang",
+        shortStem: "-ī",
+        gender: "陽、陰",
+        example: "yavakrī (corn buyer)",
+        base: "yavakr",
+        note: "若 ī 前有兩個或兩個以上輔音，遇以元音起始的格尾，則 ī 變為 iy (下表斜體部分)。\n例如: yavakrī【陽、陰】買大麥者\n*有兩種形式的: 前者同普通單音節語幹形式(參見第十三課 dhī)，後者同普通多音節語幹形式(參見第十一課 nadī)。",
+        excludeFromDropdown: true,
+        data: [
+            ["yavakrīs", { t: "yavakriyau", userMarked: true }, { t: "yavakriyas", userMarked: true }],
+            [{ t: "yavakriyam", userMarked: true }, { t: "yavakriyau", userMarked: true }, { t: "yavakriyas", userMarked: true }],
+            [{ t: "yavakriyā", userMarked: true }, "yavakrībhyām", "yavakrībhis"],
+            [{ t: "yavakriye / yavakriyai", userMarked: true }, "yavakrībhyām", "yavakrībhyas"],
+            [{ t: "yavakriyas / yavakriyās", userMarked: true }, "yavakrībhyām", "yavakrībhyas"],
+            [{ t: "yavakriyas / yavakriyās", userMarked: true }, "yavakriyos", { t: "yavakriyām / yavakrīnām", userMarked: true }],
+            [{ t: "yavakriyi / yavakriyām", userMarked: true }, "yavakriyos", "yavakrīṣu"],
+            ["yavakrīs", { t: "yavakriyau", userMarked: true }, { t: "yavakriyas", userMarked: true }]
+        ],
+        relatedTables: [
+            { id: "dhi_fem", label: "dhī【陰】思想" },
+            { id: "nadi_fem", label: "nadī【陰】河流" }
         ]
     },
     "suci_neut": {
@@ -222,6 +278,10 @@ export const DATA = {
             ["vadhvās", "vadhvos", "vadhūnām"],
             ["vadhvām", "vadhvos", "vadhūṣu"],
             [{ t: "vadhu", userMarked: true }, "vadhvau", "vadhvas"]
+        ],
+        relatedTables: [
+            { id: "khalapu_fem", label: "khalapū【陽、陰】清潔工" },
+            { id: "punarbhu_fem", label: "punarbhū【陽、陰】再嫁的女人" }
         ]
     },
     "bhu_fem": {
@@ -241,6 +301,58 @@ export const DATA = {
             ["bhuvas", "bhuvos", "bhuvām"],
             ["bhuvi", "bhuvos", "bhūṣu"],
             ["bhūs", "bhuvau", "bhuvas"]
+        ],
+        relatedTables: [
+            { id: "khalapu_fem", label: "khalapū【陽、陰】清潔工" },
+            { id: "punarbhu_fem", label: "punarbhū【陽、陰】再嫁的女人" }
+        ]
+    },
+    "khalapu_fem": {
+        id: "khalapu_fem",
+        stem: "Root-stem (ū-stem) Yan",
+        shortStem: "-ū",
+        gender: "陽、陰",
+        example: "khalapū (cleaner)",
+        base: "khalap",
+        note: "以 ū 收尾的詞根語幹構成複合詞時，遇以元音起始的格尾，若 ū 前只有一個輔音，則 ū 變為 v (下表斜體部分)。\n例如: khala-pū【陽、陰】清潔工\n*有兩種形式的: 前者同普通單音節語幹形式，後者同普通多音節語幹形式。(參見第十四課 ū 語幹變格)",
+        excludeFromDropdown: true,
+        data: [
+            ["khalapūs", { t: "khalapvau", userMarked: true }, { t: "khalapvas", userMarked: true }],
+            [{ t: "khalapvam", userMarked: true }, { t: "khalapvau", userMarked: true }, { t: "khalapvas", userMarked: true }],
+            [{ t: "khalapvā", userMarked: true }, "khalapūbhyām", "khalapūbhis"],
+            [{ t: "khalapve / khalapvai", userMarked: true }, "khalapūbhyām", "khalapūbhyas"],
+            [{ t: "khalapvas / khalapvās", userMarked: true }, "khalapūbhyām", "khalapūbhyas"],
+            [{ t: "khalapvas / khalapvās", userMarked: true }, "khalapvos", { t: "khalapvām / khalapūnām", userMarked: true }],
+            [{ t: "khalapvi / khalapvām", userMarked: true }, "khalapvos", "khalapūṣu"],
+            [{ t: "khalapūs / khalapu", userMarked: true }, { t: "khalapvau", userMarked: true }, { t: "khalapvas", userMarked: true }]
+        ],
+        relatedTables: [
+            { id: "bhu_fem", label: "bhū【陰】大地" },
+            { id: "vadhu_fem", label: "vadhū【陰】女子" }
+        ]
+    },
+    "punarbhu_fem": {
+        id: "punarbhu_fem",
+        stem: "Root-stem (ū-stem) Uvang",
+        shortStem: "-ū",
+        gender: "陽、陰",
+        example: "punarbhū (remarried woman)",
+        base: "punarbh",
+        note: "若 ū 前有兩個或兩個以上輔音，遇以元音起始的格尾，則 ū 變為 uv (下表斜體部分)。\n例如: punar-bhū【陽、陰】再嫁的女人",
+        excludeFromDropdown: true,
+        data: [
+            ["punarbhūs", { t: "punarbhuvau", userMarked: true }, { t: "punarbhuvas", userMarked: true }],
+            [{ t: "punarbhuvam", userMarked: true }, { t: "punarbhuvau", userMarked: true }, { t: "punarbhuvas", userMarked: true }],
+            [{ t: "punarbhuvā", userMarked: true }, "punarbhūbhyām", "punarbhūbhis"],
+            [{ t: "punarbhuve / punarbhuvai", userMarked: true }, "punarbhūbhyām", "punarbhūbhyas"],
+            [{ t: "punarbhuvas / punarbhuvās", userMarked: true }, "punarbhūbhyām", "punarbhūbhyas"],
+            [{ t: "punarbhuvas / punarbhuvās", userMarked: true }, "punarbhuvos", { t: "punarbhuvām / punarbhūnām", userMarked: true }],
+            [{ t: "punarbhuvi / punarbhuvām", userMarked: true }, "punarbhuvos", "punarbhūṣu"],
+            ["punarbhūs", { t: "punarbhuvau", userMarked: true }, { t: "punarbhuvas", userMarked: true }]
+        ],
+        relatedTables: [
+            { id: "bhu_fem", label: "bhū【陰】大地" },
+            { id: "vadhu_fem", label: "vadhū【陰】女子" }
         ]
     },
     "visvapa_masc": {
