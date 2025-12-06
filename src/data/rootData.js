@@ -218,6 +218,14 @@ export const ROOT_DATA = {
                 ]
             },
             {
+                description: '7 致使式、第 10 類動詞和名動詞的被動語態：1) 保留語幹加強形式，2) 去掉 aya 添加 ya，3) 加中間語態語尾。',
+                exceptions: [
+                    { root: { value: '√bhū', type: '1P', def: '是，有，存在' }, form: 'bhāvayati [致使] -> bhāvyate [致使被動]' },
+                    { root: { value: '√cur', type: '10U', def: '偷' }, form: 'corayati -> coryate' },
+                    { root: { value: '√gaṇaya', type: '名動', def: '數' }, form: 'gaṇayati -> gaṇyate' }
+                ]
+            },
+            {
                 description: '8 詞根弱化類：部分詞根開頭或居中的 ya、va、ra 變為 i、u、ṛ。',
                 exceptions: [
                     { root: { value: '√vac', type: '2P', def: '說' }, form: 'ucyate' },
