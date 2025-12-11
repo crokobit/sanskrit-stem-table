@@ -389,16 +389,18 @@ export const DATA = {
         gender: "陽",
         example: "pitṛ (father)",
         base: "pit",
+        hasStrength: true,
+        stemStrength: { strong: "pitar", middle: "pitṛ", weak: "pitr" },
         note: " 第三至七格及呼格同行动名词的变格规律。",
         data: [
-            ["pitā", "pitarau", "pitaras"],
-            ["pitaram", "pitarau", "pitṝn"],
-            ["pitrā", "pitṛbhyām", "pitṛbhis"],
-            ["pitre", "pitṛbhyām", "pitṛbhyas"],
-            ["pitur", "pitṛbhyām", "pitṛbhyas"],
-            ["pitur", "pitros", "pitṝṇām"],
-            ["pitari", "pitros", "pitṛṣu"],
-            ["pitar", "pitarau", "pitaras"]
+            [{ t: "pitā", s: STRONG }, { t: "pitarau", s: STRONG }, { t: "pitaras", s: STRONG }],
+            [{ t: "pitaram", s: STRONG }, { t: "pitarau", s: STRONG }, { t: "pitṝn", s: WEAK, userMarked: true }],
+            [{ t: "pitrā", s: WEAK }, { t: "pitṛbhyām", s: MIDDLE }, { t: "pitṛbhis", s: MIDDLE }],
+            [{ t: "pitre", s: WEAK }, { t: "pitṛbhyām", s: MIDDLE }, { t: "pitṛbhyas", s: MIDDLE }],
+            [{ t: "pitur", s: WEAK, userMarked: true }, { t: "pitṛbhyām", s: MIDDLE }, { t: "pitṛbhyas", s: MIDDLE }],
+            [{ t: "pitur", s: WEAK, userMarked: true }, { t: "pitros", s: WEAK }, { t: "pitṝṇām", s: WEAK, userMarked: true }],
+            [{ t: "pitari", s: WEAK, userMarked: true }, { t: "pitros", s: WEAK }, { t: "pitṛṣu", s: MIDDLE }],
+            [{ t: "pitar", s: STRONG, userMarked: true }, { t: "pitarau", s: STRONG }, { t: "pitaras", s: STRONG }]
         ]
     },
     "matr": {
@@ -408,16 +410,18 @@ export const DATA = {
         gender: "陰",
         example: "mātṛ (mother)",
         base: "māt",
+        hasStrength: true,
+        stemStrength: { strong: "mātar", middle: "mātṛ", weak: "mātr" },
         note: " 第三至七格及呼格同行动名词的变格规律。",
         data: [
-            ["mātā", "mātarau", "mātaras"],
-            ["mātaram", "mātarau", "mātṝs"],
-            ["mātrā", "mātṛbhyām", "mātṛbhis"],
-            ["mātre", "mātṛbhyām", "mātṛbhyas"],
-            ["mātur", "mātṛbhyām", "mātṛbhyas"],
-            ["mātur", "mātros", "mātṝṇām"],
-            ["mātari", "mātros", "mātṛṣu"],
-            ["mātar", "mātarau", "mātaras"]
+            [{ t: "mātā", s: STRONG }, { t: "mātarau", s: STRONG }, { t: "mātaras", s: STRONG }],
+            [{ t: "mātaram", s: STRONG }, { t: "mātarau", s: STRONG }, { t: "mātṝs", s: WEAK, userMarked: true }],
+            [{ t: "mātrā", s: WEAK }, { t: "mātṛbhyām", s: MIDDLE }, { t: "mātṛbhis", s: MIDDLE }],
+            [{ t: "mātre", s: WEAK }, { t: "mātṛbhyām", s: MIDDLE }, { t: "mātṛbhyas", s: MIDDLE }],
+            [{ t: "mātur", s: WEAK, userMarked: true }, { t: "mātṛbhyām", s: MIDDLE }, { t: "mātṛbhyas", s: MIDDLE }],
+            [{ t: "mātur", s: WEAK, userMarked: true }, { t: "mātros", s: WEAK }, { t: "mātṝṇām", s: WEAK, userMarked: true }],
+            [{ t: "mātari", s: WEAK, userMarked: true }, { t: "mātros", s: WEAK }, { t: "mātṛṣu", s: MIDDLE }],
+            [{ t: "mātar", s: STRONG, userMarked: true }, { t: "mātarau", s: STRONG }, { t: "mātaras", s: STRONG }]
         ]
     },
     "r_masc": {
