@@ -393,7 +393,7 @@ export const DATA = {
         stemStrength: { strong: "pitar", middle: "pitṛ", weak: "pitr" },
         note: " 第三至七格及呼格同行动名词的变格规律。",
         data: [
-            [{ t: "pitā", s: STRONG }, { t: "pitarau", s: STRONG }, { t: "pitaras", s: STRONG }],
+            [{ t: "pitā", s: STRONG, userMarked: true }, { t: "pitarau", s: STRONG }, { t: "pitaras", s: STRONG }],
             [{ t: "pitaram", s: STRONG }, { t: "pitarau", s: STRONG }, { t: "pitṝn", s: WEAK, userMarked: true }],
             [{ t: "pitrā", s: WEAK }, { t: "pitṛbhyām", s: MIDDLE }, { t: "pitṛbhis", s: MIDDLE }],
             [{ t: "pitre", s: WEAK }, { t: "pitṛbhyām", s: MIDDLE }, { t: "pitṛbhyas", s: MIDDLE }],
@@ -414,7 +414,7 @@ export const DATA = {
         stemStrength: { strong: "mātar", middle: "mātṛ", weak: "mātr" },
         note: " 第三至七格及呼格同行动名词的变格规律。",
         data: [
-            [{ t: "mātā", s: STRONG }, { t: "mātarau", s: STRONG }, { t: "mātaras", s: STRONG }],
+            [{ t: "mātā", s: STRONG, userMarked: true }, { t: "mātarau", s: STRONG }, { t: "mātaras", s: STRONG }],
             [{ t: "mātaram", s: STRONG }, { t: "mātarau", s: STRONG }, { t: "mātṝs", s: WEAK, userMarked: true }],
             [{ t: "mātrā", s: WEAK }, { t: "mātṛbhyām", s: MIDDLE }, { t: "mātṛbhis", s: MIDDLE }],
             [{ t: "mātre", s: WEAK }, { t: "mātṛbhyām", s: MIDDLE }, { t: "mātṛbhyas", s: MIDDLE }],
