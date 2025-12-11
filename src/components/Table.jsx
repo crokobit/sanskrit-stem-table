@@ -2,6 +2,7 @@ import React from 'react';
 import WordCell from './WordCell';
 import { DERIVATION_RULES } from '../data/derivationRules';
 import { CASE_NAMES, COL_NAMES } from '../data/sanskritData';
+import { getGenderLabel } from '../utils/sanskritUtils';
 
 const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabels = COL_NAMES, data, onTableSwitch }) => {
     const [showDerivation, setShowDerivation] = React.useState(false);
@@ -33,6 +34,64 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
     };
 
     const sourceTable = showDerivation ? getSourceTableData() : null;
+
+    // Helper to get all related tables (bidirectional)
+    const getAllRelatedTables = () => {
+        if (!data) return [];
+
+        const direct = currentTable.relatedTables || [];
+        const relatedMap = new Map();
+
+        // Add direct relations
+        direct.forEach(r => relatedMap.set(r.id, r));
+
+        // Find reverse relations (parents)
+        Object.values(data).forEach(table => {
+            if (table.relatedTables) {
+                const pointsToCurrent = table.relatedTables.some(r => r.id === currentTable.id);
+                if (pointsToCurrent) {
+                    // Add parent
+                    if (!relatedMap.has(table.id)) {
+                        // Construct label for parent
+                        // Try to match style: "word【gender】meaning"
+                        // We have table.example like "word (meaning)"
+                        let label = table.example || table.id;
+                        if (table.gender) {
+                            const genderLbl = getGenderLabel(table.gender);
+                            // Insert gender before meaning if possible, or just append
+                            // If example is "word (meaning)", make it "word【gender】(meaning)"
+                            if (label.includes(' (')) {
+                                label = label.replace(' (', `【${genderLbl}】`);
+                                label = label.replace(')', ''); // Remove closing paren? Or keep it?
+                                // Manual labels are "word【gender】meaning"
+                                // "kartṛ (doer)" -> "kartṛ【陽】doer"
+                            } else {
+                                label = `${label}【${genderLbl}】`;
+                            }
+                        }
+
+                        relatedMap.set(table.id, {
+                            id: table.id,
+                            label: label,
+                            variant: null,
+                            gender: null
+                        });
+                    }
+
+                    // Add siblings (parent's related tables)
+                    table.relatedTables.forEach(sibling => {
+                        if (sibling.id !== currentTable.id && !relatedMap.has(sibling.id)) {
+                            relatedMap.set(sibling.id, sibling);
+                        }
+                    });
+                }
+            }
+        });
+
+        return Array.from(relatedMap.values());
+    };
+
+    const allRelatedTables = getAllRelatedTables();
 
     return (
         <div className="table-wrapper">
@@ -270,7 +329,7 @@ const Table = ({ currentTable, handleCellClick, rowLabels = CASE_NAMES, colLabel
                         {showDerivation ? 'Show Table' : 'Show Process'}
                     </button>
                 )}
-                {currentTable.relatedTables && currentTable.relatedTables.map(related => (
+                {allRelatedTables.map(related => (
                     <button
                         key={related.id}
                         onClick={() => onTableSwitch && onTableSwitch(related.id, related.variant, related.gender)}

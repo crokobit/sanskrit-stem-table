@@ -389,6 +389,7 @@ export const DATA = {
         gender: "陽",
         example: "pitṛ (father)",
         base: "pit",
+        excludeFromDropdown: true,
         hasStrength: true,
         stemStrength: { strong: "pitar", middle: "pitṛ", weak: "pitr" },
         note: " 第三至七格及呼格同行动名词的变格规律。",
@@ -410,6 +411,7 @@ export const DATA = {
         gender: "陰",
         example: "mātṛ (mother)",
         base: "māt",
+        excludeFromDropdown: true,
         hasStrength: true,
         stemStrength: { strong: "mātar", middle: "mātṛ", weak: "mātr" },
         note: " 第三至七格及呼格同行动名词的变格规律。",
@@ -437,7 +439,9 @@ export const DATA = {
         relatedTables: [
             { id: "svasr_fem", label: "svasṛ【陰】姐妹" },
             { id: "naptr_masc", label: "naptṛ【陽】孫" },
-            { id: "visvapa_masc", label: "viśvapā【陽】保護一切者" }
+            { id: "visvapa_masc", label: "viśvapā【陽】保護一切者" },
+            { id: "pitr", label: "pitṛ【陽】父" },
+            { id: "matr", label: "mātṛ【陰】母" }
         ],
         data: [
             [{ t: "kartā", s: STRONG, userMarked: true }, { t: "kartārau", s: STRONG }, { t: "kartāras", s: STRONG }],
